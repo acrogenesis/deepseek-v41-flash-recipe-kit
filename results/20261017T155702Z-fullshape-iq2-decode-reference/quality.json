@@ -1,0 +1,84 @@
+{
+  "label": "fullshape-iq2-decode-reference",
+  "profile": "gpu",
+  "command": [
+    "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/build/bin/llama-perplexity",
+    "-m",
+    "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/fullshape-pilot/synthetic-iq2.gguf",
+    "-c",
+    "256",
+    "-b",
+    "256",
+    "-ub",
+    "1",
+    "--chunks",
+    "3",
+    "-f",
+    "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/data/heldout.txt",
+    "-t",
+    "16",
+    "-ngl",
+    "99",
+    "-ot",
+    "engram_embd.weight=CPU",
+    "-lm",
+    "mmap",
+    "-lzm",
+    "on",
+    "--no-repack",
+    "--fit",
+    "off",
+    "-fa",
+    "on",
+    "--no-warmup",
+    "--save-all-logits",
+    "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/quality/fullshape-iq2-decode.logits"
+  ],
+  "status": "complete",
+  "context": 256,
+  "chunks": 3,
+  "ubatch": 1,
+  "wave_preloading": false,
+  "op_offload_min_batch": "32",
+  "scored_positions": 381,
+  "corpus_sha256": "3dc6d7e7174c78dbe9844befc30b86cd3141b1a3c42f23d66477b7f6ace1fc70",
+  "pins": {
+    "native": {
+      "repo": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "revision": "1bae0e1088993b9b82de08f59de5be5a34e42170"
+    },
+    "baseline": {
+      "repo": "mrfakename/DeepSeek-V4.1-Flash-1017-GGUF",
+      "revision": "2c97dba3934f27a99767a90830e7519cc7b8b2d9",
+      "include": "Q2_K/*.gguf",
+      "bytes": 264515416800
+    },
+    "reference": {
+      "repo": "mrfakename/DeepSeek-V4.1-Flash-1017-GGUF",
+      "revision": "2c97dba3934f27a99767a90830e7519cc7b8b2d9",
+      "include": "Q8_0/*.gguf",
+      "bytes": 507954227008,
+      "description": "MXFP4 routed experts retained from the native checkpoint; Q8 dense and Engram conversion. This is a converted reference, not an exact native forward pass."
+    },
+    "llama_cpp": {
+      "repo": "https://github.com/vcruz305/llama.cpp",
+      "revision": "2076412598e99127ea2554467b2b7530856895d3"
+    },
+    "streaming_patch": {
+      "upstream_repo": "https://github.com/JigSawPT/llama.cpp",
+      "upstream_commit": "4aa9d62c871a55021bc2c2d35ee84bdd5dd28c6e",
+      "local_patch": "patches/moe-stream.patch",
+      "sha256": "4a68d7bedba8214224ff9facae88ef2dbc81fca6d57cb89e82c74dd626fa1557"
+    },
+    "runtime_fixes": {
+      "local_patch": "patches/runtime-fixes.patch",
+      "sha256": "3ea8391e25cc7c4716a8552f49365313012e90509d1a86d96a5cd17ce41225d4",
+      "description": "Review fixes for index-source top-k reuse and CUDA MMQ tail padding; applied to both cache and no-cache runtimes"
+    }
+  },
+  "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/app-graphical.slice/app-Hyprland-xdg\\x2dterminal\\x2dexec-665a95a6.scope\n",
+  "returncode": 0,
+  "seconds": 0.9153390849987773,
+  "ppl": 554.9902,
+  "ppl_se": 11.33217
+}

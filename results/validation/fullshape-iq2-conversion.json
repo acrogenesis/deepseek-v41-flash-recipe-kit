@@ -1,0 +1,55 @@
+{
+  "purpose": "Conversion runtime and cache tests on synthetic wrapper with actual layer-0 experts; not model quality",
+  "command": [
+    "work/build/bin/llama-quantize",
+    "--allow-requantize",
+    "--pure",
+    "--max-buffer-size",
+    "2048",
+    "--imatrix",
+    "work/fullshape-selftest/pilot-imatrix.gguf",
+    "--tensor-type-file",
+    "work/fullshape-pilot/tensor-types.txt",
+    "work/fullshape-selftest/synthetic-mxfp4.gguf",
+    "work/fullshape-pilot/synthetic-iq2.gguf",
+    "IQ2_XXS",
+    "24"
+  ],
+  "status": "complete",
+  "threads": 24,
+  "coverage": "370/384 expert IDs; unseen synthetic experts use quantizer unit importance fallback",
+  "returncode": 0,
+  "seconds": 179.20430670600035,
+  "max_rss_kib": 4433192,
+  "non_expert_bytes_identical": true,
+  "expert_layout_checks": [
+    {
+      "tensor": "blk.0.ffn_gate_exps.weight",
+      "type": "IQ2_XXS",
+      "shape": [
+        5120,
+        2304,
+        384
+      ]
+    },
+    {
+      "tensor": "blk.0.ffn_down_exps.weight",
+      "type": "IQ2_XXS",
+      "shape": [
+        2304,
+        5120,
+        384
+      ]
+    },
+    {
+      "tensor": "blk.0.ffn_up_exps.weight",
+      "type": "IQ2_XXS",
+      "shape": [
+        5120,
+        2304,
+        384
+      ]
+    }
+  ],
+  "cache_validation": "Passed batched prefill and single-token comparisons, 100% top-1 agreement and mean KL rounding to zero"
+}

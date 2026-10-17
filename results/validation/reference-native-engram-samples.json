@@ -1,0 +1,142 @@
+{
+  "native": {
+    "repo": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+    "revision": "1bae0e1088993b9b82de08f59de5be5a34e42170"
+  },
+  "reference": {
+    "repo": "mrfakename/DeepSeek-V4.1-Flash-1017-GGUF",
+    "revision": "2c97dba3934f27a99767a90830e7519cc7b8b2d9",
+    "include": "Q8_0/*.gguf",
+    "bytes": 507954227008,
+    "description": "MXFP4 routed experts retained from the native checkpoint; Q8 dense and Engram conversion. This is a converted reference, not an exact native forward pass."
+  },
+  "checks": [
+    {
+      "layer": 1,
+      "row": 0,
+      "relative_rmse": 0.005271396888811337,
+      "cosine": 0.9999861121177673,
+      "same_q8_bytes": true,
+      "native_sample_sha256": "0f1af285e5acae0c605ad7648c61cb2174ae6c6055ab7af83ab52ae259472a5c",
+      "gguf_sample_sha256": "b6474b1ccd891e4ca035f50e9eb7616e46c9e2ce297b8fd361e930c870aec0a0",
+      "passed": true
+    },
+    {
+      "layer": 1,
+      "row": 1,
+      "relative_rmse": 0.005702135711263182,
+      "cosine": 0.9999838471412659,
+      "same_q8_bytes": true,
+      "native_sample_sha256": "121199380c30f0a2be7294d2cd1544031b9ca8d9baf27b816aa7bfcfb283ba90",
+      "gguf_sample_sha256": "4a87d50c96a9637ce16c44844343ddb8188c054eca91da5fcddf72b015d532ed",
+      "passed": true
+    },
+    {
+      "layer": 1,
+      "row": 128002056,
+      "relative_rmse": 0.0053117297362641905,
+      "cosine": 0.999985933303833,
+      "same_q8_bytes": true,
+      "native_sample_sha256": "ddbcf4c560fe821182376c0a3bca2d0039122339e1581e4f590d8d385b410a04",
+      "gguf_sample_sha256": "8fa7d5f83eba68ac9377aa25f898a891e82782323ba39f944329330dec793b75",
+      "passed": true
+    },
+    {
+      "layer": 1,
+      "row": 192003084,
+      "relative_rmse": 0.006037766333029779,
+      "cosine": 0.9999820590019226,
+      "same_q8_bytes": true,
+      "native_sample_sha256": "79730886fa7c58d8cf585c742b1bd1bee3611874f5b08724db73c6ff32147485",
+      "gguf_sample_sha256": "60b9a9bc5ff7c1b63a6bab08de2091d59429bfa08eefa7136e8cd7b34ec5eb5a",
+      "passed": true
+    },
+    {
+      "layer": 1,
+      "row": 384006166,
+      "relative_rmse": 0.005572043072148999,
+      "cosine": 0.9999846816062927,
+      "same_q8_bytes": true,
+      "native_sample_sha256": "95965b999de60d502e8b21567cbfec74ac84f7af5ca10a62c22be12ab44dac86",
+      "gguf_sample_sha256": "75b5b1039ddc6067ba11e303c203b4b184401e6b47124330fbcca9a62d77d429",
+      "passed": true
+    },
+    {
+      "layer": 1,
+      "row": 384006167,
+      "relative_rmse": 0.005239772519334611,
+      "cosine": 0.9999864101409912,
+      "same_q8_bytes": true,
+      "native_sample_sha256": "5dec0886d0a6b5dcda925e8dddaaeab0807b11285ba7d8ab867d0236270a6d5b",
+      "gguf_sample_sha256": "fbb34c37069760b7339b9120282590da4ced074ada6aead1bca2dae1d1d50569",
+      "passed": true
+    },
+    {
+      "layer": 14,
+      "row": 0,
+      "relative_rmse": 0.005486129718556762,
+      "cosine": 0.9999852776527405,
+      "same_q8_bytes": true,
+      "native_sample_sha256": "6d3845f5fba53fa1f9140b7bd0df9a678c18eb3268ee682c861266cbd0a00891",
+      "gguf_sample_sha256": "02ef2fffaa76f3134041428ef714dc895f01e71ef50ea8d5d9233bed6a418f8f",
+      "passed": true
+    },
+    {
+      "layer": 14,
+      "row": 1,
+      "relative_rmse": 0.005476945386163613,
+      "cosine": 0.9999851584434509,
+      "same_q8_bytes": true,
+      "native_sample_sha256": "1f4e1b3f348850974f0e49a96ea44d65c105c3202816b09c2f2717cc7fee5959",
+      "gguf_sample_sha256": "86f875583728d174fe39e03feb07ee020fad847139d3c1522c8c3c3b70706c6c",
+      "passed": true
+    },
+    {
+      "layer": 14,
+      "row": 128005560,
+      "relative_rmse": 0.005515327695415611,
+      "cosine": 0.9999849796295166,
+      "same_q8_bytes": true,
+      "native_sample_sha256": "5794171ce04f270fe9e747f314f29dbf87e5e2a4e9e76ce8e6d071da6a9ba3c1",
+      "gguf_sample_sha256": "6fac3d8c2953109ce21df28a838dcf7204aa80d62a1404018745d98962d3238b",
+      "passed": true
+    },
+    {
+      "layer": 14,
+      "row": 192008341,
+      "relative_rmse": 0.005293987024942037,
+      "cosine": 0.9999861717224121,
+      "same_q8_bytes": true,
+      "native_sample_sha256": "213748bcf588d90bcbbfc38465184252a235c6a7f095f74733ebc151d4bfcaca",
+      "gguf_sample_sha256": "a7a66fa7886ecb048ed7ab4f583ec916b39a1e79497f08cdc093f9a38ab1b519",
+      "passed": true
+    },
+    {
+      "layer": 14,
+      "row": 384016680,
+      "relative_rmse": 0.005627985225630809,
+      "cosine": 0.9999845623970032,
+      "same_q8_bytes": true,
+      "native_sample_sha256": "7a6742e90c9920057bb4ed1f6b196f679e9c6e49f0eedccf786acb75ca587d38",
+      "gguf_sample_sha256": "21d419fe191840808143a094f7276cf77e2512492a96c4e6b93f852c4bb979e0",
+      "passed": true
+    },
+    {
+      "layer": 14,
+      "row": 384016681,
+      "relative_rmse": 0.005838569577321145,
+      "cosine": 0.9999830722808838,
+      "same_q8_bytes": true,
+      "native_sample_sha256": "1b7f6a576cf153f495f58104c542af300fd4757e21a9f62a14a0c2dab4cae122",
+      "gguf_sample_sha256": "49a4636d19e6dd9684beccc7779b9de2d8dcb1838360be0f6bbee6551eba18c1",
+      "passed": true
+    }
+  ],
+  "scope": "Six rows in each Engram table; sampled conversion check, not whole-model parity",
+  "thresholds": {
+    "relative_rmse_max": 0.01,
+    "cosine_min": 0.9999
+  },
+  "passed": true,
+  "all_sampled_q8_bytes_identical": true
+}

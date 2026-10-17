@@ -1,0 +1,179 @@
+{
+  "status": "complete",
+  "purpose": "Template rendering only; tiny CPU fixture does not measure DeepSeek quality",
+  "template_sha256": "153c8b3d148095bd4c247d029fa52ec035800f3886d216cd89cbbdaa89705126",
+  "checks": [
+    {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "expected": "<｜begin▁of▁sentence｜><｜User｜>Hello<｜Assistant｜></think>",
+      "actual": "<｜begin▁of▁sentence｜><｜User｜>Hello<｜Assistant｜></think>",
+      "equal": true
+    },
+    {
+      "messages": [
+        {
+          "role": "system",
+          "content": "Be concise."
+        },
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "expected": "<｜begin▁of▁sentence｜><｜System｜>Be concise.<｜User｜>Hello<｜Assistant｜></think>",
+      "actual": "<｜begin▁of▁sentence｜><｜System｜>Be concise.<｜User｜>Hello<｜Assistant｜></think>",
+      "equal": true
+    },
+    {
+      "messages": [
+        {
+          "role": "system",
+          "content": "Be concise."
+        },
+        {
+          "role": "user",
+          "content": "Hello"
+        },
+        {
+          "role": "assistant",
+          "content": "Hi."
+        },
+        {
+          "role": "user",
+          "content": "What is 2+2?"
+        }
+      ],
+      "expected": "<｜begin▁of▁sentence｜><｜System｜>Be concise.<｜User｜>Hello<｜Assistant｜></think>Hi.<｜end▁of▁sentence｜><｜User｜>What is 2+2?<｜Assistant｜></think>",
+      "actual": "<｜begin▁of▁sentence｜><｜System｜>Be concise.<｜User｜>Hello<｜Assistant｜></think>Hi.<｜end▁of▁sentence｜><｜User｜>What is 2+2?<｜Assistant｜></think>",
+      "equal": true
+    },
+    {
+      "messages": [
+        {
+          "role": "user",
+          "content": "First"
+        },
+        {
+          "role": "user",
+          "content": "Second"
+        }
+      ],
+      "expected": "<｜begin▁of▁sentence｜><｜User｜>First\n\nSecond<｜Assistant｜></think>",
+      "actual": "<｜begin▁of▁sentence｜><｜User｜>First\n\nSecond<｜Assistant｜></think>",
+      "equal": true
+    },
+    {
+      "messages": [
+        {
+          "role": "system",
+          "content": "First"
+        },
+        {
+          "role": "system",
+          "content": "Second"
+        },
+        {
+          "role": "user",
+          "content": "Third"
+        }
+      ],
+      "expected": "<｜begin▁of▁sentence｜><｜System｜>First<｜System｜>Second<｜User｜>Third<｜Assistant｜></think>",
+      "actual": "<｜begin▁of▁sentence｜><｜System｜>First<｜System｜>Second<｜User｜>Third<｜Assistant｜></think>",
+      "equal": true
+    },
+    {
+      "messages": [
+        {
+          "role": "user",
+          "content": "First"
+        },
+        {
+          "role": "assistant",
+          "content": "Reply"
+        },
+        {
+          "role": "system",
+          "content": "New instruction"
+        },
+        {
+          "role": "user",
+          "content": "Continue"
+        }
+      ],
+      "expected": "<｜begin▁of▁sentence｜><｜User｜>First<｜Assistant｜></think>Reply<｜end▁of▁sentence｜><｜System｜>New instruction<｜User｜>Continue<｜Assistant｜></think>",
+      "actual": "<｜begin▁of▁sentence｜><｜User｜>First<｜Assistant｜></think>Reply<｜end▁of▁sentence｜><｜System｜>New instruction<｜User｜>Continue<｜Assistant｜></think>",
+      "equal": true
+    },
+    {
+      "messages": [
+        {
+          "role": "user",
+          "content": "First"
+        },
+        {
+          "role": "assistant",
+          "content": "Reply"
+        },
+        {
+          "role": "system",
+          "content": "New instruction"
+        }
+      ],
+      "expected": "<｜begin▁of▁sentence｜><｜User｜>First<｜Assistant｜></think>Reply<｜end▁of▁sentence｜><｜System｜>New instruction<｜Assistant｜></think>",
+      "actual": "<｜begin▁of▁sentence｜><｜User｜>First<｜Assistant｜></think>Reply<｜end▁of▁sentence｜><｜System｜>New instruction<｜Assistant｜></think>",
+      "equal": true
+    },
+    {
+      "messages": [
+        {
+          "role": "user",
+          "content": "First"
+        },
+        {
+          "role": "assistant",
+          "content": "Reply",
+          "reasoning_content": "Old reasoning"
+        },
+        {
+          "role": "user",
+          "content": "Continue"
+        }
+      ],
+      "expected": "<｜begin▁of▁sentence｜><｜User｜>First<｜Assistant｜></think>Reply<｜end▁of▁sentence｜><｜User｜>Continue<｜Assistant｜></think>",
+      "actual": "<｜begin▁of▁sentence｜><｜User｜>First<｜Assistant｜></think>Reply<｜end▁of▁sentence｜><｜User｜>Continue<｜Assistant｜></think>",
+      "equal": true
+    },
+    {
+      "messages": [
+        {
+          "role": "user",
+          "content": ""
+        }
+      ],
+      "expected": "<｜begin▁of▁sentence｜><｜User｜><｜Assistant｜></think>",
+      "actual": "<｜begin▁of▁sentence｜><｜User｜><｜Assistant｜></think>",
+      "equal": true
+    },
+    {
+      "messages": [
+        {
+          "role": "system",
+          "content": "Español / 中文"
+        },
+        {
+          "role": "user",
+          "content": "  café\n\n你好\t  "
+        }
+      ],
+      "expected": "<｜begin▁of▁sentence｜><｜System｜>Español / 中文<｜User｜>  café\n\n你好\t  <｜Assistant｜></think>",
+      "actual": "<｜begin▁of▁sentence｜><｜System｜>Español / 中文<｜User｜>  café\n\n你好\t  <｜Assistant｜></think>",
+      "equal": true
+    }
+  ],
+  "tools_rejected": true
+}

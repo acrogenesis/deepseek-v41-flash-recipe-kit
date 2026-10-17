@@ -1,0 +1,181 @@
+{
+  "purpose": "Synthetic quantizer fallback check; not model quality",
+  "source": "tools/quantize/quantize.cpp load_imatrix: count == 0 gives unit weights",
+  "pins": {
+    "native": {
+      "repo": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "revision": "1bae0e1088993b9b82de08f59de5be5a34e42170"
+    },
+    "baseline": {
+      "repo": "mrfakename/DeepSeek-V4.1-Flash-1017-GGUF",
+      "revision": "2c97dba3934f27a99767a90830e7519cc7b8b2d9",
+      "include": "Q2_K/*.gguf",
+      "bytes": 264515416800
+    },
+    "reference": {
+      "repo": "mrfakename/DeepSeek-V4.1-Flash-1017-GGUF",
+      "revision": "2c97dba3934f27a99767a90830e7519cc7b8b2d9",
+      "include": "Q8_0/*.gguf",
+      "bytes": 507954227008,
+      "description": "MXFP4 routed experts retained from the native checkpoint; Q8 dense and Engram conversion. This is a converted reference, not an exact native forward pass."
+    },
+    "llama_cpp": {
+      "repo": "https://github.com/vcruz305/llama.cpp",
+      "revision": "2076412598e99127ea2554467b2b7530856895d3"
+    },
+    "streaming_patch": {
+      "upstream_repo": "https://github.com/JigSawPT/llama.cpp",
+      "upstream_commit": "4aa9d62c871a55021bc2c2d35ee84bdd5dd28c6e",
+      "local_patch": "patches/moe-stream.patch",
+      "sha256": "416f4d6022cd012b271ad6d08614d3d64e77b3dcfb0212df0f9de522039ac3d8"
+    },
+    "runtime_fixes": {
+      "local_patch": "patches/runtime-fixes.patch",
+      "sha256": "e449f85290ceacf28e14028fe17691f278fe42ad975977d84aef990ef8c2163f",
+      "description": "Index-source top-k reuse, CUDA MMQ tail padding, and imatrix source-free operation guard; applied to both runtimes"
+    }
+  },
+  "commands": [
+    [
+      "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/build/bin/llama-quantize",
+      "--allow-requantize",
+      "--pure",
+      "--imatrix",
+      "work/imatrix-fallback-selftest-verified/missing-imatrix.gguf",
+      "--tensor-type-file",
+      "work/imatrix-fallback-selftest-verified/tensor-types.txt",
+      "work/quantizer-selftest/synthetic-mxfp4.gguf",
+      "work/imatrix-fallback-selftest-verified/missing.gguf",
+      "IQ2_XXS",
+      "2"
+    ],
+    [
+      "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/build/bin/llama-quantize",
+      "--allow-requantize",
+      "--pure",
+      "--imatrix",
+      "work/imatrix-fallback-selftest-verified/explicit-unit-imatrix.gguf",
+      "--tensor-type-file",
+      "work/imatrix-fallback-selftest-verified/tensor-types.txt",
+      "work/quantizer-selftest/synthetic-mxfp4.gguf",
+      "work/imatrix-fallback-selftest-verified/explicit-unit.gguf",
+      "IQ2_XXS",
+      "2"
+    ]
+  ],
+  "forced_missing_expert_ids": {
+    "blk.0.ffn_down_exps.weight": [
+      0
+    ],
+    "blk.0.ffn_gate_exps.weight": [
+      0
+    ],
+    "blk.0.ffn_up_exps.weight": [
+      0
+    ],
+    "blk.1.ffn_down_exps.weight": [
+      0
+    ],
+    "blk.1.ffn_gate_exps.weight": [
+      0
+    ],
+    "blk.1.ffn_up_exps.weight": [
+      0
+    ]
+  },
+  "checks": [
+    {
+      "tensor": "output.weight",
+      "equal": true
+    },
+    {
+      "tensor": "output_norm.weight",
+      "equal": true
+    },
+    {
+      "tensor": "token_embd.weight",
+      "equal": true
+    },
+    {
+      "tensor": "blk.0.attn_k.weight",
+      "equal": true
+    },
+    {
+      "tensor": "blk.0.attn_norm.weight",
+      "equal": true
+    },
+    {
+      "tensor": "blk.0.attn_output.weight",
+      "equal": true
+    },
+    {
+      "tensor": "blk.0.attn_q.weight",
+      "equal": true
+    },
+    {
+      "tensor": "blk.0.attn_v.weight",
+      "equal": true
+    },
+    {
+      "tensor": "blk.0.ffn_down_exps.weight",
+      "equal": true
+    },
+    {
+      "tensor": "blk.0.ffn_gate_exps.weight",
+      "equal": true
+    },
+    {
+      "tensor": "blk.0.ffn_gate_inp.weight",
+      "equal": true
+    },
+    {
+      "tensor": "blk.0.ffn_norm.weight",
+      "equal": true
+    },
+    {
+      "tensor": "blk.0.ffn_up_exps.weight",
+      "equal": true
+    },
+    {
+      "tensor": "blk.1.attn_k.weight",
+      "equal": true
+    },
+    {
+      "tensor": "blk.1.attn_norm.weight",
+      "equal": true
+    },
+    {
+      "tensor": "blk.1.attn_output.weight",
+      "equal": true
+    },
+    {
+      "tensor": "blk.1.attn_q.weight",
+      "equal": true
+    },
+    {
+      "tensor": "blk.1.attn_v.weight",
+      "equal": true
+    },
+    {
+      "tensor": "blk.1.ffn_down_exps.weight",
+      "equal": true
+    },
+    {
+      "tensor": "blk.1.ffn_gate_exps.weight",
+      "equal": true
+    },
+    {
+      "tensor": "blk.1.ffn_gate_inp.weight",
+      "equal": true
+    },
+    {
+      "tensor": "blk.1.ffn_norm.weight",
+      "equal": true
+    },
+    {
+      "tensor": "blk.1.ffn_up_exps.weight",
+      "equal": true
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,44 @@
+{
+  "model": "Exact-release public Q2_K mix",
+  "purpose": "Separate CPU/GPU backend differences from the expert cache",
+  "comparisons": [
+    {
+      "label": "q2-runtime-streaming",
+      "artifact": "results/20261017T151914Z-q2-runtime-streaming/quality.json",
+      "context": 512,
+      "scored_positions": 1020,
+      "ppl": 11.049862,
+      "reference_ppl": 11.049838,
+      "ppl_ratio": 1.000002,
+      "top1_agreement_percent": 100.0,
+      "mean_kl": -0.0,
+      "runtime_gate": true
+    },
+    {
+      "label": "q2-decode-streaming",
+      "artifact": "results/20261017T153545Z-q2-decode-streaming/quality.json",
+      "context": 256,
+      "scored_positions": 508,
+      "ppl": 16.83039,
+      "reference_ppl": 16.664527,
+      "ppl_ratio": 1.009953,
+      "top1_agreement_percent": 91.339,
+      "mean_kl": 0.031168,
+      "runtime_gate": false
+    },
+    {
+      "label": "q2-decode-gpu-compare",
+      "artifact": "results/20261017T155243Z-q2-decode-gpu-compare/quality.json",
+      "context": 256,
+      "scored_positions": 508,
+      "ppl": 16.83039,
+      "reference_ppl": 16.83047,
+      "ppl_ratio": 0.999995,
+      "top1_agreement_percent": 100.0,
+      "mean_kl": -0.0,
+      "runtime_gate": true
+    }
+  ],
+  "interpretation": "The original CPU/GPU single-token gate failed. With GPU arithmetic in both paths, all 508 top choices match and mean KL rounds to zero. This validates the cache on this sample, not general model quality or native-forward parity.",
+  "timing_note": "Reference download and some build/pilot work overlap these quality diagnostics; their durations are not throughput benchmarks."
+}

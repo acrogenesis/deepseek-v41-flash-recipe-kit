@@ -1,0 +1,255 @@
+{
+  "purpose": "Synthetic CPU fixture: imatrix continuation must preserve counts and activation statistics",
+  "commands": [
+    [
+      "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/build/bin/llama-imatrix",
+      "-m",
+      "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/quantizer-selftest/synthetic-mxfp4.gguf",
+      "-f",
+      "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/data/calibration.txt",
+      "--output-format",
+      "gguf",
+      "-c",
+      "512",
+      "-b",
+      "512",
+      "-ub",
+      "256",
+      "--no-ppl",
+      "--no-repack",
+      "--fit",
+      "off",
+      "-ngl",
+      "0",
+      "-t",
+      "2",
+      "-o",
+      "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/calibration-resume-selftest/whole.gguf",
+      "--chunks",
+      "8"
+    ],
+    [
+      "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/build/bin/llama-imatrix",
+      "-m",
+      "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/quantizer-selftest/synthetic-mxfp4.gguf",
+      "-f",
+      "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/data/calibration.txt",
+      "--output-format",
+      "gguf",
+      "-c",
+      "512",
+      "-b",
+      "512",
+      "-ub",
+      "256",
+      "--no-ppl",
+      "--no-repack",
+      "--fit",
+      "off",
+      "-ngl",
+      "0",
+      "-t",
+      "2",
+      "-o",
+      "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/calibration-resume-selftest/prefix.gguf",
+      "--chunks",
+      "4"
+    ],
+    [
+      "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/build/bin/llama-imatrix",
+      "-m",
+      "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/quantizer-selftest/synthetic-mxfp4.gguf",
+      "-f",
+      "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/data/calibration.txt",
+      "--output-format",
+      "gguf",
+      "-c",
+      "512",
+      "-b",
+      "512",
+      "-ub",
+      "256",
+      "--no-ppl",
+      "--no-repack",
+      "--fit",
+      "off",
+      "-ngl",
+      "0",
+      "-t",
+      "2",
+      "-o",
+      "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/calibration-resume-selftest/continued.gguf",
+      "--chunks",
+      "4",
+      "--from-chunk",
+      "4",
+      "--in-file",
+      "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/calibration-resume-selftest/prefix.gguf"
+    ]
+  ],
+  "whole_chunks": 8,
+  "continued_chunks": 8,
+  "checks": [
+    {
+      "tensor": "blk.0.attn_k.weight.in_sum2",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.0.attn_k.weight.counts",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.0.attn_output.weight.in_sum2",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.0.attn_output.weight.counts",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.0.attn_q.weight.in_sum2",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.0.attn_q.weight.counts",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.0.attn_v.weight.in_sum2",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.0.attn_v.weight.counts",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.0.ffn_down_exps.weight.in_sum2",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.0.ffn_down_exps.weight.counts",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.0.ffn_gate_exps.weight.in_sum2",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.0.ffn_gate_exps.weight.counts",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.0.ffn_gate_inp.weight.in_sum2",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.0.ffn_gate_inp.weight.counts",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.0.ffn_up_exps.weight.in_sum2",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.0.ffn_up_exps.weight.counts",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.1.attn_k.weight.in_sum2",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.1.attn_k.weight.counts",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.1.attn_output.weight.in_sum2",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.1.attn_output.weight.counts",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.1.attn_q.weight.in_sum2",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.1.attn_q.weight.counts",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.1.attn_v.weight.in_sum2",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.1.attn_v.weight.counts",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.1.ffn_down_exps.weight.in_sum2",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.1.ffn_down_exps.weight.counts",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.1.ffn_gate_exps.weight.in_sum2",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.1.ffn_gate_exps.weight.counts",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.1.ffn_gate_inp.weight.in_sum2",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.1.ffn_gate_inp.weight.counts",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.1.ffn_up_exps.weight.in_sum2",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    },
+    {
+      "tensor": "blk.1.ffn_up_exps.weight.counts",
+      "passed": true,
+      "max_absolute_difference": 0.0
+    }
+  ],
+  "passed": true
+}

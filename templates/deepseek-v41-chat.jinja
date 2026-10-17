@@ -1,0 +1,34 @@
+{# Text-only chat rendering, checked against the exact release's encoding.py. #}
+{%- if tools is defined and tools -%}
+  {{- raise_exception('This recipe currently supports text chat without tool calls.') -}}
+{%- endif -%}
+{{- '<｜begin▁of▁sentence｜>' -}}
+{%- for message in messages -%}
+  {%- set role = message['role'] -%}
+  {%- if message['tool_calls'] is defined and message['tool_calls'] -%}
+    {{- raise_exception('This recipe currently supports text chat without tool calls.') -}}
+  {%- endif -%}
+  {%- if message['content'] is defined and message['content'] is not none and message['content'] is not string -%}
+    {{- raise_exception('This recipe currently supports text-only message content.') -}}
+  {%- endif -%}
+  {%- if role == 'system' -%}
+    {{- '<｜System｜>' + (message['content'] or '') -}}
+  {%- elif role == 'user' -%}
+    {%- if loop.index0 > 0 and messages[loop.index0 - 1]['role'] == 'user' -%}
+      {{- '\n\n' -}}
+    {%- else -%}
+      {{- '<｜User｜>' -}}
+    {%- endif -%}
+    {{- message['content'] or '' -}}
+  {%- elif role == 'assistant' -%}
+    {{- message['content'] or '' -}}
+    {%- if not (message['wo_eos'] is defined and message['wo_eos']) -%}
+      {{- '<｜end▁of▁sentence｜>' -}}
+    {%- endif -%}
+  {%- else -%}
+    {{- raise_exception('Supported message roles are system, user and assistant.') -}}
+  {%- endif -%}
+  {%- if (loop.last or messages[loop.index0 + 1]['role'] == 'assistant') and (role == 'user' or (role == 'system' and loop.index0 > 0)) -%}
+    {{- '<｜Assistant｜></think>' -}}
+  {%- endif -%}
+{%- endfor -%}

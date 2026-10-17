@@ -1,0 +1,110 @@
+{
+  "profile": "streaming",
+  "context": 8192,
+  "port": 5017,
+  "wave_preloading": false,
+  "pins": {
+    "native": {
+      "repo": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "revision": "1bae0e1088993b9b82de08f59de5be5a34e42170"
+    },
+    "baseline": {
+      "repo": "mrfakename/DeepSeek-V4.1-Flash-1017-GGUF",
+      "revision": "2c97dba3934f27a99767a90830e7519cc7b8b2d9",
+      "include": "Q2_K/*.gguf",
+      "bytes": 264515416800
+    },
+    "reference": {
+      "repo": "mrfakename/DeepSeek-V4.1-Flash-1017-GGUF",
+      "revision": "2c97dba3934f27a99767a90830e7519cc7b8b2d9",
+      "include": "Q8_0/*.gguf",
+      "bytes": 507954227008,
+      "description": "MXFP4 routed experts retained from the native checkpoint; Q8 dense and Engram conversion. This is a converted reference, not an exact native forward pass."
+    },
+    "llama_cpp": {
+      "repo": "https://github.com/vcruz305/llama.cpp",
+      "revision": "2076412598e99127ea2554467b2b7530856895d3"
+    },
+    "streaming_patch": {
+      "upstream_repo": "https://github.com/JigSawPT/llama.cpp",
+      "upstream_commit": "4aa9d62c871a55021bc2c2d35ee84bdd5dd28c6e",
+      "local_patch": "patches/moe-stream.patch",
+      "sha256": "416f4d6022cd012b271ad6d08614d3d64e77b3dcfb0212df0f9de522039ac3d8"
+    },
+    "runtime_fixes": {
+      "local_patch": "patches/runtime-fixes.patch",
+      "sha256": "e449f85290ceacf28e14028fe17691f278fe42ad975977d84aef990ef8c2163f",
+      "description": "Index-source top-k reuse, CUDA MMQ tail padding, and imatrix source-free operation guard; applied to both runtimes"
+    }
+  },
+  "model": {
+    "variant": "reference",
+    "model": "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/models/DeepSeek-V4.1-Flash-1017-GGUF/Q8_0/DeepSeek-V4.1-Flash-1017-Q8_0-00001-of-00010.gguf",
+    "alias": "deepseek-v41-flash-1017-mxfp4-q8",
+    "receipt": "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/feasibility/download-reference-verified.json",
+    "manifest": {
+      "repo": "mrfakename/DeepSeek-V4.1-Flash-1017-GGUF",
+      "revision": "2c97dba3934f27a99767a90830e7519cc7b8b2d9",
+      "verified_at": "2026-10-17T16:45:38.056629+00:00",
+      "files": [
+        {
+          "file": "Q8_0/DeepSeek-V4.1-Flash-1017-Q8_0-00001-of-00010.gguf",
+          "bytes": 43322444352,
+          "sha256": "1344d6af67cad84abe93da0f454a6bfa8aef3ec0022f71906e9edb40f23812b3"
+        },
+        {
+          "file": "Q8_0/DeepSeek-V4.1-Flash-1017-Q8_0-00002-of-00010.gguf",
+          "bytes": 43316676000,
+          "sha256": "b93249203c3bde33d7738a50ab976879514d49f5b9c3564f6270dee54142418f"
+        },
+        {
+          "file": "Q8_0/DeepSeek-V4.1-Flash-1017-Q8_0-00003-of-00010.gguf",
+          "bytes": 43316676032,
+          "sha256": "96e5fe684c77232b39bea4ca5e9d49fc0fb2082ea2bde93b5a9a08a4a6363284"
+        },
+        {
+          "file": "Q8_0/DeepSeek-V4.1-Flash-1017-Q8_0-00004-of-00010.gguf",
+          "bytes": 43316676032,
+          "sha256": "0a529b1909a0693f3b6c58804424ce27d190d616f19f7c45a3ad62533e943b7c"
+        },
+        {
+          "file": "Q8_0/DeepSeek-V4.1-Flash-1017-Q8_0-00005-of-00010.gguf",
+          "bytes": 43316676032,
+          "sha256": "812b6f08b3b87c20ea2a7e6f8afc946b6b99471404bcb172dd943f7a82ade95d"
+        },
+        {
+          "file": "Q8_0/DeepSeek-V4.1-Flash-1017-Q8_0-00006-of-00010.gguf",
+          "bytes": 43316676032,
+          "sha256": "ee1ba2a0d5b7f89e1e70929f4773bf8e19310a66dfa270af3269711cd5f2c51f"
+        },
+        {
+          "file": "Q8_0/DeepSeek-V4.1-Flash-1017-Q8_0-00007-of-00010.gguf",
+          "bytes": 28877784064,
+          "sha256": "89c73265da70f074b0c7ddcbdf86f151cb27d2258ad2dee99c28263d40ca0612"
+        },
+        {
+          "file": "Q8_0/DeepSeek-V4.1-Flash-1017-Q8_0-00008-of-00010.gguf",
+          "bytes": 104449677888,
+          "sha256": "096b13ad2b1875e043053d68cf4cd2cc1f54f4f5df9b07629c4f90be7b776559"
+        },
+        {
+          "file": "Q8_0/DeepSeek-V4.1-Flash-1017-Q8_0-00009-of-00010.gguf",
+          "bytes": 104452537696,
+          "sha256": "cdcd2cdd1657cd60354fdb63dc899731665448ed53229dfdd32dd2ca1d517945"
+        },
+        {
+          "file": "Q8_0/DeepSeek-V4.1-Flash-1017-Q8_0-00010-of-00010.gguf",
+          "bytes": 10268402880,
+          "sha256": "cb9325b45fc4c585caa83c24f2f6985b7a872ec0546e4fe5af98456631d0c33c"
+        }
+      ]
+    }
+  },
+  "gpu_cache": "16",
+  "ram_cache": "64",
+  "command": [
+    "bash",
+    "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/scripts/serve.sh"
+  ],
+  "systemd_cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/deepseek41-conversion-campaign.service\n"
+}

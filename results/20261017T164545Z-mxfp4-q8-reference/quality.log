@@ -1,0 +1,17 @@
+0.00.176.224 W llama_model_load: disabling mmap because MoE expert streaming is enabled (mmap -> none)
+0.00.354.830 W load_tensors: tensor buffer overrides (-ot/--cpu-moe) do not apply to SSD-streamed expert tensors
+0.15.395.814 W alloc_l2: MoE L2 host tier = 64.00 GiB PINNED (page-locked, unavailable to the rest of the system), 10951 slots of 6275072 bytes, eviction CLOCK
+0.16.940.828 I cmn          init: llama threadpool init, n_threads = 16
+0.16.941.789 I 
+0.16.941.858 I system_info: n_threads = 16 (n_threads_batch = 16) / 32 | CUDA : ARCHS = 1200 | USE_GRAPHS = 1 | FA_QUANTS = q4_0-q4_0,q8_0-q8_0,f16-f16,bf16-bf16 | BLACKWELL_NATIVE_FP4 = 1 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | AVX512 = 1 | AVX512_VBMI = 1 | AVX512_VNNI = 1 | AVX512_BF16 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+0.16.942.087 I perplexity: saving all logits to /home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/quality/mxfp4-q8-reference.logits
+0.16.942.102 I perplexity: tokenizing the input ..
+0.16.959.180 I perplexity: tokenization took 17.074 ms
+0.16.959.198 I perplexity: calculating perplexity over 8 chunks, n_ctx=512, batch_size=512, n_seq=1
+0.56.730.133 I perplexity: 39.75 seconds per pass - ETA 5.30 minutes
+[1]3.0474,[2]5.3371,[3]6.0537,[4]5.5718,[5]6.0497,[6]5.4430,[7]5.9245,[8]6.3430,
+5.50.829.243 I Final estimate: PPL = 6.3430 +/- 0.37565
+
+5.50.834.153 W print_stats: moe stream: remap calls = 640, expert hits = 807, misses = 113481 (13570 cold), hit rate = 0.71%
+5.50.834.154 W print_stats: moe stream: load stall = 0.00 ms total (0.000 ms per remap call)
+5.50.834.155 W print_stats: moe stream: L2 slab hits = 0, fills = 340443, evictions = 329492, hit rate = 0.00%

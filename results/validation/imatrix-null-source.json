@@ -1,0 +1,945 @@
+{
+  "diagnosis": "SIGSEGV in IMatrixCollector::collect_imatrix while strchr receives 0x100; source tensor was null before operation filtering",
+  "signal": "SIGSEGV / SEGV_MAPERR",
+  "memory_peak": "72 GiB under an 80 GiB limit; no OOM kill",
+  "gdb_log": "work/logs/calibration-debug.log",
+  "source_free_node_in_model": "Engram gate dequantization builds ARANGE with no source tensor",
+  "fix": "Filter MUL_MAT/MUL_MAT_ID before reading sources; applied to both runtimes",
+  "validation": "Full-model 512-token chunk passed: 120 expert tensors, all statistics finite, all counts sum to 3072 = 512 tokens x 6 experts",
+  "measurement": {
+    "status": "complete",
+    "command": [
+      "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/build-streaming/bin/llama-imatrix",
+      "-m",
+      "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/models/DeepSeek-V4.1-Flash-1017-GGUF/Q8_0/DeepSeek-V4.1-Flash-1017-Q8_0-00001-of-00010.gguf",
+      "-f",
+      "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/data/calibration.txt",
+      "-o",
+      "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/calibration/fullmodel-guard-one.gguf",
+      "--output-format",
+      "gguf",
+      "-c",
+      "512",
+      "-b",
+      "512",
+      "-ub",
+      "256",
+      "--chunks",
+      "1",
+      "--no-ppl",
+      "-t",
+      "16",
+      "-ngl",
+      "99",
+      "-ot",
+      "engram_embd.weight=CPU",
+      "-lm",
+      "mmap",
+      "-lzm",
+      "on",
+      "--no-repack",
+      "--fit",
+      "off",
+      "-fa",
+      "on",
+      "--moe-stream",
+      "--moe-stream-cache",
+      "16",
+      "--moe-stream-l2",
+      "64",
+      "--moe-stream-io-threads",
+      "4",
+      "--moe-stream-direct"
+    ],
+    "requested_chunks": 1,
+    "context": 512,
+    "source_model": "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/models/DeepSeek-V4.1-Flash-1017-GGUF/Q8_0/DeepSeek-V4.1-Flash-1017-Q8_0-00001-of-00010.gguf",
+    "profile": "streaming",
+    "runtime": "original expert IDs; masked parking pairs excluded",
+    "corpus_sha256": "e426a16c58f5e7e24a90a516622ac2fb7604b87fae43b9033307c425be78b2d6",
+    "pins": {
+      "native": {
+        "repo": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+        "revision": "1bae0e1088993b9b82de08f59de5be5a34e42170"
+      },
+      "baseline": {
+        "repo": "mrfakename/DeepSeek-V4.1-Flash-1017-GGUF",
+        "revision": "2c97dba3934f27a99767a90830e7519cc7b8b2d9",
+        "include": "Q2_K/*.gguf",
+        "bytes": 264515416800
+      },
+      "reference": {
+        "repo": "mrfakename/DeepSeek-V4.1-Flash-1017-GGUF",
+        "revision": "2c97dba3934f27a99767a90830e7519cc7b8b2d9",
+        "include": "Q8_0/*.gguf",
+        "bytes": 507954227008,
+        "description": "MXFP4 routed experts retained from the native checkpoint; Q8 dense and Engram conversion. This is a converted reference, not an exact native forward pass."
+      },
+      "llama_cpp": {
+        "repo": "https://github.com/vcruz305/llama.cpp",
+        "revision": "2076412598e99127ea2554467b2b7530856895d3"
+      },
+      "streaming_patch": {
+        "upstream_repo": "https://github.com/JigSawPT/llama.cpp",
+        "upstream_commit": "4aa9d62c871a55021bc2c2d35ee84bdd5dd28c6e",
+        "local_patch": "patches/moe-stream.patch",
+        "sha256": "416f4d6022cd012b271ad6d08614d3d64e77b3dcfb0212df0f9de522039ac3d8"
+      },
+      "runtime_fixes": {
+        "local_patch": "patches/runtime-fixes.patch",
+        "sha256": "e449f85290ceacf28e14028fe17691f278fe42ad975977d84aef990ef8c2163f",
+        "description": "Index-source top-k reuse, CUDA MMQ tail padding, and imatrix source-free operation guard; applied to both runtimes"
+      }
+    },
+    "returncode": 0,
+    "seconds": 72.72379416500007,
+    "completed_chunks": 1,
+    "recorded_chunk_size": 512,
+    "all_statistics_finite": true,
+    "coverage": [
+      {
+        "tensor": "blk.0.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 299,
+        "min_tokens": 0.0,
+        "max_tokens": 166.0
+      },
+      {
+        "tensor": "blk.0.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 299,
+        "min_tokens": 0.0,
+        "max_tokens": 166.0
+      },
+      {
+        "tensor": "blk.0.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 299,
+        "min_tokens": 0.0,
+        "max_tokens": 166.0
+      },
+      {
+        "tensor": "blk.1.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 288,
+        "min_tokens": 0.0,
+        "max_tokens": 135.0
+      },
+      {
+        "tensor": "blk.1.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 288,
+        "min_tokens": 0.0,
+        "max_tokens": 135.0
+      },
+      {
+        "tensor": "blk.1.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 288,
+        "min_tokens": 0.0,
+        "max_tokens": 135.0
+      },
+      {
+        "tensor": "blk.10.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 232,
+        "min_tokens": 0.0,
+        "max_tokens": 411.0
+      },
+      {
+        "tensor": "blk.10.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 232,
+        "min_tokens": 0.0,
+        "max_tokens": 411.0
+      },
+      {
+        "tensor": "blk.10.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 232,
+        "min_tokens": 0.0,
+        "max_tokens": 411.0
+      },
+      {
+        "tensor": "blk.11.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 200,
+        "min_tokens": 0.0,
+        "max_tokens": 376.0
+      },
+      {
+        "tensor": "blk.11.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 200,
+        "min_tokens": 0.0,
+        "max_tokens": 376.0
+      },
+      {
+        "tensor": "blk.11.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 200,
+        "min_tokens": 0.0,
+        "max_tokens": 376.0
+      },
+      {
+        "tensor": "blk.12.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 223,
+        "min_tokens": 0.0,
+        "max_tokens": 434.0
+      },
+      {
+        "tensor": "blk.12.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 223,
+        "min_tokens": 0.0,
+        "max_tokens": 434.0
+      },
+      {
+        "tensor": "blk.12.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 223,
+        "min_tokens": 0.0,
+        "max_tokens": 434.0
+      },
+      {
+        "tensor": "blk.13.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 227,
+        "min_tokens": 0.0,
+        "max_tokens": 460.0
+      },
+      {
+        "tensor": "blk.13.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 227,
+        "min_tokens": 0.0,
+        "max_tokens": 460.0
+      },
+      {
+        "tensor": "blk.13.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 227,
+        "min_tokens": 0.0,
+        "max_tokens": 460.0
+      },
+      {
+        "tensor": "blk.14.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 190,
+        "min_tokens": 0.0,
+        "max_tokens": 455.0
+      },
+      {
+        "tensor": "blk.14.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 190,
+        "min_tokens": 0.0,
+        "max_tokens": 455.0
+      },
+      {
+        "tensor": "blk.14.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 190,
+        "min_tokens": 0.0,
+        "max_tokens": 455.0
+      },
+      {
+        "tensor": "blk.15.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 250,
+        "min_tokens": 0.0,
+        "max_tokens": 350.0
+      },
+      {
+        "tensor": "blk.15.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 250,
+        "min_tokens": 0.0,
+        "max_tokens": 350.0
+      },
+      {
+        "tensor": "blk.15.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 250,
+        "min_tokens": 0.0,
+        "max_tokens": 350.0
+      },
+      {
+        "tensor": "blk.16.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 180,
+        "min_tokens": 0.0,
+        "max_tokens": 483.0
+      },
+      {
+        "tensor": "blk.16.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 180,
+        "min_tokens": 0.0,
+        "max_tokens": 483.0
+      },
+      {
+        "tensor": "blk.16.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 180,
+        "min_tokens": 0.0,
+        "max_tokens": 483.0
+      },
+      {
+        "tensor": "blk.17.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 228,
+        "min_tokens": 0.0,
+        "max_tokens": 460.0
+      },
+      {
+        "tensor": "blk.17.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 228,
+        "min_tokens": 0.0,
+        "max_tokens": 460.0
+      },
+      {
+        "tensor": "blk.17.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 228,
+        "min_tokens": 0.0,
+        "max_tokens": 460.0
+      },
+      {
+        "tensor": "blk.18.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 199,
+        "min_tokens": 0.0,
+        "max_tokens": 209.0
+      },
+      {
+        "tensor": "blk.18.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 199,
+        "min_tokens": 0.0,
+        "max_tokens": 209.0
+      },
+      {
+        "tensor": "blk.18.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 199,
+        "min_tokens": 0.0,
+        "max_tokens": 209.0
+      },
+      {
+        "tensor": "blk.19.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 271,
+        "min_tokens": 0.0,
+        "max_tokens": 366.0
+      },
+      {
+        "tensor": "blk.19.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 271,
+        "min_tokens": 0.0,
+        "max_tokens": 366.0
+      },
+      {
+        "tensor": "blk.19.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 271,
+        "min_tokens": 0.0,
+        "max_tokens": 366.0
+      },
+      {
+        "tensor": "blk.2.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 233,
+        "min_tokens": 0.0,
+        "max_tokens": 137.0
+      },
+      {
+        "tensor": "blk.2.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 233,
+        "min_tokens": 0.0,
+        "max_tokens": 137.0
+      },
+      {
+        "tensor": "blk.2.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 233,
+        "min_tokens": 0.0,
+        "max_tokens": 137.0
+      },
+      {
+        "tensor": "blk.20.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 204,
+        "min_tokens": 0.0,
+        "max_tokens": 457.0
+      },
+      {
+        "tensor": "blk.20.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 204,
+        "min_tokens": 0.0,
+        "max_tokens": 457.0
+      },
+      {
+        "tensor": "blk.20.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 204,
+        "min_tokens": 0.0,
+        "max_tokens": 457.0
+      },
+      {
+        "tensor": "blk.21.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 247,
+        "min_tokens": 0.0,
+        "max_tokens": 124.0
+      },
+      {
+        "tensor": "blk.21.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 247,
+        "min_tokens": 0.0,
+        "max_tokens": 124.0
+      },
+      {
+        "tensor": "blk.21.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 247,
+        "min_tokens": 0.0,
+        "max_tokens": 124.0
+      },
+      {
+        "tensor": "blk.22.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 240,
+        "min_tokens": 0.0,
+        "max_tokens": 168.0
+      },
+      {
+        "tensor": "blk.22.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 240,
+        "min_tokens": 0.0,
+        "max_tokens": 168.0
+      },
+      {
+        "tensor": "blk.22.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 240,
+        "min_tokens": 0.0,
+        "max_tokens": 168.0
+      },
+      {
+        "tensor": "blk.23.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 277,
+        "min_tokens": 0.0,
+        "max_tokens": 138.0
+      },
+      {
+        "tensor": "blk.23.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 277,
+        "min_tokens": 0.0,
+        "max_tokens": 138.0
+      },
+      {
+        "tensor": "blk.23.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 277,
+        "min_tokens": 0.0,
+        "max_tokens": 138.0
+      },
+      {
+        "tensor": "blk.24.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 225,
+        "min_tokens": 0.0,
+        "max_tokens": 156.0
+      },
+      {
+        "tensor": "blk.24.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 225,
+        "min_tokens": 0.0,
+        "max_tokens": 156.0
+      },
+      {
+        "tensor": "blk.24.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 225,
+        "min_tokens": 0.0,
+        "max_tokens": 156.0
+      },
+      {
+        "tensor": "blk.25.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 203,
+        "min_tokens": 0.0,
+        "max_tokens": 151.0
+      },
+      {
+        "tensor": "blk.25.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 203,
+        "min_tokens": 0.0,
+        "max_tokens": 151.0
+      },
+      {
+        "tensor": "blk.25.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 203,
+        "min_tokens": 0.0,
+        "max_tokens": 151.0
+      },
+      {
+        "tensor": "blk.26.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 232,
+        "min_tokens": 0.0,
+        "max_tokens": 179.0
+      },
+      {
+        "tensor": "blk.26.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 232,
+        "min_tokens": 0.0,
+        "max_tokens": 179.0
+      },
+      {
+        "tensor": "blk.26.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 232,
+        "min_tokens": 0.0,
+        "max_tokens": 179.0
+      },
+      {
+        "tensor": "blk.27.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 249,
+        "min_tokens": 0.0,
+        "max_tokens": 304.0
+      },
+      {
+        "tensor": "blk.27.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 249,
+        "min_tokens": 0.0,
+        "max_tokens": 304.0
+      },
+      {
+        "tensor": "blk.27.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 249,
+        "min_tokens": 0.0,
+        "max_tokens": 304.0
+      },
+      {
+        "tensor": "blk.28.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 234,
+        "min_tokens": 0.0,
+        "max_tokens": 241.0
+      },
+      {
+        "tensor": "blk.28.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 234,
+        "min_tokens": 0.0,
+        "max_tokens": 241.0
+      },
+      {
+        "tensor": "blk.28.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 234,
+        "min_tokens": 0.0,
+        "max_tokens": 241.0
+      },
+      {
+        "tensor": "blk.29.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 259,
+        "min_tokens": 0.0,
+        "max_tokens": 233.0
+      },
+      {
+        "tensor": "blk.29.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 259,
+        "min_tokens": 0.0,
+        "max_tokens": 233.0
+      },
+      {
+        "tensor": "blk.29.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 259,
+        "min_tokens": 0.0,
+        "max_tokens": 233.0
+      },
+      {
+        "tensor": "blk.3.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 235,
+        "min_tokens": 0.0,
+        "max_tokens": 314.0
+      },
+      {
+        "tensor": "blk.3.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 235,
+        "min_tokens": 0.0,
+        "max_tokens": 314.0
+      },
+      {
+        "tensor": "blk.3.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 235,
+        "min_tokens": 0.0,
+        "max_tokens": 314.0
+      },
+      {
+        "tensor": "blk.30.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 244,
+        "min_tokens": 0.0,
+        "max_tokens": 285.0
+      },
+      {
+        "tensor": "blk.30.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 244,
+        "min_tokens": 0.0,
+        "max_tokens": 285.0
+      },
+      {
+        "tensor": "blk.30.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 244,
+        "min_tokens": 0.0,
+        "max_tokens": 285.0
+      },
+      {
+        "tensor": "blk.31.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 238,
+        "min_tokens": 0.0,
+        "max_tokens": 302.0
+      },
+      {
+        "tensor": "blk.31.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 238,
+        "min_tokens": 0.0,
+        "max_tokens": 302.0
+      },
+      {
+        "tensor": "blk.31.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 238,
+        "min_tokens": 0.0,
+        "max_tokens": 302.0
+      },
+      {
+        "tensor": "blk.32.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 269,
+        "min_tokens": 0.0,
+        "max_tokens": 146.0
+      },
+      {
+        "tensor": "blk.32.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 269,
+        "min_tokens": 0.0,
+        "max_tokens": 146.0
+      },
+      {
+        "tensor": "blk.32.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 269,
+        "min_tokens": 0.0,
+        "max_tokens": 146.0
+      },
+      {
+        "tensor": "blk.33.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 256,
+        "min_tokens": 0.0,
+        "max_tokens": 134.0
+      },
+      {
+        "tensor": "blk.33.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 256,
+        "min_tokens": 0.0,
+        "max_tokens": 134.0
+      },
+      {
+        "tensor": "blk.33.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 256,
+        "min_tokens": 0.0,
+        "max_tokens": 134.0
+      },
+      {
+        "tensor": "blk.34.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 251,
+        "min_tokens": 0.0,
+        "max_tokens": 329.0
+      },
+      {
+        "tensor": "blk.34.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 251,
+        "min_tokens": 0.0,
+        "max_tokens": 329.0
+      },
+      {
+        "tensor": "blk.34.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 251,
+        "min_tokens": 0.0,
+        "max_tokens": 329.0
+      },
+      {
+        "tensor": "blk.35.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 252,
+        "min_tokens": 0.0,
+        "max_tokens": 198.0
+      },
+      {
+        "tensor": "blk.35.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 252,
+        "min_tokens": 0.0,
+        "max_tokens": 198.0
+      },
+      {
+        "tensor": "blk.35.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 252,
+        "min_tokens": 0.0,
+        "max_tokens": 198.0
+      },
+      {
+        "tensor": "blk.36.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 240,
+        "min_tokens": 0.0,
+        "max_tokens": 430.0
+      },
+      {
+        "tensor": "blk.36.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 240,
+        "min_tokens": 0.0,
+        "max_tokens": 430.0
+      },
+      {
+        "tensor": "blk.36.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 240,
+        "min_tokens": 0.0,
+        "max_tokens": 430.0
+      },
+      {
+        "tensor": "blk.37.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 246,
+        "min_tokens": 0.0,
+        "max_tokens": 376.0
+      },
+      {
+        "tensor": "blk.37.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 246,
+        "min_tokens": 0.0,
+        "max_tokens": 376.0
+      },
+      {
+        "tensor": "blk.37.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 246,
+        "min_tokens": 0.0,
+        "max_tokens": 376.0
+      },
+      {
+        "tensor": "blk.38.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 265,
+        "min_tokens": 0.0,
+        "max_tokens": 174.0
+      },
+      {
+        "tensor": "blk.38.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 265,
+        "min_tokens": 0.0,
+        "max_tokens": 174.0
+      },
+      {
+        "tensor": "blk.38.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 265,
+        "min_tokens": 0.0,
+        "max_tokens": 174.0
+      },
+      {
+        "tensor": "blk.39.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 252,
+        "min_tokens": 0.0,
+        "max_tokens": 147.0
+      },
+      {
+        "tensor": "blk.39.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 252,
+        "min_tokens": 0.0,
+        "max_tokens": 147.0
+      },
+      {
+        "tensor": "blk.39.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 252,
+        "min_tokens": 0.0,
+        "max_tokens": 147.0
+      },
+      {
+        "tensor": "blk.4.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 234,
+        "min_tokens": 0.0,
+        "max_tokens": 285.0
+      },
+      {
+        "tensor": "blk.4.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 234,
+        "min_tokens": 0.0,
+        "max_tokens": 285.0
+      },
+      {
+        "tensor": "blk.4.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 234,
+        "min_tokens": 0.0,
+        "max_tokens": 285.0
+      },
+      {
+        "tensor": "blk.5.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 260,
+        "min_tokens": 0.0,
+        "max_tokens": 287.0
+      },
+      {
+        "tensor": "blk.5.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 260,
+        "min_tokens": 0.0,
+        "max_tokens": 287.0
+      },
+      {
+        "tensor": "blk.5.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 260,
+        "min_tokens": 0.0,
+        "max_tokens": 287.0
+      },
+      {
+        "tensor": "blk.6.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 219,
+        "min_tokens": 0.0,
+        "max_tokens": 319.0
+      },
+      {
+        "tensor": "blk.6.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 219,
+        "min_tokens": 0.0,
+        "max_tokens": 319.0
+      },
+      {
+        "tensor": "blk.6.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 219,
+        "min_tokens": 0.0,
+        "max_tokens": 319.0
+      },
+      {
+        "tensor": "blk.7.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 208,
+        "min_tokens": 0.0,
+        "max_tokens": 161.0
+      },
+      {
+        "tensor": "blk.7.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 208,
+        "min_tokens": 0.0,
+        "max_tokens": 161.0
+      },
+      {
+        "tensor": "blk.7.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 208,
+        "min_tokens": 0.0,
+        "max_tokens": 161.0
+      },
+      {
+        "tensor": "blk.8.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 206,
+        "min_tokens": 0.0,
+        "max_tokens": 400.0
+      },
+      {
+        "tensor": "blk.8.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 206,
+        "min_tokens": 0.0,
+        "max_tokens": 400.0
+      },
+      {
+        "tensor": "blk.8.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 206,
+        "min_tokens": 0.0,
+        "max_tokens": 400.0
+      },
+      {
+        "tensor": "blk.9.ffn_down_exps.weight",
+        "experts": 384,
+        "observed": 218,
+        "min_tokens": 0.0,
+        "max_tokens": 252.0
+      },
+      {
+        "tensor": "blk.9.ffn_gate_exps.weight",
+        "experts": 384,
+        "observed": 218,
+        "min_tokens": 0.0,
+        "max_tokens": 252.0
+      },
+      {
+        "tensor": "blk.9.ffn_up_exps.weight",
+        "experts": 384,
+        "observed": 218,
+        "min_tokens": 0.0,
+        "max_tokens": 252.0
+      }
+    ],
+    "observed_experts": 28449,
+    "total_experts": 46080,
+    "sha256": "ef8589e95873c119fb488d12a9e5f5e19e5944c3c18a83a58d1b4c3291f05905"
+  }
+}

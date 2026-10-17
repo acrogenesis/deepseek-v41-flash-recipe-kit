@@ -1,0 +1,408 @@
+{
+  "native": {
+    "repo": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+    "revision": "1bae0e1088993b9b82de08f59de5be5a34e42170"
+  },
+  "reference": {
+    "repo": "mrfakename/DeepSeek-V4.1-Flash-1017-GGUF",
+    "revision": "2c97dba3934f27a99767a90830e7519cc7b8b2d9",
+    "include": "Q8_0/*.gguf",
+    "bytes": 507954227008,
+    "description": "MXFP4 routed experts retained from the native checkpoint; Q8 dense and Engram conversion. This is a converted reference, not an exact native forward pass."
+  },
+  "scope": "Selected layers and experts, gate/up/down only; not whole-model parity",
+  "layers": [
+    0,
+    7,
+    14,
+    21,
+    28,
+    35,
+    39
+  ],
+  "experts": [
+    0,
+    383
+  ],
+  "checks": [
+    {
+      "native_tensor": "layers.0.ffn.experts.0.w1",
+      "gguf_tensor": "blk.0.ffn_gate_exps.weight",
+      "expert": 0,
+      "bytes": 6266880,
+      "sha256_native_repacked": "da3c040e28d3e30076f3b674e37b2e882c8222d7bbe06b3764b75dcbd484fbb9",
+      "sha256_gguf": "da3c040e28d3e30076f3b674e37b2e882c8222d7bbe06b3764b75dcbd484fbb9",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.0.ffn.experts.0.w2",
+      "gguf_tensor": "blk.0.ffn_down_exps.weight",
+      "expert": 0,
+      "bytes": 6266880,
+      "sha256_native_repacked": "24f34ebb77f9a426da73b02aaa4e7c71391ac4054749c010a384692ead0bb707",
+      "sha256_gguf": "24f34ebb77f9a426da73b02aaa4e7c71391ac4054749c010a384692ead0bb707",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.0.ffn.experts.0.w3",
+      "gguf_tensor": "blk.0.ffn_up_exps.weight",
+      "expert": 0,
+      "bytes": 6266880,
+      "sha256_native_repacked": "78f99bf2da279a779771a497c531cbb8e2b1618c0f87e93ebc324dfa2962059b",
+      "sha256_gguf": "78f99bf2da279a779771a497c531cbb8e2b1618c0f87e93ebc324dfa2962059b",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.0.ffn.experts.383.w1",
+      "gguf_tensor": "blk.0.ffn_gate_exps.weight",
+      "expert": 383,
+      "bytes": 6266880,
+      "sha256_native_repacked": "19cfda920b1514b27a217091be45b891c8cc3dda96f564ab22f79be5903964ef",
+      "sha256_gguf": "19cfda920b1514b27a217091be45b891c8cc3dda96f564ab22f79be5903964ef",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.0.ffn.experts.383.w2",
+      "gguf_tensor": "blk.0.ffn_down_exps.weight",
+      "expert": 383,
+      "bytes": 6266880,
+      "sha256_native_repacked": "4a020e66df9f0096718129ea3ba890f0a6355237f2d4dea77cfc3298d29bf168",
+      "sha256_gguf": "4a020e66df9f0096718129ea3ba890f0a6355237f2d4dea77cfc3298d29bf168",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.0.ffn.experts.383.w3",
+      "gguf_tensor": "blk.0.ffn_up_exps.weight",
+      "expert": 383,
+      "bytes": 6266880,
+      "sha256_native_repacked": "bfd8f1c3ed2bbe2124a40bfcb5b89f5ad84b026e239f3ceac09767bbeb2f5191",
+      "sha256_gguf": "bfd8f1c3ed2bbe2124a40bfcb5b89f5ad84b026e239f3ceac09767bbeb2f5191",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.7.ffn.experts.0.w1",
+      "gguf_tensor": "blk.7.ffn_gate_exps.weight",
+      "expert": 0,
+      "bytes": 6266880,
+      "sha256_native_repacked": "650fe4dd605cab068bc3f77d17fa1ca3553d302a75b47fa380f4db00139915ed",
+      "sha256_gguf": "650fe4dd605cab068bc3f77d17fa1ca3553d302a75b47fa380f4db00139915ed",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.7.ffn.experts.0.w2",
+      "gguf_tensor": "blk.7.ffn_down_exps.weight",
+      "expert": 0,
+      "bytes": 6266880,
+      "sha256_native_repacked": "aeaf0a7706445c6f5c579fbfcabb7b0dc516fc4184b427f76f9383a19d21372e",
+      "sha256_gguf": "aeaf0a7706445c6f5c579fbfcabb7b0dc516fc4184b427f76f9383a19d21372e",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.7.ffn.experts.0.w3",
+      "gguf_tensor": "blk.7.ffn_up_exps.weight",
+      "expert": 0,
+      "bytes": 6266880,
+      "sha256_native_repacked": "4d98acc8299f367675469eb6939aba78e05057dc37e03c5b396fbdf0b9fd06de",
+      "sha256_gguf": "4d98acc8299f367675469eb6939aba78e05057dc37e03c5b396fbdf0b9fd06de",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.7.ffn.experts.383.w1",
+      "gguf_tensor": "blk.7.ffn_gate_exps.weight",
+      "expert": 383,
+      "bytes": 6266880,
+      "sha256_native_repacked": "30ecacc3eed67e02166ef8f9b53789a61891168265c17d13edf06f84f2847e0c",
+      "sha256_gguf": "30ecacc3eed67e02166ef8f9b53789a61891168265c17d13edf06f84f2847e0c",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.7.ffn.experts.383.w2",
+      "gguf_tensor": "blk.7.ffn_down_exps.weight",
+      "expert": 383,
+      "bytes": 6266880,
+      "sha256_native_repacked": "1784639a1aad98ea94d213ac014ee75ac44d1d91ed00d122ae62fe921d0ffed2",
+      "sha256_gguf": "1784639a1aad98ea94d213ac014ee75ac44d1d91ed00d122ae62fe921d0ffed2",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.7.ffn.experts.383.w3",
+      "gguf_tensor": "blk.7.ffn_up_exps.weight",
+      "expert": 383,
+      "bytes": 6266880,
+      "sha256_native_repacked": "558665349b8f40e596b3a45167c5e48594d8aed928380f1c873548961d1b1874",
+      "sha256_gguf": "558665349b8f40e596b3a45167c5e48594d8aed928380f1c873548961d1b1874",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.14.ffn.experts.0.w1",
+      "gguf_tensor": "blk.14.ffn_gate_exps.weight",
+      "expert": 0,
+      "bytes": 6266880,
+      "sha256_native_repacked": "5ddf40f4f2ad3f023c73ac2ab9c32a59c0b2e6ba942f1a36a515d383a99b08cf",
+      "sha256_gguf": "5ddf40f4f2ad3f023c73ac2ab9c32a59c0b2e6ba942f1a36a515d383a99b08cf",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.14.ffn.experts.0.w2",
+      "gguf_tensor": "blk.14.ffn_down_exps.weight",
+      "expert": 0,
+      "bytes": 6266880,
+      "sha256_native_repacked": "37d164091887ccff76a9b748c263315cf428edfe50163265b42f0fd61b4f3503",
+      "sha256_gguf": "37d164091887ccff76a9b748c263315cf428edfe50163265b42f0fd61b4f3503",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.14.ffn.experts.0.w3",
+      "gguf_tensor": "blk.14.ffn_up_exps.weight",
+      "expert": 0,
+      "bytes": 6266880,
+      "sha256_native_repacked": "7f1139a9606b763e562bc502d722bd5ba367f7e08bc772d0a14f23bcc3e1856b",
+      "sha256_gguf": "7f1139a9606b763e562bc502d722bd5ba367f7e08bc772d0a14f23bcc3e1856b",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.14.ffn.experts.383.w1",
+      "gguf_tensor": "blk.14.ffn_gate_exps.weight",
+      "expert": 383,
+      "bytes": 6266880,
+      "sha256_native_repacked": "39fc5931ca364ec8115fda12677dc6622e781afa2fef5e33382af5f530c80c2c",
+      "sha256_gguf": "39fc5931ca364ec8115fda12677dc6622e781afa2fef5e33382af5f530c80c2c",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.14.ffn.experts.383.w2",
+      "gguf_tensor": "blk.14.ffn_down_exps.weight",
+      "expert": 383,
+      "bytes": 6266880,
+      "sha256_native_repacked": "bbcb60ad62f848e53e25937259f0aa446c141ccfc3426c41c81af00421ee2cb6",
+      "sha256_gguf": "bbcb60ad62f848e53e25937259f0aa446c141ccfc3426c41c81af00421ee2cb6",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.14.ffn.experts.383.w3",
+      "gguf_tensor": "blk.14.ffn_up_exps.weight",
+      "expert": 383,
+      "bytes": 6266880,
+      "sha256_native_repacked": "7b0a02e9ab0b64a37d09d2826f69c68eb99f0f7be57d4abaad513819fd95a5fd",
+      "sha256_gguf": "7b0a02e9ab0b64a37d09d2826f69c68eb99f0f7be57d4abaad513819fd95a5fd",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.21.ffn.experts.0.w1",
+      "gguf_tensor": "blk.21.ffn_gate_exps.weight",
+      "expert": 0,
+      "bytes": 6266880,
+      "sha256_native_repacked": "43cbd3e0ca7cdf82a01b2ef7265ef4b62caa1d47bb24ec8b792bdf4ec0aa85fa",
+      "sha256_gguf": "43cbd3e0ca7cdf82a01b2ef7265ef4b62caa1d47bb24ec8b792bdf4ec0aa85fa",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.21.ffn.experts.0.w2",
+      "gguf_tensor": "blk.21.ffn_down_exps.weight",
+      "expert": 0,
+      "bytes": 6266880,
+      "sha256_native_repacked": "fb4cd1c7a8b45aa313b64a265cf57aef64c7d8425094dbb666898de0c7173f2b",
+      "sha256_gguf": "fb4cd1c7a8b45aa313b64a265cf57aef64c7d8425094dbb666898de0c7173f2b",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.21.ffn.experts.0.w3",
+      "gguf_tensor": "blk.21.ffn_up_exps.weight",
+      "expert": 0,
+      "bytes": 6266880,
+      "sha256_native_repacked": "d75ac6f173e6bb54595a476fb8923de95433e107e96c8cca0bd3c096e5315935",
+      "sha256_gguf": "d75ac6f173e6bb54595a476fb8923de95433e107e96c8cca0bd3c096e5315935",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.21.ffn.experts.383.w1",
+      "gguf_tensor": "blk.21.ffn_gate_exps.weight",
+      "expert": 383,
+      "bytes": 6266880,
+      "sha256_native_repacked": "a41f0c81a6a0fabf50cc3fd6f2a4249c453402e0fe599474c2fd88594a7e304b",
+      "sha256_gguf": "a41f0c81a6a0fabf50cc3fd6f2a4249c453402e0fe599474c2fd88594a7e304b",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.21.ffn.experts.383.w2",
+      "gguf_tensor": "blk.21.ffn_down_exps.weight",
+      "expert": 383,
+      "bytes": 6266880,
+      "sha256_native_repacked": "3c48b6ccbcafb775059beab46edd24e9f6990337163d362b163e5c222bd0c6e5",
+      "sha256_gguf": "3c48b6ccbcafb775059beab46edd24e9f6990337163d362b163e5c222bd0c6e5",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.21.ffn.experts.383.w3",
+      "gguf_tensor": "blk.21.ffn_up_exps.weight",
+      "expert": 383,
+      "bytes": 6266880,
+      "sha256_native_repacked": "c38310c71a75676ac745d73da55cb69a7d9722ec0b26f4d19d5a0d1eca04ec4a",
+      "sha256_gguf": "c38310c71a75676ac745d73da55cb69a7d9722ec0b26f4d19d5a0d1eca04ec4a",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.28.ffn.experts.0.w1",
+      "gguf_tensor": "blk.28.ffn_gate_exps.weight",
+      "expert": 0,
+      "bytes": 6266880,
+      "sha256_native_repacked": "010c26a4d2277299c8923c8efef86d8421fbab2add4b3599d94416f6c4c20bf8",
+      "sha256_gguf": "010c26a4d2277299c8923c8efef86d8421fbab2add4b3599d94416f6c4c20bf8",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.28.ffn.experts.0.w2",
+      "gguf_tensor": "blk.28.ffn_down_exps.weight",
+      "expert": 0,
+      "bytes": 6266880,
+      "sha256_native_repacked": "e7dbef16119e3c4d5d127cdec4ed13d2fcbd79e058ee1355aecc8ad35ed3b046",
+      "sha256_gguf": "e7dbef16119e3c4d5d127cdec4ed13d2fcbd79e058ee1355aecc8ad35ed3b046",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.28.ffn.experts.0.w3",
+      "gguf_tensor": "blk.28.ffn_up_exps.weight",
+      "expert": 0,
+      "bytes": 6266880,
+      "sha256_native_repacked": "da81df820b25d196620a1751f42ddadc04c3e8c67335c99a5d56674788141f81",
+      "sha256_gguf": "da81df820b25d196620a1751f42ddadc04c3e8c67335c99a5d56674788141f81",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.28.ffn.experts.383.w1",
+      "gguf_tensor": "blk.28.ffn_gate_exps.weight",
+      "expert": 383,
+      "bytes": 6266880,
+      "sha256_native_repacked": "02effbe3a7ca1a41a52f0d7e94456c8457c0728eab512b8204fadd3c990e39e3",
+      "sha256_gguf": "02effbe3a7ca1a41a52f0d7e94456c8457c0728eab512b8204fadd3c990e39e3",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.28.ffn.experts.383.w2",
+      "gguf_tensor": "blk.28.ffn_down_exps.weight",
+      "expert": 383,
+      "bytes": 6266880,
+      "sha256_native_repacked": "d8077b70d426bb81927f7b06d5f3b09ac2498a259f5c67025b6beed257916374",
+      "sha256_gguf": "d8077b70d426bb81927f7b06d5f3b09ac2498a259f5c67025b6beed257916374",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.28.ffn.experts.383.w3",
+      "gguf_tensor": "blk.28.ffn_up_exps.weight",
+      "expert": 383,
+      "bytes": 6266880,
+      "sha256_native_repacked": "664068fe2321e526b72abe60ea876c775ec6dfe6d5b194b9e3d334e1d674f7d1",
+      "sha256_gguf": "664068fe2321e526b72abe60ea876c775ec6dfe6d5b194b9e3d334e1d674f7d1",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.35.ffn.experts.0.w1",
+      "gguf_tensor": "blk.35.ffn_gate_exps.weight",
+      "expert": 0,
+      "bytes": 6266880,
+      "sha256_native_repacked": "a09c5fbf09c9d5204ddd2dc1052005971d9f234450145bfe719fa71cc21717bb",
+      "sha256_gguf": "a09c5fbf09c9d5204ddd2dc1052005971d9f234450145bfe719fa71cc21717bb",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.35.ffn.experts.0.w2",
+      "gguf_tensor": "blk.35.ffn_down_exps.weight",
+      "expert": 0,
+      "bytes": 6266880,
+      "sha256_native_repacked": "c5a62d887f54a49d45d445af0132b91cafa838e400716da97068b893beba2d1c",
+      "sha256_gguf": "c5a62d887f54a49d45d445af0132b91cafa838e400716da97068b893beba2d1c",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.35.ffn.experts.0.w3",
+      "gguf_tensor": "blk.35.ffn_up_exps.weight",
+      "expert": 0,
+      "bytes": 6266880,
+      "sha256_native_repacked": "1c506b51801ec612c229a24d90b77dd6b0352c53ab8b00b065c75ec7b95fd2a6",
+      "sha256_gguf": "1c506b51801ec612c229a24d90b77dd6b0352c53ab8b00b065c75ec7b95fd2a6",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.35.ffn.experts.383.w1",
+      "gguf_tensor": "blk.35.ffn_gate_exps.weight",
+      "expert": 383,
+      "bytes": 6266880,
+      "sha256_native_repacked": "59a66689903ef1dcc2849b52b725822b534b85c39be9431fa99170b0a989e26c",
+      "sha256_gguf": "59a66689903ef1dcc2849b52b725822b534b85c39be9431fa99170b0a989e26c",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.35.ffn.experts.383.w2",
+      "gguf_tensor": "blk.35.ffn_down_exps.weight",
+      "expert": 383,
+      "bytes": 6266880,
+      "sha256_native_repacked": "89f810c9bc3bf6a303a39350a0498b01dbfbb2dd9df4f448585878ae04af0444",
+      "sha256_gguf": "89f810c9bc3bf6a303a39350a0498b01dbfbb2dd9df4f448585878ae04af0444",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.35.ffn.experts.383.w3",
+      "gguf_tensor": "blk.35.ffn_up_exps.weight",
+      "expert": 383,
+      "bytes": 6266880,
+      "sha256_native_repacked": "27d24609b3a745cc2a75526b4f293395d35656ade955d0f71337ee9e0e8c16ca",
+      "sha256_gguf": "27d24609b3a745cc2a75526b4f293395d35656ade955d0f71337ee9e0e8c16ca",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.39.ffn.experts.0.w1",
+      "gguf_tensor": "blk.39.ffn_gate_exps.weight",
+      "expert": 0,
+      "bytes": 6266880,
+      "sha256_native_repacked": "2783b2956bbf921b359ca7b894a7939c25e6351bc09539170eab6f31808ffb1a",
+      "sha256_gguf": "2783b2956bbf921b359ca7b894a7939c25e6351bc09539170eab6f31808ffb1a",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.39.ffn.experts.0.w2",
+      "gguf_tensor": "blk.39.ffn_down_exps.weight",
+      "expert": 0,
+      "bytes": 6266880,
+      "sha256_native_repacked": "f8398d60c2de95eeaca69f0d4ca5082848080d09571ca9619fa937d0d3835221",
+      "sha256_gguf": "f8398d60c2de95eeaca69f0d4ca5082848080d09571ca9619fa937d0d3835221",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.39.ffn.experts.0.w3",
+      "gguf_tensor": "blk.39.ffn_up_exps.weight",
+      "expert": 0,
+      "bytes": 6266880,
+      "sha256_native_repacked": "96ec920c46705e231e2885d59729ade24b6985d8ae529e937bef76b9cac8ac32",
+      "sha256_gguf": "96ec920c46705e231e2885d59729ade24b6985d8ae529e937bef76b9cac8ac32",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.39.ffn.experts.383.w1",
+      "gguf_tensor": "blk.39.ffn_gate_exps.weight",
+      "expert": 383,
+      "bytes": 6266880,
+      "sha256_native_repacked": "828b753b4f29b21236b97865e91226c5a61378636986e41382daad7c48c5c8d3",
+      "sha256_gguf": "828b753b4f29b21236b97865e91226c5a61378636986e41382daad7c48c5c8d3",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.39.ffn.experts.383.w2",
+      "gguf_tensor": "blk.39.ffn_down_exps.weight",
+      "expert": 383,
+      "bytes": 6266880,
+      "sha256_native_repacked": "c6eacf8f7350eda88e77c1f298e14db1c28cd4fb7670e01a88781f6bbce86c47",
+      "sha256_gguf": "c6eacf8f7350eda88e77c1f298e14db1c28cd4fb7670e01a88781f6bbce86c47",
+      "equal": true
+    },
+    {
+      "native_tensor": "layers.39.ffn.experts.383.w3",
+      "gguf_tensor": "blk.39.ffn_up_exps.weight",
+      "expert": 383,
+      "bytes": 6266880,
+      "sha256_native_repacked": "8dd4c30dc389f38daa33bc81204e60281cbf7f2ed6cdf7e59adedbb2cdc44ac8",
+      "sha256_gguf": "8dd4c30dc389f38daa33bc81204e60281cbf7f2ed6cdf7e59adedbb2cdc44ac8",
+      "equal": true
+    }
+  ],
+  "passed": true
+}

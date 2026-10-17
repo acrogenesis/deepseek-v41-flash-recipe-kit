@@ -1,0 +1,13 @@
+0.00.251.827 W load: bad special token: 'tokenizer.ggml.seperator_token_id' = 4294967295, using default id -1
+0.00.251.831 W load: bad special token: 'tokenizer.ggml.padding_token_id' = 4294967295, using default id -1
+0.00.724.706 I cmn          init: llama threadpool init, n_threads = 16
+0.00.725.529 I 
+0.00.725.591 I system_info: n_threads = 16 (n_threads_batch = 16) / 32 | CUDA : ARCHS = 1200 | USE_GRAPHS = 1 | FA_QUANTS = q4_0-q4_0,q8_0-q8_0,f16-f16,bf16-bf16 | BLACKWELL_NATIVE_FP4 = 1 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | AVX512 = 1 | AVX512_VBMI = 1 | AVX512_VNNI = 1 | AVX512_BF16 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+0.00.725.673 I perplexity: saving all logits to /home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/quality/fullshape-mxfp4-decode.logits
+0.00.725.677 I perplexity: tokenizing the input ..
+0.00.731.627 I perplexity: tokenization took 5.949 ms
+0.00.731.642 I perplexity: calculating perplexity over 3 chunks, n_ctx=256, batch_size=256, n_seq=1
+0.00.816.006 I perplexity: 0.08 seconds per pass - ETA 0.00 minutes
+[1]569.4506,[2]560.8425,[3]553.8434,
+0.00.946.648 I Final estimate: PPL = 553.8434 +/- 11.05908
+

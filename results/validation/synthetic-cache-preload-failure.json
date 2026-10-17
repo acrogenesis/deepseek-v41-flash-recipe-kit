@@ -1,0 +1,104 @@
+{
+  "model": "synthetic two-layer 16-expert Q2_K",
+  "purpose": "cache plumbing only",
+  "preloading": true,
+  "comparisons": [
+    {
+      "profile": "stream-buffered",
+      "prompt_tokens": 32,
+      "same_tokens": true,
+      "max_abs_logprob_difference": 0.0,
+      "positions": 16,
+      "passed": true
+    },
+    {
+      "profile": "stream-buffered",
+      "prompt_tokens": 128,
+      "same_tokens": true,
+      "max_abs_logprob_difference": 0.0,
+      "positions": 14,
+      "passed": true
+    },
+    {
+      "profile": "stream-buffered",
+      "prompt_tokens": 311,
+      "same_tokens": true,
+      "max_abs_logprob_difference": 0.0,
+      "positions": 15,
+      "passed": true
+    },
+    {
+      "profile": "stream-direct",
+      "prompt_tokens": 32,
+      "same_tokens": true,
+      "max_abs_logprob_difference": 0.0,
+      "positions": 16,
+      "passed": true
+    },
+    {
+      "profile": "stream-direct",
+      "prompt_tokens": 128,
+      "same_tokens": true,
+      "max_abs_logprob_difference": 0.0,
+      "positions": 14,
+      "passed": true
+    },
+    {
+      "profile": "stream-direct",
+      "prompt_tokens": 311,
+      "same_tokens": true,
+      "max_abs_logprob_difference": 0.0,
+      "positions": 15,
+      "passed": true
+    },
+    {
+      "profile": "stream-buffered-l2",
+      "prompt_tokens": 32,
+      "same_tokens": false,
+      "max_abs_logprob_difference": 2.009091377258301,
+      "positions": 16,
+      "passed": false
+    },
+    {
+      "profile": "stream-buffered-l2",
+      "prompt_tokens": 128,
+      "same_tokens": true,
+      "max_abs_logprob_difference": 0.0,
+      "positions": 14,
+      "passed": true
+    },
+    {
+      "profile": "stream-buffered-l2",
+      "prompt_tokens": 311,
+      "same_tokens": true,
+      "max_abs_logprob_difference": 0.0,
+      "positions": 15,
+      "passed": true
+    },
+    {
+      "profile": "stream-direct-l2",
+      "prompt_tokens": 32,
+      "same_tokens": true,
+      "max_abs_logprob_difference": 0.0,
+      "positions": 16,
+      "passed": true
+    },
+    {
+      "profile": "stream-direct-l2",
+      "prompt_tokens": 128,
+      "same_tokens": true,
+      "max_abs_logprob_difference": 0.0,
+      "positions": 14,
+      "passed": true
+    },
+    {
+      "profile": "stream-direct-l2",
+      "prompt_tokens": 311,
+      "same_tokens": true,
+      "max_abs_logprob_difference": 0.0,
+      "positions": 15,
+      "passed": true
+    }
+  ],
+  "passed": false
+}

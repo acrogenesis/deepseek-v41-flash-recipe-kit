@@ -1,0 +1,12 @@
+{
+  "purpose": "Inference output stability after the calibration-only source guard",
+  "files": [
+    "work/quality/mxfp4-q8-reference.logits",
+    "work/quality/mxfp4-q8-reference-416f4d6022cd.logits"
+  ],
+  "sha256": [
+    "c14f11060ad61014453b3c798bd38b26bd65eb4bb3fcbf320b52a1989a39135d",
+    "c14f11060ad61014453b3c798bd38b26bd65eb4bb3fcbf320b52a1989a39135d"
+  ],
+  "identical": true
+}

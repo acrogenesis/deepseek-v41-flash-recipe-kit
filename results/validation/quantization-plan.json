@@ -1,0 +1,27 @@
+{
+  "purpose": "Full-reference tensor plan and coverage-policy validation; no model quantized",
+  "dry_run_status": "dry_run_complete",
+  "tensor_payload_bytes": 359312742368,
+  "expert_tensors": 120,
+  "strict_coverage_rejected": true,
+  "observed_entries": 44106,
+  "unseen_entries": 1974,
+  "unobserved_importance_policy": "unit weights, as implemented by the pinned llama.cpp quantizer",
+  "command": [
+    "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/build/bin/llama-quantize",
+    "--allow-requantize",
+    "--pure",
+    "--keep-split",
+    "--max-buffer-size",
+    "2048",
+    "--imatrix",
+    "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/calibration/mxfp4-q8-32.gguf",
+    "--tensor-type-file",
+    "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/reported-coverage-dry-run/tensor-types.txt",
+    "--dry-run",
+    "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/models/DeepSeek-V4.1-Flash-1017-GGUF/Q8_0/DeepSeek-V4.1-Flash-1017-Q8_0-00001-of-00010.gguf",
+    "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/reported-coverage-dry-run/DeepSeek-V4.1-Flash-1017-IQ2_XXS-Experts-Q8-Dense-Engram",
+    "IQ2_XXS",
+    "24"
+  ]
+}

@@ -1,0 +1,12 @@
+0.00.371.706 W llama_model_loader: tensor overrides to CPU are used with mmap enabled - consider using --load-mode none for better performance
+1.04.605.103 I cmn          init: llama threadpool init, n_threads = 16
+1.04.606.001 I 
+1.04.606.076 I system_info: n_threads = 16 (n_threads_batch = 16) / 32 | CUDA : ARCHS = 1200 | USE_GRAPHS = 1 | FA_QUANTS = q4_0-q4_0,q8_0-q8_0,f16-f16,bf16-bf16 | BLACKWELL_NATIVE_FP4 = 1 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | AVX512 = 1 | AVX512_VBMI = 1 | AVX512_VNNI = 1 | AVX512_BF16 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+1.04.606.266 I perplexity: saving all logits to /home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/quality/q2-cpu.logits
+1.04.606.271 I perplexity: tokenizing the input ..
+1.04.623.879 I perplexity: tokenization took 17.604 ms
+1.04.623.893 I perplexity: calculating perplexity over 4 chunks, n_ctx=512, batch_size=512, n_seq=1
+2.51.816.266 I perplexity: 107.17 seconds per pass - ETA 7.13 minutes
+[1]6.6994,[2]10.4318,[3]10.8098,[4]11.0499,
+8.03.234.203 I Final estimate: PPL = 11.0499 +/- 0.91986
+

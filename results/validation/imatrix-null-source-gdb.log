@@ -1,0 +1,70 @@
+
+This GDB supports auto-downloading debuginfo from the following URLs:
+  <https://debuginfod.archlinux.org>
+Enable debuginfod for this session? (y or [n]) [answered N; input not from terminal]
+Debuginfod has been disabled.
+To make this setting permanent, add 'set debuginfod enabled off' to .gdbinit.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/usr/lib/libthread_db.so.1".
+0.00.173.226 W llama_model_load: disabling mmap because MoE expert streaming is enabled (mmap -> none)
+0.00.352.478 W load_tensors: tensor buffer overrides (-ot/--cpu-moe) do not apply to SSD-streamed expert tensors
+0.11.152.475 W alloc_l2: MoE L2 host tier = 64.00 GiB PINNED (page-locked, unavailable to the rest of the system), 10951 slots of 6275072 bytes, eviction CLOCK
+0.12.782.580 I cmn          init: llama threadpool init, n_threads = 16
+0.12.783.524 I 
+0.12.783.598 I system_info: n_threads = 16 (n_threads_batch = 16) / 32 | CUDA : ARCHS = 1200 | USE_GRAPHS = 1 | FA_QUANTS = q4_0-q4_0,q8_0-q8_0,f16-f16,bf16-bf16 | BLACKWELL_NATIVE_FP4 = 1 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | AVX512 = 1 | AVX512_VBMI = 1 | AVX512_VNNI = 1 | AVX512_BF16 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+0.12.783.607 I compute_imatrix: tokenizing the input ..
+0.12.954.578 I compute_imatrix: tokenization took 170.959 ms
+0.12.954.614 I compute_imatrix: computing over 1 chunks, n_ctx=512, batch_size=512, n_seq=1
+
+Thread 1 "llama-imatrix" received signal SIGSEGV, Segmentation fault.
+0x00007fffed98ff96 in ?? () from /usr/lib/libc.so.6
+#0  0x00007fffed98ff96 in ?? () from /usr/lib/libc.so.6
+#1  0x000055555556f230 in IMatrixCollector::collect_imatrix(ggml_tensor*, bool, void*) ()
+#2  0x00007ffff7391867 in ggml_backend_sched_graph_compute_async () from /home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/build-streaming/bin/libggml-base.so.0
+#3  0x00007ffff77fcbe1 in llama_context::graph_compute(ggml_cgraph*, bool) () from /home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/build-streaming/bin/libllama.so.0
+#4  0x00007ffff7800757 in llama_context::process_ubatch(llama_ubatch const&, llm_graph_type, llama_memory_context_i*, ggml_status&) () from /home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/build-streaming/bin/libllama.so.0
+#5  0x00007ffff7809008 in llama_context::decode(llama_batch const&) () from /home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/build-streaming/bin/libllama.so.0
+#6  0x00007ffff780a69b in llama_decode () from /home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/build-streaming/bin/libllama.so.0
+#7  0x0000555555564c92 in main ()
+rdi            0x100               256
+rsi            0x23                35
+
+Thread 11 (Thread 0x7ffd7bfff000 (LWP 861273) "llama-imatrix"):
+#0  0x00007fffed8a0952 in ?? () from /usr/lib/libc.so.6
+#1  0x00007fffed894cd9 in ?? () from /usr/lib/libc.so.6
+
+Thread 10 (Thread 0x7ffd80d86000 (LWP 861272) "llama-imatrix"):
+#0  0x00007fffed8a0952 in ?? () from /usr/lib/libc.so.6
+#1  0x00007fffed894cd9 in ?? () from /usr/lib/libc.so.6
+
+Thread 9 (Thread 0x7ffd81587000 (LWP 861271) "llama-imatrix"):
+#0  0x00007fffed8a0952 in ?? () from /usr/lib/libc.so.6
+#1  0x00007fffed894cd9 in ?? () from /usr/lib/libc.so.6
+
+Thread 8 (Thread 0x7ffd83abf000 (LWP 861270) "llama-imatrix"):
+#0  0x00007fffed8a0952 in ?? () from /usr/lib/libc.so.6
+#1  0x00007fffed894cd9 in ?? () from /usr/lib/libc.so.6
+
+Thread 7 (Thread 0x7ffd939fd000 (LWP 861109) "llama-imatrix"):
+#0  0x00007fffed8a0952 in ?? () from /usr/lib/libc.so.6
+#1  0x00007fffed911365 in poll () from /usr/lib/libc.so.6
+
+Thread 6 (Thread 0x7ffd99df7000 (LWP 861107) "cuda-EvtHandlr"):
+#0  0x00007fffed8a0952 in ?? () from /usr/lib/libc.so.6
+#1  0x00007fffed911365 in poll () from /usr/lib/libc.so.6
+
+Thread 5 (Thread 0x7ffd9a5f8000 (LWP 861106) "llama-imatrix"):
+#0  0x00007fffed8a0952 in ?? () from /usr/lib/libc.so.6
+#1  0x00007fffed894cd9 in ?? () from /usr/lib/libc.so.6
+
+Thread 4 (Thread 0x7fffa4dfe000 (LWP 861101) "cuda00001400006"):
+#0  0x00007fffed8a0952 in ?? () from /usr/lib/libc.so.6
+#1  0x00007fffed911365 in poll () from /usr/lib/libc.so.6
+
+Thread 3 (Thread 0x7fffa55ff000 (LWP 861100) "llama-imatrix"):
+#0  0x00007fffed8a0952 in ?? () from /usr/lib/libc.so.6
+#1  0x00007fffed894cd9 in ?? () from /usr/lib/libc.so.6
+
+Thread 1 (Thread 0x7ffff7309000 (LWP 861089) "llama-imatrix"):
+#0  0x00007fffed98ff96 in ?? () from /usr/lib/libc.so.6
+#1  0x000055555556f230 in IMatrixCollector::collect_imatrix(ggml_tensor*, bool, void*) ()

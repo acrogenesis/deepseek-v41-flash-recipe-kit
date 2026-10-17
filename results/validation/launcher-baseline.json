@@ -1,0 +1,12 @@
+{
+  "status": "complete",
+  "time": "2026-10-17T16:28:28.498981+00:00",
+  "command": "bash scripts/start.sh baseline",
+  "health": {
+    "status": "ok"
+  },
+  "chat_command": "python scripts/chat.py --tokens 48 'Reply with exactly: DeepSeek is running locally.'",
+  "response": "DeepSeek is running locally.",
+  "systemd": "ActiveState=active\nMemoryCurrent=77304451072\nMemoryPeak=77310935040\nMemorySwapCurrent=0\n",
+  "not_a_throughput_benchmark": "Reference download active"
+}

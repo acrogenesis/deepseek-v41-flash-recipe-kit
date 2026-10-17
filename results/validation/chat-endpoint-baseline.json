@@ -1,0 +1,204 @@
+{
+  "status": "complete",
+  "purpose": "Real OpenAI chat completion with system and user roles; not a capability benchmark",
+  "started_at": "2026-10-17T18:57:25.038449+00:00",
+  "variant": "baseline",
+  "model": "deepseek-v41-flash-1017-q2k",
+  "url": "http://127.0.0.1:5017",
+  "pins": {
+    "native": {
+      "repo": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "revision": "1bae0e1088993b9b82de08f59de5be5a34e42170"
+    },
+    "baseline": {
+      "repo": "mrfakename/DeepSeek-V4.1-Flash-1017-GGUF",
+      "revision": "2c97dba3934f27a99767a90830e7519cc7b8b2d9",
+      "include": "Q2_K/*.gguf",
+      "bytes": 264515416800
+    },
+    "reference": {
+      "repo": "mrfakename/DeepSeek-V4.1-Flash-1017-GGUF",
+      "revision": "2c97dba3934f27a99767a90830e7519cc7b8b2d9",
+      "include": "Q8_0/*.gguf",
+      "bytes": 507954227008,
+      "description": "MXFP4 routed experts retained from the native checkpoint; Q8 dense and Engram conversion. This is a converted reference, not an exact native forward pass."
+    },
+    "llama_cpp": {
+      "repo": "https://github.com/vcruz305/llama.cpp",
+      "revision": "2076412598e99127ea2554467b2b7530856895d3"
+    },
+    "streaming_patch": {
+      "upstream_repo": "https://github.com/JigSawPT/llama.cpp",
+      "upstream_commit": "4aa9d62c871a55021bc2c2d35ee84bdd5dd28c6e",
+      "local_patch": "patches/moe-stream.patch",
+      "sha256": "416f4d6022cd012b271ad6d08614d3d64e77b3dcfb0212df0f9de522039ac3d8"
+    },
+    "runtime_fixes": {
+      "local_patch": "patches/runtime-fixes.patch",
+      "sha256": "e449f85290ceacf28e14028fe17691f278fe42ad975977d84aef990ef8c2163f",
+      "description": "Index-source top-k reuse, CUDA MMQ tail padding, and imatrix source-free operation guard; applied to both runtimes"
+    }
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "For this connection test, reply with exactly DEEPSEEK_READY and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Run the connection test."
+    }
+  ],
+  "health": {
+    "status": "ok"
+  },
+  "models": {
+    "models": [
+      {
+        "name": "deepseek-v41-flash-1017-q2k",
+        "model": "deepseek-v41-flash-1017-q2k",
+        "modified_at": "",
+        "size": "",
+        "digest": "",
+        "type": "model",
+        "description": "",
+        "tags": [
+          ""
+        ],
+        "capabilities": [
+          "completion"
+        ],
+        "parameters": "",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "",
+          "families": [
+            ""
+          ],
+          "parameter_size": "",
+          "quantization_level": ""
+        }
+      }
+    ],
+    "object": "list",
+    "data": [
+      {
+        "id": "deepseek-v41-flash-1017-q2k",
+        "aliases": [
+          "deepseek-v41-flash-1017-q2k"
+        ],
+        "tags": [],
+        "object": "model",
+        "created": 1792263445,
+        "owned_by": "llamacpp",
+        "meta": {
+          "vocab_type": 2,
+          "n_vocab": 129280,
+          "n_ctx": 8192,
+          "n_ctx_train": 1048576,
+          "n_embd": 5120,
+          "n_params": 748494684784,
+          "size": 264509580136,
+          "ftype": "Q2_K - Medium"
+        }
+      }
+    ]
+  },
+  "configured_context": 8192,
+  "template_matches_official": true,
+  "expected_input_ids": [
+    0,
+    128799,
+    3870,
+    566,
+    7530,
+    1950,
+    14,
+    20430,
+    418,
+    9045,
+    420,
+    67845,
+    58348,
+    45,
+    65,
+    35092,
+    59,
+    305,
+    5760,
+    3006,
+    16,
+    128803,
+    29382,
+    270,
+    7530,
+    1950,
+    16,
+    128804,
+    128822
+  ],
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "DEEPSEEK_READY"
+        }
+      }
+    ],
+    "created": 1792263453,
+    "model": "deepseek-v41-flash-1017-q2k",
+    "system_fingerprint": "b1-2076412",
+    "object": "chat.completion",
+    "usage": {
+      "completion_tokens": 8,
+      "prompt_tokens": 29,
+      "total_tokens": 37,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "id": "chatcmpl-JIOsnwttnQkiSQdy53J5C0MSA6tkRyff",
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 29,
+      "prompt_ms": 7314.091,
+      "prompt_per_token_ms": 252.21003448275863,
+      "prompt_per_second": 3.9649493012870636,
+      "predicted_n": 8,
+      "predicted_ms": 1394.064,
+      "predicted_per_token_ms": 199.15200000000002,
+      "predicted_per_second": 5.021290270747971
+    }
+  },
+  "seconds": 8.71110884799782,
+  "prompt_token_count_matches": true,
+  "answer": "DEEPSEEK_READY",
+  "exact_answer": true,
+  "concurrent_work": "CPU IQ2 quantization; this is a functional API check, not a throughput measurement",
+  "launch_command": [
+    "systemd-run",
+    "--user",
+    "--collect",
+    "--unit=deepseek41-api-smoke",
+    "-p",
+    "MemoryHigh=72G",
+    "-p",
+    "MemoryMax=80G",
+    "-p",
+    "MemorySwapMax=0",
+    "--working-directory=/home/archogenesis/Work/deepseek-v41-flash-recipe-kit",
+    "env",
+    "PROFILE=streaming",
+    "MODEL_VARIANT=baseline",
+    "GPU_CACHE_GIB=16",
+    "RAM_CACHE_GIB=64",
+    "CONTEXT=8192",
+    "PORT=5017",
+    "bash",
+    "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/scripts/serve.sh"
+  ]
+}

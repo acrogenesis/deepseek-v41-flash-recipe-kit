@@ -1,0 +1,60 @@
+0.00.181.208 W llama_model_load: disabling mmap because MoE expert streaming is enabled (mmap -> none)
+0.00.258.982 W load: bad special token: 'tokenizer.ggml.seperator_token_id' = 4294967295, using default id -1
+0.00.258.985 W load: bad special token: 'tokenizer.ggml.padding_token_id' = 4294967295, using default id -1
+0.00.262.469 W load_tensors: tensor buffer overrides (-ot/--cpu-moe) do not apply to SSD-streamed expert tensors
+0.00.413.929 W alloc_l2: MoE L2 host tier = 1.00 GiB PINNED (page-locked, unavailable to the rest of the system), 36157 slots of 29696 bytes, eviction CLOCK
+0.00.421.610 I cmn          init: llama threadpool init, n_threads = 16
+0.00.422.471 I 
+0.00.422.517 I system_info: n_threads = 16 (n_threads_batch = 16) / 32 | CUDA : ARCHS = 1200 | USE_GRAPHS = 1 | FA_QUANTS = q4_0-q4_0,q8_0-q8_0,f16-f16,bf16-bf16 | BLACKWELL_NATIVE_FP4 = 1 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | AVX512 = 1 | AVX512_VBMI = 1 | AVX512_VNNI = 1 | AVX512_BF16 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+0.00.422.586 I kl_divergence: computing over 4 chunks, n_ctx=512, batch_size=512, n_seq=1
+0.00.482.491 I kl_divergence: 0.06 seconds per pass - ETA 0.00 minutes
+
+chunk             PPL               ln(PPL(Q)/PPL(base))          KL Divergence              Δp RMS            Same top p
+   1     581.2991 ±   20.3112       0.00000 ±       -nan       0.00000 ±    0.00000     0.000 ±  0.000 %    100.000 ±  0.000 %
+   2     595.9304 ±   14.4247       0.00000 ±       -nan       0.00000 ±    0.00000     0.000 ±  0.000 %    100.000 ±  0.000 %
+   3     616.9142 ±   12.7309      -0.00000 ±       -nan       0.00000 ±    0.00000     0.000 ±  0.000 %    100.000 ±  0.000 %
+   4     616.9658 ±   11.2870      -0.00000 ±       -nan       0.00000 ±    0.00000     0.000 ±  0.000 %    100.000 ±  0.000 %
+
+====== Perplexity statistics ======
+Mean PPL(Q)                   : 616.965752 ±  11.287024
+Mean PPL(base)                : 616.966190 ±  11.287037
+Cor(ln(PPL(Q)), ln(PPL(base))): 100.00%
+Mean ln(PPL(Q)/PPL(base))     :  -0.000001 ±       -nan
+Mean PPL(Q)/PPL(base)         :   0.999999 ±       -nan
+Mean PPL(Q)-PPL(base)         :  -0.000438 ±       -nan
+
+====== KL divergence statistics ======
+Mean    KLD:   0.000000 ±   0.000000
+Maximum KLD:   0.000003
+99.9%   KLD:   0.000003
+99.0%   KLD:   0.000002
+95.0%   KLD:   0.000002
+90.0%   KLD:   0.000001
+Median  KLD:  -0.000000
+10.0%   KLD:  -0.000001
+ 5.0%   KLD:  -0.000002
+ 1.0%   KLD:  -0.000002
+ 0.1%   KLD:  -0.000003
+Minimum KLD:  -0.000003
+
+====== Token probability statistics ======
+Mean    Δp:  0.000 ± 0.000 %
+Maximum Δp:  0.000%
+99.9%   Δp:  0.000%
+99.0%   Δp:  0.000%
+95.0%   Δp:  0.000%
+90.0%   Δp:  0.000%
+75.0%   Δp:  0.000%
+Median  Δp:  0.000%
+25.0%   Δp: -0.000%
+10.0%   Δp: -0.000%
+ 5.0%   Δp: -0.000%
+ 1.0%   Δp: -0.000%
+ 0.1%   Δp: -0.000%
+Minimum Δp: -0.000%
+RMS Δp    :  0.000 ± 0.000 %
+Same top p: 100.000 ± 0.000 %
+
+0.00.507.022 W print_stats: moe stream: remap calls = 12, expert hits = 25, misses = 101 (28 cold), hit rate = 19.84%
+0.00.507.023 W print_stats: moe stream: load stall = 0.00 ms total (0.000 ms per remap call)
+0.00.507.025 W print_stats: moe stream: L2 slab hits = 219, fills = 84, evictions = 0, hit rate = 72.28%

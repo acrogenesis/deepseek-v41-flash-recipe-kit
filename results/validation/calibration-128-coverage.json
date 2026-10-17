@@ -1,0 +1,1684 @@
+{
+  "file": "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/calibration/mxfp4-q8-128.gguf",
+  "chunks": 128,
+  "context": 512,
+  "expert_tensors": 120,
+  "observed_entries": 46020,
+  "total_entries": 46080,
+  "fully_observed_tensors": 69,
+  "unseen_entries": 60,
+  "fewer_than_10_observations": 276,
+  "tensors": [
+    {
+      "layer": 0,
+      "projection": "down",
+      "tensor": "blk.0.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 5,
+      "median_count": 814.5,
+      "max_count": 7988
+    },
+    {
+      "layer": 0,
+      "projection": "gate",
+      "tensor": "blk.0.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 5,
+      "median_count": 814.5,
+      "max_count": 7988
+    },
+    {
+      "layer": 0,
+      "projection": "up",
+      "tensor": "blk.0.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 5,
+      "median_count": 814.5,
+      "max_count": 7988
+    },
+    {
+      "layer": 1,
+      "projection": "down",
+      "tensor": "blk.1.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 7,
+      "median_count": 705.0,
+      "max_count": 6965
+    },
+    {
+      "layer": 1,
+      "projection": "gate",
+      "tensor": "blk.1.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 7,
+      "median_count": 705.0,
+      "max_count": 6965
+    },
+    {
+      "layer": 1,
+      "projection": "up",
+      "tensor": "blk.1.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 7,
+      "median_count": 705.0,
+      "max_count": 6965
+    },
+    {
+      "layer": 2,
+      "projection": "down",
+      "tensor": "blk.2.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 5,
+      "median_count": 673.5,
+      "max_count": 10062
+    },
+    {
+      "layer": 2,
+      "projection": "gate",
+      "tensor": "blk.2.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 5,
+      "median_count": 673.5,
+      "max_count": 10062
+    },
+    {
+      "layer": 2,
+      "projection": "up",
+      "tensor": "blk.2.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 5,
+      "median_count": 673.5,
+      "max_count": 10062
+    },
+    {
+      "layer": 3,
+      "projection": "down",
+      "tensor": "blk.3.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        192
+      ],
+      "fewer_than_10_observations": 3,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 693.5,
+      "max_count": 12130
+    },
+    {
+      "layer": 3,
+      "projection": "gate",
+      "tensor": "blk.3.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        192
+      ],
+      "fewer_than_10_observations": 3,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 693.5,
+      "max_count": 12130
+    },
+    {
+      "layer": 3,
+      "projection": "up",
+      "tensor": "blk.3.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        192
+      ],
+      "fewer_than_10_observations": 3,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 693.5,
+      "max_count": 12130
+    },
+    {
+      "layer": 4,
+      "projection": "down",
+      "tensor": "blk.4.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        317
+      ],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 717.0,
+      "max_count": 11718
+    },
+    {
+      "layer": 4,
+      "projection": "gate",
+      "tensor": "blk.4.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        317
+      ],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 717.0,
+      "max_count": 11718
+    },
+    {
+      "layer": 4,
+      "projection": "up",
+      "tensor": "blk.4.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        317
+      ],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 717.0,
+      "max_count": 11718
+    },
+    {
+      "layer": 5,
+      "projection": "down",
+      "tensor": "blk.5.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 2,
+      "median_count": 747.0,
+      "max_count": 23244
+    },
+    {
+      "layer": 5,
+      "projection": "gate",
+      "tensor": "blk.5.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 2,
+      "median_count": 747.0,
+      "max_count": 23244
+    },
+    {
+      "layer": 5,
+      "projection": "up",
+      "tensor": "blk.5.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 2,
+      "median_count": 747.0,
+      "max_count": 23244
+    },
+    {
+      "layer": 6,
+      "projection": "down",
+      "tensor": "blk.6.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 7,
+      "median_count": 660.0,
+      "max_count": 14142
+    },
+    {
+      "layer": 6,
+      "projection": "gate",
+      "tensor": "blk.6.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 7,
+      "median_count": 660.0,
+      "max_count": 14142
+    },
+    {
+      "layer": 6,
+      "projection": "up",
+      "tensor": "blk.6.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 7,
+      "median_count": 660.0,
+      "max_count": 14142
+    },
+    {
+      "layer": 7,
+      "projection": "down",
+      "tensor": "blk.7.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 3,
+      "median_count": 708.0,
+      "max_count": 10334
+    },
+    {
+      "layer": 7,
+      "projection": "gate",
+      "tensor": "blk.7.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 3,
+      "median_count": 708.0,
+      "max_count": 10334
+    },
+    {
+      "layer": 7,
+      "projection": "up",
+      "tensor": "blk.7.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 3,
+      "median_count": 708.0,
+      "max_count": 10334
+    },
+    {
+      "layer": 8,
+      "projection": "down",
+      "tensor": "blk.8.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 0,
+      "total_routes": 393216,
+      "min_count": 10,
+      "median_count": 667.0,
+      "max_count": 19687
+    },
+    {
+      "layer": 8,
+      "projection": "gate",
+      "tensor": "blk.8.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 0,
+      "total_routes": 393216,
+      "min_count": 10,
+      "median_count": 667.0,
+      "max_count": 19687
+    },
+    {
+      "layer": 8,
+      "projection": "up",
+      "tensor": "blk.8.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 0,
+      "total_routes": 393216,
+      "min_count": 10,
+      "median_count": 667.0,
+      "max_count": 19687
+    },
+    {
+      "layer": 9,
+      "projection": "down",
+      "tensor": "blk.9.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 0,
+      "total_routes": 393216,
+      "min_count": 12,
+      "median_count": 699.5,
+      "max_count": 17053
+    },
+    {
+      "layer": 9,
+      "projection": "gate",
+      "tensor": "blk.9.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 0,
+      "total_routes": 393216,
+      "min_count": 12,
+      "median_count": 699.5,
+      "max_count": 17053
+    },
+    {
+      "layer": 9,
+      "projection": "up",
+      "tensor": "blk.9.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 0,
+      "total_routes": 393216,
+      "min_count": 12,
+      "median_count": 699.5,
+      "max_count": 17053
+    },
+    {
+      "layer": 10,
+      "projection": "down",
+      "tensor": "blk.10.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 6,
+      "median_count": 616.5,
+      "max_count": 33781
+    },
+    {
+      "layer": 10,
+      "projection": "gate",
+      "tensor": "blk.10.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 6,
+      "median_count": 616.5,
+      "max_count": 33781
+    },
+    {
+      "layer": 10,
+      "projection": "up",
+      "tensor": "blk.10.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 6,
+      "median_count": 616.5,
+      "max_count": 33781
+    },
+    {
+      "layer": 11,
+      "projection": "down",
+      "tensor": "blk.11.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 0,
+      "total_routes": 393216,
+      "min_count": 11,
+      "median_count": 648.0,
+      "max_count": 22257
+    },
+    {
+      "layer": 11,
+      "projection": "gate",
+      "tensor": "blk.11.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 0,
+      "total_routes": 393216,
+      "min_count": 11,
+      "median_count": 648.0,
+      "max_count": 22257
+    },
+    {
+      "layer": 11,
+      "projection": "up",
+      "tensor": "blk.11.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 0,
+      "total_routes": 393216,
+      "min_count": 11,
+      "median_count": 648.0,
+      "max_count": 22257
+    },
+    {
+      "layer": 12,
+      "projection": "down",
+      "tensor": "blk.12.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 3,
+      "total_routes": 393216,
+      "min_count": 1,
+      "median_count": 529.5,
+      "max_count": 23622
+    },
+    {
+      "layer": 12,
+      "projection": "gate",
+      "tensor": "blk.12.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 3,
+      "total_routes": 393216,
+      "min_count": 1,
+      "median_count": 529.5,
+      "max_count": 23622
+    },
+    {
+      "layer": 12,
+      "projection": "up",
+      "tensor": "blk.12.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 3,
+      "total_routes": 393216,
+      "min_count": 1,
+      "median_count": 529.5,
+      "max_count": 23622
+    },
+    {
+      "layer": 13,
+      "projection": "down",
+      "tensor": "blk.13.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        230
+      ],
+      "fewer_than_10_observations": 3,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 648.0,
+      "max_count": 15927
+    },
+    {
+      "layer": 13,
+      "projection": "gate",
+      "tensor": "blk.13.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        230
+      ],
+      "fewer_than_10_observations": 3,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 648.0,
+      "max_count": 15927
+    },
+    {
+      "layer": 13,
+      "projection": "up",
+      "tensor": "blk.13.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        230
+      ],
+      "fewer_than_10_observations": 3,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 648.0,
+      "max_count": 15927
+    },
+    {
+      "layer": 14,
+      "projection": "down",
+      "tensor": "blk.14.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        316
+      ],
+      "fewer_than_10_observations": 7,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 537.0,
+      "max_count": 29469
+    },
+    {
+      "layer": 14,
+      "projection": "gate",
+      "tensor": "blk.14.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        316
+      ],
+      "fewer_than_10_observations": 7,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 537.0,
+      "max_count": 29469
+    },
+    {
+      "layer": 14,
+      "projection": "up",
+      "tensor": "blk.14.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        316
+      ],
+      "fewer_than_10_observations": 7,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 537.0,
+      "max_count": 29469
+    },
+    {
+      "layer": 15,
+      "projection": "down",
+      "tensor": "blk.15.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        77
+      ],
+      "fewer_than_10_observations": 3,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 697.0,
+      "max_count": 12363
+    },
+    {
+      "layer": 15,
+      "projection": "gate",
+      "tensor": "blk.15.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        77
+      ],
+      "fewer_than_10_observations": 3,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 697.0,
+      "max_count": 12363
+    },
+    {
+      "layer": 15,
+      "projection": "up",
+      "tensor": "blk.15.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        77
+      ],
+      "fewer_than_10_observations": 3,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 697.0,
+      "max_count": 12363
+    },
+    {
+      "layer": 16,
+      "projection": "down",
+      "tensor": "blk.16.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 6,
+      "total_routes": 393216,
+      "min_count": 1,
+      "median_count": 576.0,
+      "max_count": 18104
+    },
+    {
+      "layer": 16,
+      "projection": "gate",
+      "tensor": "blk.16.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 6,
+      "total_routes": 393216,
+      "min_count": 1,
+      "median_count": 576.0,
+      "max_count": 18104
+    },
+    {
+      "layer": 16,
+      "projection": "up",
+      "tensor": "blk.16.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 6,
+      "total_routes": 393216,
+      "min_count": 1,
+      "median_count": 576.0,
+      "max_count": 18104
+    },
+    {
+      "layer": 17,
+      "projection": "down",
+      "tensor": "blk.17.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        114
+      ],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 673.0,
+      "max_count": 16043
+    },
+    {
+      "layer": 17,
+      "projection": "gate",
+      "tensor": "blk.17.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        114
+      ],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 673.0,
+      "max_count": 16043
+    },
+    {
+      "layer": 17,
+      "projection": "up",
+      "tensor": "blk.17.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        114
+      ],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 673.0,
+      "max_count": 16043
+    },
+    {
+      "layer": 18,
+      "projection": "down",
+      "tensor": "blk.18.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 381,
+      "unseen_ids": [
+        68,
+        161,
+        197
+      ],
+      "fewer_than_10_observations": 8,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 511.0,
+      "max_count": 23464
+    },
+    {
+      "layer": 18,
+      "projection": "gate",
+      "tensor": "blk.18.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 381,
+      "unseen_ids": [
+        68,
+        161,
+        197
+      ],
+      "fewer_than_10_observations": 8,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 511.0,
+      "max_count": 23464
+    },
+    {
+      "layer": 18,
+      "projection": "up",
+      "tensor": "blk.18.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 381,
+      "unseen_ids": [
+        68,
+        161,
+        197
+      ],
+      "fewer_than_10_observations": 8,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 511.0,
+      "max_count": 23464
+    },
+    {
+      "layer": 19,
+      "projection": "down",
+      "tensor": "blk.19.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        97
+      ],
+      "fewer_than_10_observations": 6,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 807.0,
+      "max_count": 13217
+    },
+    {
+      "layer": 19,
+      "projection": "gate",
+      "tensor": "blk.19.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        97
+      ],
+      "fewer_than_10_observations": 6,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 807.0,
+      "max_count": 13217
+    },
+    {
+      "layer": 19,
+      "projection": "up",
+      "tensor": "blk.19.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        97
+      ],
+      "fewer_than_10_observations": 6,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 807.0,
+      "max_count": 13217
+    },
+    {
+      "layer": 20,
+      "projection": "down",
+      "tensor": "blk.20.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        244
+      ],
+      "fewer_than_10_observations": 3,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 689.5,
+      "max_count": 15531
+    },
+    {
+      "layer": 20,
+      "projection": "gate",
+      "tensor": "blk.20.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        244
+      ],
+      "fewer_than_10_observations": 3,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 689.5,
+      "max_count": 15531
+    },
+    {
+      "layer": 20,
+      "projection": "up",
+      "tensor": "blk.20.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        244
+      ],
+      "fewer_than_10_observations": 3,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 689.5,
+      "max_count": 15531
+    },
+    {
+      "layer": 21,
+      "projection": "down",
+      "tensor": "blk.21.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        207
+      ],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 778.0,
+      "max_count": 14269
+    },
+    {
+      "layer": 21,
+      "projection": "gate",
+      "tensor": "blk.21.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        207
+      ],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 778.0,
+      "max_count": 14269
+    },
+    {
+      "layer": 21,
+      "projection": "up",
+      "tensor": "blk.21.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        207
+      ],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 778.0,
+      "max_count": 14269
+    },
+    {
+      "layer": 22,
+      "projection": "down",
+      "tensor": "blk.22.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 3,
+      "total_routes": 393216,
+      "min_count": 1,
+      "median_count": 691.5,
+      "max_count": 7256
+    },
+    {
+      "layer": 22,
+      "projection": "gate",
+      "tensor": "blk.22.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 3,
+      "total_routes": 393216,
+      "min_count": 1,
+      "median_count": 691.5,
+      "max_count": 7256
+    },
+    {
+      "layer": 22,
+      "projection": "up",
+      "tensor": "blk.22.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 3,
+      "total_routes": 393216,
+      "min_count": 1,
+      "median_count": 691.5,
+      "max_count": 7256
+    },
+    {
+      "layer": 23,
+      "projection": "down",
+      "tensor": "blk.23.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 0,
+      "total_routes": 393216,
+      "min_count": 11,
+      "median_count": 824.5,
+      "max_count": 5125
+    },
+    {
+      "layer": 23,
+      "projection": "gate",
+      "tensor": "blk.23.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 0,
+      "total_routes": 393216,
+      "min_count": 11,
+      "median_count": 824.5,
+      "max_count": 5125
+    },
+    {
+      "layer": 23,
+      "projection": "up",
+      "tensor": "blk.23.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 0,
+      "total_routes": 393216,
+      "min_count": 11,
+      "median_count": 824.5,
+      "max_count": 5125
+    },
+    {
+      "layer": 24,
+      "projection": "down",
+      "tensor": "blk.24.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        350
+      ],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 775.0,
+      "max_count": 5565
+    },
+    {
+      "layer": 24,
+      "projection": "gate",
+      "tensor": "blk.24.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        350
+      ],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 775.0,
+      "max_count": 5565
+    },
+    {
+      "layer": 24,
+      "projection": "up",
+      "tensor": "blk.24.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        350
+      ],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 775.0,
+      "max_count": 5565
+    },
+    {
+      "layer": 25,
+      "projection": "down",
+      "tensor": "blk.25.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 1,
+      "median_count": 786.0,
+      "max_count": 5592
+    },
+    {
+      "layer": 25,
+      "projection": "gate",
+      "tensor": "blk.25.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 1,
+      "median_count": 786.0,
+      "max_count": 5592
+    },
+    {
+      "layer": 25,
+      "projection": "up",
+      "tensor": "blk.25.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 1,
+      "median_count": 786.0,
+      "max_count": 5592
+    },
+    {
+      "layer": 26,
+      "projection": "down",
+      "tensor": "blk.26.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        31
+      ],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 780.5,
+      "max_count": 6373
+    },
+    {
+      "layer": 26,
+      "projection": "gate",
+      "tensor": "blk.26.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        31
+      ],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 780.5,
+      "max_count": 6373
+    },
+    {
+      "layer": 26,
+      "projection": "up",
+      "tensor": "blk.26.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        31
+      ],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 780.5,
+      "max_count": 6373
+    },
+    {
+      "layer": 27,
+      "projection": "down",
+      "tensor": "blk.27.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        260
+      ],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 709.5,
+      "max_count": 8596
+    },
+    {
+      "layer": 27,
+      "projection": "gate",
+      "tensor": "blk.27.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        260
+      ],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 709.5,
+      "max_count": 8596
+    },
+    {
+      "layer": 27,
+      "projection": "up",
+      "tensor": "blk.27.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        260
+      ],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 709.5,
+      "max_count": 8596
+    },
+    {
+      "layer": 28,
+      "projection": "down",
+      "tensor": "blk.28.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        306
+      ],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 653.5,
+      "max_count": 8497
+    },
+    {
+      "layer": 28,
+      "projection": "gate",
+      "tensor": "blk.28.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        306
+      ],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 653.5,
+      "max_count": 8497
+    },
+    {
+      "layer": 28,
+      "projection": "up",
+      "tensor": "blk.28.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        306
+      ],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 653.5,
+      "max_count": 8497
+    },
+    {
+      "layer": 29,
+      "projection": "down",
+      "tensor": "blk.29.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 5,
+      "median_count": 731.5,
+      "max_count": 8863
+    },
+    {
+      "layer": 29,
+      "projection": "gate",
+      "tensor": "blk.29.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 5,
+      "median_count": 731.5,
+      "max_count": 8863
+    },
+    {
+      "layer": 29,
+      "projection": "up",
+      "tensor": "blk.29.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 5,
+      "median_count": 731.5,
+      "max_count": 8863
+    },
+    {
+      "layer": 30,
+      "projection": "down",
+      "tensor": "blk.30.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 7,
+      "median_count": 765.5,
+      "max_count": 8687
+    },
+    {
+      "layer": 30,
+      "projection": "gate",
+      "tensor": "blk.30.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 7,
+      "median_count": 765.5,
+      "max_count": 8687
+    },
+    {
+      "layer": 30,
+      "projection": "up",
+      "tensor": "blk.30.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 7,
+      "median_count": 765.5,
+      "max_count": 8687
+    },
+    {
+      "layer": 31,
+      "projection": "down",
+      "tensor": "blk.31.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 2,
+      "median_count": 717.0,
+      "max_count": 10238
+    },
+    {
+      "layer": 31,
+      "projection": "gate",
+      "tensor": "blk.31.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 2,
+      "median_count": 717.0,
+      "max_count": 10238
+    },
+    {
+      "layer": 31,
+      "projection": "up",
+      "tensor": "blk.31.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 2,
+      "median_count": 717.0,
+      "max_count": 10238
+    },
+    {
+      "layer": 32,
+      "projection": "down",
+      "tensor": "blk.32.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 4,
+      "total_routes": 393216,
+      "min_count": 1,
+      "median_count": 741.5,
+      "max_count": 7733
+    },
+    {
+      "layer": 32,
+      "projection": "gate",
+      "tensor": "blk.32.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 4,
+      "total_routes": 393216,
+      "min_count": 1,
+      "median_count": 741.5,
+      "max_count": 7733
+    },
+    {
+      "layer": 32,
+      "projection": "up",
+      "tensor": "blk.32.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 4,
+      "total_routes": 393216,
+      "min_count": 1,
+      "median_count": 741.5,
+      "max_count": 7733
+    },
+    {
+      "layer": 33,
+      "projection": "down",
+      "tensor": "blk.33.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 9,
+      "median_count": 745.5,
+      "max_count": 6349
+    },
+    {
+      "layer": 33,
+      "projection": "gate",
+      "tensor": "blk.33.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 9,
+      "median_count": 745.5,
+      "max_count": 6349
+    },
+    {
+      "layer": 33,
+      "projection": "up",
+      "tensor": "blk.33.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 9,
+      "median_count": 745.5,
+      "max_count": 6349
+    },
+    {
+      "layer": 34,
+      "projection": "down",
+      "tensor": "blk.34.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 4,
+      "median_count": 645.5,
+      "max_count": 13513
+    },
+    {
+      "layer": 34,
+      "projection": "gate",
+      "tensor": "blk.34.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 4,
+      "median_count": 645.5,
+      "max_count": 13513
+    },
+    {
+      "layer": 34,
+      "projection": "up",
+      "tensor": "blk.34.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 1,
+      "total_routes": 393216,
+      "min_count": 4,
+      "median_count": 645.5,
+      "max_count": 13513
+    },
+    {
+      "layer": 35,
+      "projection": "down",
+      "tensor": "blk.35.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 5,
+      "total_routes": 393216,
+      "min_count": 1,
+      "median_count": 704.5,
+      "max_count": 14436
+    },
+    {
+      "layer": 35,
+      "projection": "gate",
+      "tensor": "blk.35.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 5,
+      "total_routes": 393216,
+      "min_count": 1,
+      "median_count": 704.5,
+      "max_count": 14436
+    },
+    {
+      "layer": 35,
+      "projection": "up",
+      "tensor": "blk.35.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 5,
+      "total_routes": 393216,
+      "min_count": 1,
+      "median_count": 704.5,
+      "max_count": 14436
+    },
+    {
+      "layer": 36,
+      "projection": "down",
+      "tensor": "blk.36.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        335
+      ],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 700.0,
+      "max_count": 13761
+    },
+    {
+      "layer": 36,
+      "projection": "gate",
+      "tensor": "blk.36.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        335
+      ],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 700.0,
+      "max_count": 13761
+    },
+    {
+      "layer": 36,
+      "projection": "up",
+      "tensor": "blk.36.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        335
+      ],
+      "fewer_than_10_observations": 2,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 700.0,
+      "max_count": 13761
+    },
+    {
+      "layer": 37,
+      "projection": "down",
+      "tensor": "blk.37.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 382,
+      "unseen_ids": [
+        133,
+        290
+      ],
+      "fewer_than_10_observations": 4,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 721.0,
+      "max_count": 11588
+    },
+    {
+      "layer": 37,
+      "projection": "gate",
+      "tensor": "blk.37.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 382,
+      "unseen_ids": [
+        133,
+        290
+      ],
+      "fewer_than_10_observations": 4,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 721.0,
+      "max_count": 11588
+    },
+    {
+      "layer": 37,
+      "projection": "up",
+      "tensor": "blk.37.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 382,
+      "unseen_ids": [
+        133,
+        290
+      ],
+      "fewer_than_10_observations": 4,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 721.0,
+      "max_count": 11588
+    },
+    {
+      "layer": 38,
+      "projection": "down",
+      "tensor": "blk.38.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        250
+      ],
+      "fewer_than_10_observations": 4,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 732.5,
+      "max_count": 7798
+    },
+    {
+      "layer": 38,
+      "projection": "gate",
+      "tensor": "blk.38.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        250
+      ],
+      "fewer_than_10_observations": 4,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 732.5,
+      "max_count": 7798
+    },
+    {
+      "layer": 38,
+      "projection": "up",
+      "tensor": "blk.38.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 383,
+      "unseen_ids": [
+        250
+      ],
+      "fewer_than_10_observations": 4,
+      "total_routes": 393216,
+      "min_count": 0,
+      "median_count": 732.5,
+      "max_count": 7798
+    },
+    {
+      "layer": 39,
+      "projection": "down",
+      "tensor": "blk.39.ffn_down_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 0,
+      "total_routes": 393216,
+      "min_count": 12,
+      "median_count": 722.5,
+      "max_count": 7762
+    },
+    {
+      "layer": 39,
+      "projection": "gate",
+      "tensor": "blk.39.ffn_gate_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 0,
+      "total_routes": 393216,
+      "min_count": 12,
+      "median_count": 722.5,
+      "max_count": 7762
+    },
+    {
+      "layer": 39,
+      "projection": "up",
+      "tensor": "blk.39.ffn_up_exps.weight",
+      "experts": 384,
+      "observed": 384,
+      "unseen_ids": [],
+      "fewer_than_10_observations": 0,
+      "total_routes": 393216,
+      "min_count": 12,
+      "median_count": 722.5,
+      "max_count": 7762
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+[
+  {
+    "label": "reference-streaming",
+    "source": "results/20261017T210406Z-reference-streaming/probe.json",
+    "pairs": [
+      {
+        "same_text": true,
+        "same_delivered_token_ids": true,
+        "first_different_delivered_token": null,
+        "generated_tokens": [
+          128,
+          128
+        ]
+      },
+      {
+        "same_text": true,
+        "same_delivered_token_ids": true,
+        "first_different_delivered_token": null,
+        "generated_tokens": [
+          128,
+          128
+        ]
+      },
+      {
+        "same_text": true,
+        "same_delivered_token_ids": true,
+        "first_different_delivered_token": null,
+        "generated_tokens": [
+          128,
+          128
+        ]
+      }
+    ]
+  },
+  {
+    "label": "iq2-streaming",
+    "source": "results/20261017T210718Z-iq2-streaming/probe.json",
+    "pairs": [
+      {
+        "same_text": true,
+        "same_delivered_token_ids": true,
+        "first_different_delivered_token": null,
+        "generated_tokens": [
+          128,
+          128
+        ]
+      },
+      {
+        "same_text": true,
+        "same_delivered_token_ids": true,
+        "first_different_delivered_token": null,
+        "generated_tokens": [
+          128,
+          128
+        ]
+      },
+      {
+        "same_text": true,
+        "same_delivered_token_ids": true,
+        "first_different_delivered_token": null,
+        "generated_tokens": [
+          128,
+          128
+        ]
+      }
+    ]
+  },
+  {
+    "label": "streaming",
+    "source": "results/20261017T210838Z-streaming/probe.json",
+    "pairs": [
+      {
+        "same_text": false,
+        "same_delivered_token_ids": false,
+        "first_different_delivered_token": 19,
+        "generated_tokens": [
+          128,
+          128
+        ]
+      },
+      {
+        "same_text": false,
+        "same_delivered_token_ids": false,
+        "first_different_delivered_token": 15,
+        "generated_tokens": [
+          128,
+          128
+        ]
+      },
+      {
+        "same_text": false,
+        "same_delivered_token_ids": false,
+        "first_different_delivered_token": 13,
+        "generated_tokens": [
+          128,
+          128
+        ]
+      }
+    ]
+  },
+  {
+    "label": "baseline",
+    "source": "results/20261017T212430Z-baseline/probe.json",
+    "pairs": [
+      {
+        "same_text": true,
+        "same_delivered_token_ids": true,
+        "first_different_delivered_token": null,
+        "generated_tokens": [
+          128,
+          128
+        ]
+      },
+      {
+        "same_text": true,
+        "same_delivered_token_ids": true,
+        "first_different_delivered_token": null,
+        "generated_tokens": [
+          128,
+          128
+        ]
+      },
+      {
+        "same_text": true,
+        "same_delivered_token_ids": true,
+        "first_different_delivered_token": null,
+        "generated_tokens": [
+          128,
+          128
+        ]
+      }
+    ]
+  },
+  {
+    "label": "gpu-offload",
+    "source": "results/20261017T211053Z-gpu-offload/probe.json",
+    "pairs": [
+      {
+        "same_text": true,
+        "same_delivered_token_ids": true,
+        "first_different_delivered_token": null,
+        "generated_tokens": [
+          128,
+          128
+        ]
+      },
+      {
+        "same_text": true,
+        "same_delivered_token_ids": true,
+        "first_different_delivered_token": null,
+        "generated_tokens": [
+          128,
+          128
+        ]
+      },
+      {
+        "same_text": true,
+        "same_delivered_token_ids": true,
+        "first_different_delivered_token": null,
+        "generated_tokens": [
+          128,
+          128
+        ]
+      }
+    ]
+  }
+]
