@@ -1,6 +1,6 @@
 {
   "repo": "acrogenesis/DeepSeek-V4.1-Flash-1017-IQ2_XXS-GGUF",
-  "revision": "main",
+  "revision": "f5221b0be8e1849905de308e5ab4e73e282ddb60",
   "include": "*.gguf",
   "bytes": 359318573984
 }

@@ -1,0 +1,59 @@
+{
+  "repo": "acrogenesis/DeepSeek-V4.1-Flash-1017-IQ2_XXS-GGUF",
+  "revision": "f5221b0be8e1849905de308e5ab4e73e282ddb60",
+  "verified_at": "2026-10-18T01:39:39.765663+00:00",
+  "method": "All ten remote LFS SHA256 values and byte sizes match the locally verified conversion manifest",
+  "bytes": 359318573984,
+  "files": [
+    {
+      "file": "DeepSeek-V4.1-Flash-1017-IQ2_XXS-Experts-Q8-Dense-Engram-00001-of-00010.gguf",
+      "bytes": 21027092128,
+      "sha256": "5eeb4867ffa53d23210395cc9f69423769a27fdcf3fc7dcadaab74c435aa01b7"
+    },
+    {
+      "file": "DeepSeek-V4.1-Flash-1017-IQ2_XXS-Experts-Q8-Dense-Engram-00002-of-00010.gguf",
+      "bytes": 21021328800,
+      "sha256": "03f9d07360b343ad7ce35bea591ac627dfe223d99c82bd4af49a2260d70f3820"
+    },
+    {
+      "file": "DeepSeek-V4.1-Flash-1017-IQ2_XXS-Experts-Q8-Dense-Engram-00003-of-00010.gguf",
+      "bytes": 21021328832,
+      "sha256": "621859c563fec81156e1898ca77c9967263d0a3af0b6b344cb16ae227510ca8d"
+    },
+    {
+      "file": "DeepSeek-V4.1-Flash-1017-IQ2_XXS-Experts-Q8-Dense-Engram-00004-of-00010.gguf",
+      "bytes": 21021328832,
+      "sha256": "5ab7bdbe5ec949630094fe9e7a22a8039df3c160820a538a0d8493c4f92a4e58"
+    },
+    {
+      "file": "DeepSeek-V4.1-Flash-1017-IQ2_XXS-Experts-Q8-Dense-Engram-00005-of-00010.gguf",
+      "bytes": 21021328832,
+      "sha256": "8a0c65d6bb76625c342cf62a95d74e7ca266282376ccb07aeeb1ec6004ba6306"
+    },
+    {
+      "file": "DeepSeek-V4.1-Flash-1017-IQ2_XXS-Experts-Q8-Dense-Engram-00006-of-00010.gguf",
+      "bytes": 21021328832,
+      "sha256": "7eede4801336ac5700fe226b2b6d21907412f05c5803d91c63d8ac7c44bac4a2"
+    },
+    {
+      "file": "DeepSeek-V4.1-Flash-1017-IQ2_XXS-Experts-Q8-Dense-Engram-00007-of-00010.gguf",
+      "bytes": 14014219264,
+      "sha256": "c4a96e9547e88f113e3184a470e2041687f4e9f9a64a7b03185c3a74cd4556fb"
+    },
+    {
+      "file": "DeepSeek-V4.1-Flash-1017-IQ2_XXS-Experts-Q8-Dense-Engram-00008-of-00010.gguf",
+      "bytes": 104449677888,
+      "sha256": "096b13ad2b1875e043053d68cf4cd2cc1f54f4f5df9b07629c4f90be7b776559"
+    },
+    {
+      "file": "DeepSeek-V4.1-Flash-1017-IQ2_XXS-Experts-Q8-Dense-Engram-00009-of-00010.gguf",
+      "bytes": 104452537696,
+      "sha256": "cdcd2cdd1657cd60354fdb63dc899731665448ed53229dfdd32dd2ca1d517945"
+    },
+    {
+      "file": "DeepSeek-V4.1-Flash-1017-IQ2_XXS-Experts-Q8-Dense-Engram-00010-of-00010.gguf",
+      "bytes": 10268402880,
+      "sha256": "cb9325b45fc4c585caa83c24f2f6985b7a872ec0546e4fe5af98456631d0c33c"
+    }
+  ]
+}
