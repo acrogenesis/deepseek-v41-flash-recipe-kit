@@ -1,9 +1,16 @@
 # DeepSeek V4.1 Flash 1017 on a 5090
 
-**21.37 tok/s on an RTX 5090 32 GB and 128 GB RAM.** This recipe streams
+**36.04 tok/s on repeated prompts; 27.95 tok/s on fresh prompts**, measured on
+an RTX 5090 32 GB and 128 GB RAM. The optional fast profile uses an 18 GiB GPU
+expert cache and 84 GiB pinned RAM. These are pooled medians from two complete
+short-prompt sweeps, with 128 output tokens and 8K allocated context.
+[The EXL3 comparison](COMPARISON.md) includes quality, first-token latency,
+the individual runs and cache settings.
+
+This recipe streams
 [DeepSeek's exact 1017 release](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017)
 from a Samsung 990 PRO SSD, using a pinned llama.cpp runtime with a demand-only
-expert cache: 16 GiB on the GPU and 64 GiB in RAM.
+expert cache. The default remains 16 GiB on the GPU and 64 GiB in RAM.
 
 [Download the quant on Hugging Face](https://huggingface.co/acrogenesis/DeepSeek-V4.1-Flash-1017-IQ2_XXS-GGUF).
 
@@ -11,6 +18,9 @@ The custom **359.32 GB GGUF** uses IQ2_XXS routed experts, Q8 dense/Engram weigh
 and BF16 embedding/output weights. It retains all 384 experts per layer and both
 Engram tables. The expert quant starts from native MXFP4 weights in a verified
 converted reference. Every non-expert tensor payload is unchanged.
+
+The following quantization comparison uses the common 16 GiB GPU / 64 GiB RAM
+configuration and original transfer path for all three models:
 
 | Weights | Fresh tok/s | Repeated tok/s | Fresh first token |
 |---|---:|---:|---:|
@@ -133,6 +143,17 @@ bash scripts/start.sh iq2
 ```
 
 The API listens on `http://127.0.0.1:5017`. The launcher uses the demand-only expert cache with 16 GiB GPU and 64 GiB RAM budgets. Stop it with `systemctl --user stop deepseek41-server`.
+
+For the measured 18/84 GiB configuration, after stopping an existing server:
+
+```bash
+SPEED_PROFILE=fast bash scripts/start.sh iq2
+```
+
+The fast profile enables batched transfers, protection of selected experts,
+selective GPU-only caching and CUDA graph optimization. It needs at least
+100 GiB available host RAM before startup and uses a 96 GiB process limit with
+no model swap. It preserves every model weight and selected expert.
 
 The streaming recipe disables wave preloading after it failed a synthetic
 correctness test. Demand loading passed the small cache tests, real-dimension

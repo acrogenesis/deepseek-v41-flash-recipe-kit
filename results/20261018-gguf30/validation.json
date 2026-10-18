@@ -1,0 +1,126 @@
+{
+  "status": "complete",
+  "patch_sha256": "19d21611dac18d49a02b44a56bd48e97f0ffe762d19bd9e89519a570f895f802",
+  "build": {
+    "command": "BUILD_JOBS=6 bash scripts/build.sh streaming",
+    "status": "passed",
+    "log": "results/20261018-gguf30/build.log",
+    "tested_backend": "CUDA SM120a; host-cache/file tests also ran"
+  },
+  "tests": [
+    {
+      "artifact": "results/20261018T070233Z-gguf30-batch3-shape/quality.json",
+      "status": "complete",
+      "scored_positions": 1020,
+      "mean_kl": 0.0,
+      "top1_agreement_percent": 100.0,
+      "ppl": 561.973683,
+      "runtime_gate": true
+    },
+    {
+      "artifact": "results/20261018T070306Z-gguf30-batch3-shape-decode/quality.json",
+      "status": "complete",
+      "scored_positions": 381,
+      "mean_kl": 0.0,
+      "top1_agreement_percent": 100.0,
+      "ppl": 554.990193,
+      "runtime_gate": true
+    },
+    {
+      "artifact": "results/20261018T072012Z-gguf30-victim-shape-decode/quality.json",
+      "status": "complete",
+      "scored_positions": 381,
+      "mean_kl": 0.0,
+      "top1_agreement_percent": 100.0,
+      "ppl": 554.990193,
+      "runtime_gate": true
+    },
+    {
+      "artifact": "results/20261018T074514Z-gguf30-final-runtime-gate/quality.json",
+      "status": "complete",
+      "scored_positions": 510,
+      "mean_kl": -1e-06,
+      "top1_agreement_percent": 100.0,
+      "ppl": 6.338198,
+      "runtime_gate": true
+    },
+    {
+      "artifact": "results/20261018T074208Z-gguf30-final-quality/quality.json",
+      "status": "complete",
+      "scored_positions": 2040,
+      "mean_kl": 0.362934,
+      "top1_agreement_percent": 77.549,
+      "ppl": 7.520919,
+      "runtime_gate": null
+    },
+    {
+      "artifact": "results/20261018T072751Z-gguf30-c18-graphopt/probe.json",
+      "status": "complete_smoke",
+      "requests": 14,
+      "identical_requests": 14,
+      "output_tokens": 937
+    },
+    {
+      "artifact": "results/20261018T074053Z-gguf30-final-confirm/probe.json",
+      "status": "complete_smoke",
+      "requests": 14,
+      "identical_requests": 14,
+      "output_tokens": 937
+    },
+    {
+      "artifact": "results/20261018T080650Z-gguf30-default-control/probe.json",
+      "status": "complete_smoke",
+      "requests": 14,
+      "identical_requests": 14,
+      "output_tokens": 937
+    },
+    {
+      "artifact": "results/20261018T080810Z-gguf30-output512-1/probe.json",
+      "status": "complete_smoke",
+      "control": "results/20261018T081817Z-gguf30-output512-default/probe.json",
+      "requests": 14,
+      "identical_requests": 14,
+      "output_tokens": 3241
+    },
+    {
+      "artifact": "results/20261018T081054Z-gguf30-output512-2/probe.json",
+      "status": "complete_smoke",
+      "control": "results/20261018T081817Z-gguf30-output512-default/probe.json",
+      "requests": 14,
+      "identical_requests": 14,
+      "output_tokens": 3241
+    },
+    {
+      "artifact": "results/20261018T081817Z-gguf30-output512-default/probe.json",
+      "status": "complete_smoke",
+      "control": "results/20261018T081817Z-gguf30-output512-default/probe.json",
+      "requests": 14,
+      "identical_requests": 14,
+      "output_tokens": 3241
+    }
+  ],
+  "pending": [],
+  "launcher": {
+    "artifact": "results/20261018-gguf30/fast-launcher.json",
+    "chat_artifact": "results/20261018-gguf30/fast-chat-endpoint.json",
+    "status": "complete"
+  },
+  "source_review": {
+    "patch_sha256": "19d21611dac18d49a02b44a56bd48e97f0ffe762d19bd9e89519a570f895f802",
+    "matches_upstream_worktree": true,
+    "applies_to_clean_pin": true,
+    "python_compile": "passed",
+    "shell_syntax": "passed",
+    "diff_whitespace": "Source and documentation passed; raw logs, archived patches and generated SVG whitespace preserved",
+    "local_report_links": "passed",
+    "source_hash_scope": "baseline/gpu-offload no longer require the optional streaming checkout for metadata",
+    "figures_regenerated_with": ".venv/bin/python; matplotlib 3.11.2",
+    "reviewed_figures": "Primary, quality, 512-output, long throughput and TTFT; dots aligned to line/bar centres"
+  },
+  "target": {
+    "reached": "30 tok/s on repeated original prompts in two full sweeps",
+    "fresh_original_median_tok_s": 27.95194648443391,
+    "repeat_original_median_tok_s": 36.03673995935783,
+    "limit": "Fresh original median remains below 30; additional topics and long generations have different rates."
+  }
+}

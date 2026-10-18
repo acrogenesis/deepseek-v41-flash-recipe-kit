@@ -1645,10 +1645,10 @@ index 88fe72d..3b04d5d 100644
      virtual ~llama_model_base() = default;
 diff --git a/src/llama-moe-stream.cpp b/src/llama-moe-stream.cpp
 new file mode 100644
-index 0000000..888b107
+index 0000000..bd5bee0
 --- /dev/null
 +++ b/src/llama-moe-stream.cpp
-@@ -0,0 +1,1360 @@
+@@ -0,0 +1,1658 @@
 +#include "llama-moe-stream.h"
 +
 +#include "llama-impl.h"
@@ -1861,6 +1861,22 @@ index 0000000..888b107
 +        return nullptr; // resident, or another worker is already filling it
 +    }
 +
++    // Slots explicitly discarded from the host tier are reused first; otherwise
++    // CLOCK could evict useful bytes while these holes remain unused.
++    if (!recycled.empty()) {
++        const size_t s = recycled.front();
++        recycled.pop_front();
++        entry & e = entries[s];
++        GGML_ASSERT(e.st == FREE);
++        e.key = key;
++        e.len = (uint32_t) len;
++        e.head = e.pins = e.ref = 0;
++        e.st = LOADING;
++        index[key] = s;
++        *out_slot = s;
++        return base + s*slot_stride;
++    }
++
 +    // CLOCK (second chance): a slab hit since the hand last passed it survives one sweep. Two
 +    // sweeps at most, because the first clears every reference bit it walks over.
 +    const size_t start = next_victim;
@@ -1909,6 +1925,24 @@ index 0000000..888b107
 +    index.erase(e.key);
 +    e.key = UINT64_MAX;
 +    e.st  = FREE;
++}
++
++bool llama_moe_stream_l2::discard(uint16_t file_idx, size_t offs, size_t len) {
++    L2_LOCK(*this);
++    const auto it = index.find(make_key(file_idx, offs));
++    if (it == index.end()) {
++        return true; // already absent: preserve a GPU copy on its later eviction
++    }
++    entry & e = entries[it->second];
++    if (e.st != RESIDENT || e.pins || e.len != len) {
++        return false;
++    }
++    const size_t slot = it->second;
++    index.erase(it);
++    e.key = UINT64_MAX;
++    e.st = FREE;
++    recycled.push_back(slot);
++    return true;
 +}
 +
 +void llama_moe_stream::alloc_l2(ggml_backend_buffer_type_t host_buft) {
@@ -2009,6 +2043,22 @@ index 0000000..888b107
 +
 +    debug         = std::getenv("LLAMA_MOE_STREAM_DEBUG") != nullptr;
 +    use_direct_io = direct;
++    keep_selected = std::getenv("LLAMA_MOE_STREAM_KEEP_SELECTED") != nullptr;
++    transfer_profile = std::getenv("LLAMA_MOE_STREAM_TRANSFER_PROFILE") != nullptr;
++    if (const char * s = std::getenv("LLAMA_MOE_STREAM_GPU_ONLY_GIB")) {
++        const long n = std::strtol(s, nullptr, 10);
++        if (n < 0 || n > 24) {
++            throw std::runtime_error("LLAMA_MOE_STREAM_GPU_ONLY_GIB must be 0..24");
++        }
++        gpu_only_gib = (size_t) n;
++    }
++    if (const char * s = std::getenv("LLAMA_MOE_STREAM_UPLOAD_BATCH")) {
++        const long n = std::strtol(s, nullptr, 10);
++        if (n < 1 || n > 6) {
++            throw std::runtime_error("LLAMA_MOE_STREAM_UPLOAD_BATCH must be between 1 and 6");
++        }
++        upload_batch = (int32_t) n;
++    }
 +
 +    // Router bias toward resident experts. Read once here rather than per call so a run cannot
 +    // change policy halfway through and leave counters that describe two different experiments.
@@ -2091,6 +2141,7 @@ index 0000000..888b107
 +        sl->slot_parts_left.resize(n_slots, 0);
 +        sl->slot_gen     .resize(n_slots, 0);
 +        sl->slot_last_use.resize(n_slots, 0);
++        sl->slot_gpu_only.resize(n_slots, 0);
 +        sl->route_hotness.resize(n_expert, 0);
 +        sl->route_total.resize(n_expert, 0);
 +        sl->seen         .resize(n_expert, 0);
@@ -2147,6 +2198,19 @@ index 0000000..888b107
 +            }
 +        }
 +        alloc_l2(host_buft);
++    }
++    if (!no_alloc && gpu_only_gib > 0) {
++        GGML_ASSERT(l2);
++        const size_t n_layers = std::count_if(layers.begin(), layers.end(), [](const auto & sl) { return bool(sl); });
++        const size_t per_layer = gpu_only_gib * 1024ull * 1024ull * 1024ull / n_layers;
++        for (auto & sl : layers) {
++            if (!sl) { continue; }
++            size_t bytes = 0;
++            for (const auto & wt : sl->weights) { bytes += wt.nb_expert; }
++            // Keep room for at least one routed set with RAM copies.
++            const size_t max_only = sl->n_slots > 6 ? sl->n_slots - 6 : sl->n_slots / 2;
++            sl->gpu_only_limit = (uint32_t) std::min<size_t>(max_only, per_layer / bytes);
++        }
 +    }
 +}
 +
@@ -2207,7 +2271,13 @@ index 0000000..888b107
 +    workers_started = true;
 +    workers.reserve(n_io_threads);
 +    for (int32_t i = 0; i < n_io_threads; i++) {
-+        workers.emplace_back([this, i]() { worker_loop((int) i); });
++        workers.emplace_back([this, i]() {
++            if (upload_batch > 1) {
++                worker_loop_batched((int) i);
++            } else {
++                worker_loop((int) i);
++            }
++        });
 +    }
 +}
 +
@@ -2332,6 +2402,138 @@ index 0000000..888b107
 +    moe_aligned_free(staging);
 +}
 +
++// Keep uploads serialized, but issue several copies on one worker-owned backend
++// stream before synchronizing. Every RAM lease and LOADING slot survives until
++// that synchronization; no other worker can recycle bytes in flight. Arithmetic,
++// routing, graph shapes and slot selection are untouched.
++void llama_moe_stream::worker_loop_batched(int worker_id) {
++    struct pending {
++        llama_moe_stream_work work;
++        const uint8_t * data = nullptr;
++        size_t pinned = SIZE_MAX;
++        size_t filled = SIZE_MAX;
++        size_t head = 0;
++    };
++    std::vector<uint8_t *> staging(upload_batch);
++    for (auto & ptr : staging) {
++        ptr = (uint8_t *) moe_aligned_alloc(max_nb_expert + 2*MOE_STREAM_DIRECT_ALIGN);
++        GGML_ASSERT(ptr != nullptr);
++    }
++    std::vector<pending> batch;
++    batch.reserve(upload_batch);
++    ggml_backend_ptr uploader;
++    ggml_backend_dev_t device = nullptr;
++    std::unique_lock<std::mutex> lk(mtx);
++    while (true) {
++        cv_work.wait(lk, [&]{ return shutting_down || !q_demand.empty(); });
++        if (shutting_down) {
++            break;
++        }
++        batch.clear();
++        while (!q_demand.empty() && batch.size() < (size_t) upload_batch) {
++            const auto w = q_demand.front();
++            q_demand.pop_front();
++            auto & sl = *w.sl;
++            const uint8_t bit = (uint8_t) (1u << w.weight);
++            if (w.gen != sl.slot_gen[w.slot] ||
++                sl.slot_state[w.slot] != LLAMA_MOE_STREAM_SLOT_LOADING ||
++                sl.slot_expert[w.slot] != w.expert || (sl.slot_claimed[w.slot] & bit)) {
++                continue;
++            }
++            sl.slot_claimed[w.slot] |= bit;
++            batch.push_back({ w });
++        }
++        lk.unlock();
++        const int64_t read_start = transfer_profile ? ggml_time_us() : 0;
++        int64_t bytes = 0, disk_bytes = 0;
++        for (size_t i = 0; i < batch.size(); ++i) {
++            auto & p = batch[i];
++            const auto & wt = p.work.sl->weights[p.work.weight];
++            const size_t offs = wt.offs + (size_t) p.work.expert * wt.nb_expert;
++            p.data = l2 ? l2->find(wt.file_idx, offs, wt.nb_expert, &p.pinned) : nullptr;
++            if (p.data == nullptr) {
++                disk_bytes += wt.nb_expert;
++                size_t slot = SIZE_MAX;
++                uint8_t * dst = l2 ? l2->reserve(wt.file_idx, offs, wt.nb_expert, &slot) : nullptr;
++                p.data = llama_moe_stream_pread(*files[wt.file_idx], dst ? dst : staging[i],
++                                               wt.nb_expert, offs, use_direct_io, worker_id);
++                if (dst) {
++                    if (p.data) {
++                        p.filled = slot;
++                        p.head = (size_t) (p.data - dst);
++                    } else {
++                        l2->abandon(slot);
++                    }
++                }
++            }
++            if (p.data) {
++                bytes += wt.nb_expert;
++            }
++        }
++        const int64_t read_end = transfer_profile ? ggml_time_us() : 0;
++        int64_t upload_start = 0, upload_end = 0;
++        {
++            std::lock_guard<std::mutex> up(upload_mtx);
++            upload_start = transfer_profile ? ggml_time_us() : 0;
++            for (const auto & p : batch) {
++                if (!p.data) {
++                    continue;
++                }
++                const auto & wt = p.work.sl->weights[p.work.weight];
++                auto dev = ggml_backend_buft_get_device(ggml_backend_buffer_get_type(wt.cache->buffer));
++                if (!uploader) {
++                    // This experimental path has only been validated on CUDA.
++                    GGML_ASSERT(dev && std::strncmp(ggml_backend_dev_name(dev), "CUDA", 4) == 0);
++                    device = dev;
++                    uploader.reset(ggml_backend_dev_init(dev, nullptr));
++                    GGML_ASSERT(uploader);
++                }
++                GGML_ASSERT(dev == device);
++                ggml_backend_tensor_set_async(uploader.get(), wt.cache, p.data,
++                                             (size_t) p.work.slot * wt.nb_expert, wt.nb_expert);
++            }
++            if (uploader) {
++                ggml_backend_synchronize(uploader.get());
++            }
++            upload_end = transfer_profile ? ggml_time_us() : 0;
++        }
++        for (const auto & p : batch) {
++            if (p.filled != SIZE_MAX) {
++                l2->commit(p.filled, p.head);
++            }
++            if (p.pinned != SIZE_MAX) {
++                l2->release(p.pinned);
++            }
++        }
++        lk.lock();
++        if (transfer_profile) {
++            stats.batch_read_us += read_end - read_start;
++            stats.batch_upload_wait_us += upload_start - read_end;
++            stats.batch_upload_us += upload_end - upload_start;
++            stats.batch_bytes += bytes;
++            stats.batch_disk_bytes += disk_bytes;
++        }
++        for (const auto & p : batch) {
++            const auto & w = p.work;
++            auto & sl = *w.sl;
++            if (w.gen != sl.slot_gen[w.slot]) {
++                continue;
++            }
++            sl.slot_claimed[w.slot] &= (uint8_t) ~(1u << w.weight);
++            if (!p.data) {
++                load_failed = true;
++            } else if (sl.slot_parts_left[w.slot] > 0 && --sl.slot_parts_left[w.slot] == 0) {
++                sl.slot_state[w.slot] = LLAMA_MOE_STREAM_SLOT_RESIDENT;
++            }
++        }
++        cv_done.notify_all();
++    }
++    lk.unlock();
++    for (auto ptr : staging) {
++        moe_aligned_free(ptr);
++    }
++}
++
 +// least valuable evictable slot: empty first, then coldest resident (min route hotness, oldest use
 +// as tiebreak); LOADING and keep slots are never candidates. returns -1 when no candidate exists
 +int32_t llama_moe_stream::pick_victim_locked(llama_moe_stream_layer & sl, const uint8_t * keep) const {
@@ -2362,6 +2564,9 @@ index 0000000..888b107
 +// in-flight load for the old occupant is recognized as stale), and update the expert_slot index
 +void llama_moe_stream::reserve_slot_locked(llama_moe_stream_layer & sl, int32_t expert, int32_t slot) {
 +    if (sl.slot_expert[slot] >= 0) {
++        if (sl.slot_gpu_only[slot]) {
++            writeback_slot_locked(sl, slot);
++        }
 +        if (debug) {
 +            LLAMA_LOG_DEBUG("%s: layer %d: evict expert %d from slot %d\n", __func__, sl.il, sl.slot_expert[slot], slot);
 +        }
@@ -2380,6 +2585,61 @@ index 0000000..888b107
 +    // worker finishing afterwards must not decrement this generation's counter.
 +    sl.slot_parts_left[slot] = (uint16_t) sl.weights.size();
 +    sl.slot_claimed[slot]    = 0;
++}
++
++void llama_moe_stream::writeback_slot_locked(llama_moe_stream_layer & sl, int32_t slot) {
++    GGML_ASSERT(l2 && sl.slot_state[slot] == LLAMA_MOE_STREAM_SLOT_RESIDENT);
++    for (const auto & wt : sl.weights) {
++        const size_t offs = wt.offs + (size_t) sl.slot_expert[slot] * wt.nb_expert;
++        size_t pinned = SIZE_MAX;
++        if (l2->find(wt.file_idx, offs, wt.nb_expert, &pinned)) {
++            l2->release(pinned);
++            continue;
++        }
++        size_t dst_slot = SIZE_MAX;
++        uint8_t * dst = l2->reserve(wt.file_idx, offs, wt.nb_expert, &dst_slot);
++        if (!dst) {
++            // Every host slot can be leased in tiny test configurations. Losing
++            // this cache entry is safe: its unchanged source remains on disk.
++            continue;
++        }
++        {
++            std::lock_guard<std::mutex> up(upload_mtx);
++            ggml_backend_tensor_get(wt.cache, dst, (size_t) slot * wt.nb_expert, wt.nb_expert);
++        }
++        l2->commit(dst_slot, 0);
++        stats.writeback_bytes += wt.nb_expert;
++    }
++    sl.slot_gpu_only[slot] = 0;
++    GGML_ASSERT(sl.gpu_only_slots > 0);
++    --sl.gpu_only_slots;
++}
++
++void llama_moe_stream::trim_gpu_copies_locked(llama_moe_stream_layer & sl) {
++    if (!l2 || sl.gpu_only_slots >= sl.gpu_only_limit) { return; }
++    std::vector<uint32_t> candidates;
++    for (uint32_t s = 0; s < sl.n_slots; ++s) {
++        if (!sl.slot_gpu_only[s] && sl.slot_state[s] == LLAMA_MOE_STREAM_SLOT_RESIDENT &&
++            sl.route_hotness[sl.slot_expert[s]] >= 4) {
++            candidates.push_back(s);
++        }
++    }
++    std::sort(candidates.begin(), candidates.end(), [&](uint32_t a, uint32_t b) {
++        const auto ha = sl.route_hotness[sl.slot_expert[a]], hb = sl.route_hotness[sl.slot_expert[b]];
++        return ha != hb ? ha > hb : sl.slot_last_use[a] > sl.slot_last_use[b];
++    });
++    for (const auto slot : candidates) {
++        if (sl.gpu_only_slots >= sl.gpu_only_limit) { break; }
++        bool missing = false;
++        for (const auto & wt : sl.weights) {
++            const size_t offs = wt.offs + (size_t) sl.slot_expert[slot] * wt.nb_expert;
++            missing |= l2->discard(wt.file_idx, offs, wt.nb_expert);
++        }
++        if (missing) {
++            sl.slot_gpu_only[slot] = 1;
++            ++sl.gpu_only_slots;
++        }
++    }
 +}
 +
 +// Queue one read per weight tensor of this slot. THE POINT OF THE SPLIT: a single
@@ -2452,6 +2712,29 @@ index 0000000..888b107
 +        LLAMA_LOG_INFO("%s: moe stream: L2 lock wait = %.2f ms total over %" PRId64 " ops (%.3f us each)\n",
 +                __func__, l2->t_lock_us/1000.0, l2->n_lock_ops,
 +                l2->n_lock_ops > 0 ? (double) l2->t_lock_us/l2->n_lock_ops : 0.0);
++        if (transfer_profile) {
++            size_t duplicate_bytes = 0;
++            for (const auto & sl : layers) {
++                if (!sl) { continue; }
++                for (uint32_t s = 0; s < sl->n_slots; ++s) {
++                    if (sl->slot_state[s] != LLAMA_MOE_STREAM_SLOT_RESIDENT) { continue; }
++                    for (const auto & wt : sl->weights) {
++                        const size_t offs = wt.offs + (size_t) sl->slot_expert[s] * wt.nb_expert;
++                        const auto it = l2->index.find(llama_moe_stream_l2::make_key(wt.file_idx, offs));
++                        if (it != l2->index.end() && l2->entries[it->second].st == llama_moe_stream_l2::RESIDENT) {
++                            duplicate_bytes += wt.nb_expert;
++                        }
++                    }
++                }
++            }
++            LLAMA_LOG_WARN("%s: transfer profile: GPU/RAM duplicate bytes = %zu\n", __func__, duplicate_bytes);
++        }
++    }
++    if (transfer_profile) {
++        LLAMA_LOG_WARN("%s: transfer profile: read_us=%" PRId64 " upload_wait_us=%" PRId64 " upload_us=%" PRId64
++                       " h2d_bytes=%" PRId64 " disk_bytes=%" PRId64 " d2h_bytes=%" PRId64 " (cumulative worker sums)\n",
++                       __func__, stats.batch_read_us, stats.batch_upload_wait_us, stats.batch_upload_us,
++                       stats.batch_bytes, stats.batch_disk_bytes, stats.writeback_bytes);
 +    }
 +    if (stats.n_wave_calls > 0) {
 +        LLAMA_LOG_INFO("%s: %smoe stream: waves = %" PRId64 " (%" PRId64 " non-empty), preloads issued = %" PRId64 " (ready on arrival = %" PRId64 "), wave stall = %.2f ms\n",
@@ -2654,6 +2937,18 @@ index 0000000..888b107
 +    std::fill(sl->keep.begin(), sl->keep.end(), 0);
 +    sl->demand_slots.clear();
 +
++    // Protect every selected resident expert before filling misses. Otherwise an
++    // early miss can evict a selected expert that appears later in this loop,
++    // causing an avoidable reload of bytes that were already on the GPU.
++    if (mgr->keep_selected) {
++        for (const int32_t e : sl->uniq) {
++            const auto it = sl->expert_slot.find(e);
++            if (it != sl->expert_slot.end()) {
++                sl->keep[it->second] = 1;
++            }
++        }
++    }
++
 +    bool waited = false;
 +    for (const int32_t e : sl->uniq) {
 +        const auto it = sl->expert_slot.find(e);
@@ -2720,6 +3015,9 @@ index 0000000..888b107
 +        const int32_t s = sl->expert_slot.at(ids[i]);
 +        sl->slot_last_use[s] = ++sl->use_counter;
 +        out[i] = s;
++    }
++    if (mgr->gpu_only_gib > 0) {
++        mgr->trim_gpu_copies_locked(*sl);
 +    }
 +}
 +
@@ -3011,10 +3309,10 @@ index 0000000..888b107
 +}
 diff --git a/src/llama-moe-stream.h b/src/llama-moe-stream.h
 new file mode 100644
-index 0000000..b05e57c
+index 0000000..776d698
 --- /dev/null
 +++ b/src/llama-moe-stream.h
-@@ -0,0 +1,446 @@
+@@ -0,0 +1,464 @@
 +#pragma once
 +
 +#include "llama-mmap.h"
@@ -3099,6 +3397,9 @@ index 0000000..b05e57c
 +    std::vector<uint16_t>                slot_parts_left;
 +    std::vector<uint64_t>                slot_gen;      // [n_slots] reservation generation
 +    std::vector<int64_t>                 slot_last_use; // [n_slots] LRU stamps
++    std::vector<uint8_t>                 slot_gpu_only;
++    uint32_t gpu_only_slots = 0;
++    uint32_t gpu_only_limit = 0;
 +    std::unordered_map<int32_t, int32_t> expert_slot;   // RESIDENT and LOADING entries
 +
 +    std::vector<uint32_t> route_hotness; // [n_expert] decayed selection counts, for eviction
@@ -3267,6 +3568,7 @@ index 0000000..b05e57c
 +    std::vector<entry>                   entries;
 +    std::unordered_map<uint64_t, size_t> index; // key -> entry; only LOADING/RESIDENT are in it
 +    size_t                               next_victim = 0; // CLOCK hand
++    std::deque<size_t>                    recycled;
 +    bool                                 clock       = true; // off = plain FIFO, for A/B
 +
 +    ggml_backend_buffer_ptr buf; // holds the pinned allocation when there is one
@@ -3316,11 +3618,16 @@ index 0000000..b05e57c
 +    uint8_t * reserve(uint16_t file_idx, size_t offs, size_t len, size_t * out_slot);
 +    void      commit(size_t slot, size_t head);
 +    void      abandon(size_t slot);
++    bool      discard(uint16_t file_idx, size_t offs, size_t len);
 +};
 +
 +struct llama_moe_stream {
 +    uint32_t n_slots      = 0; // expert cache slots per streamed layer
 +    int32_t  n_io_threads = 0;
++    int32_t upload_batch = 1; // opt-in: preserve the original single-slab path by default
++    bool keep_selected = false;
++    bool transfer_profile = false;
++    size_t gpu_only_gib = 0;
 +
 +    std::vector<std::unique_ptr<llama_moe_stream_layer>> layers; // [n_layer], null = not streamed
 +
@@ -3427,6 +3734,12 @@ index 0000000..b05e57c
 +        int64_t n_preload_issued = 0; // next-wave loads started during a wave's compute
 +        int64_t n_preload_ready  = 0; // wave experts already resident from the previous preload
 +        int64_t t_stall_wave_us  = 0; // wait time in wave miss handling
++        int64_t batch_read_us = 0;
++        int64_t batch_upload_wait_us = 0;
++        int64_t batch_upload_us = 0;
++        int64_t batch_bytes = 0;
++        int64_t batch_disk_bytes = 0;
++        int64_t writeback_bytes = 0;
 +    } stats;
 +
 +    // internals
@@ -3435,8 +3748,11 @@ index 0000000..b05e57c
 +    // llama_file::read_raw_at - on Windows it selects that worker's private handle, which is what
 +    // makes the pool parallel rather than merely correct
 +    void worker_loop(int worker_id);
++    void worker_loop_batched(int worker_id);
 +    int32_t pick_victim_locked(llama_moe_stream_layer & sl, const uint8_t * keep) const;
 +    void reserve_slot_locked(llama_moe_stream_layer & sl, int32_t expert, int32_t slot);
++    void trim_gpu_copies_locked(llama_moe_stream_layer & sl);
++    void writeback_slot_locked(llama_moe_stream_layer & sl, int32_t slot);
 +    // queues one read per weight tensor and wakes the pool; see the .cpp for why
 +    // the split is what raises queue depth on a single stream
 +    void enqueue_slot_locked(llama_moe_stream_layer & sl, int32_t expert, int32_t slot);
@@ -3560,10 +3876,10 @@ index 7a88b99..53c0ada 100644
      };
  
 diff --git a/tests/CMakeLists.txt b/tests/CMakeLists.txt
-index 9b3a4fc..0cb15cd 100644
+index 9b3a4fc..41a4227 100644
 --- a/tests/CMakeLists.txt
 +++ b/tests/CMakeLists.txt
-@@ -301,6 +301,15 @@ llama_build_and_test(test-model-resolution.cpp)
+@@ -301,6 +301,17 @@ llama_build_and_test(test-model-resolution.cpp)
  # the test serves its repos from an httplib server, and the library links it privately
  target_link_libraries(test-model-resolution PRIVATE cpp-httplib)
  
@@ -3575,6 +3891,8 @@ index 9b3a4fc..0cb15cd 100644
 +# and llama_log_internal() from it, and neither is exported either.
 +llama_build_and_test(test-llama-file.cpp ../src/llama-mmap.cpp ../src/llama-impl.cpp)
 +target_include_directories(test-llama-file PRIVATE ${PROJECT_SOURCE_DIR}/src)
++llama_build_and_test(test-moe-host-cache.cpp ../src/llama-moe-stream.cpp ../src/llama-mmap.cpp ../src/llama-impl.cpp)
++target_include_directories(test-moe-host-cache PRIVATE ${PROJECT_SOURCE_DIR}/src)
 +
  if (NOT LLAMA_SANITIZE_ADDRESS AND NOT GGML_SCHED_NO_REALLOC)
    # TODO: repair known memory leaks
@@ -4088,6 +4406,81 @@ index 0000000..29b4bca
 +    }
 +    printf("RESULT: PASS - all checks behaved as required\n");
 +    return 0;
++}
+diff --git a/tests/test-moe-host-cache.cpp b/tests/test-moe-host-cache.cpp
+new file mode 100644
+index 0000000..51e0875
+--- /dev/null
++++ b/tests/test-moe-host-cache.cpp
+@@ -0,0 +1,69 @@
++#include "llama-moe-stream.h"
++
++#include <cstdlib>
++#include <cstring>
++#include <cstdio>
++#include <stdexcept>
++#include <thread>
++
++#ifdef _WIN32
++#include <malloc.h>
++#endif
++
++static void check(bool condition, const char * message) {
++    if (!condition) { throw std::runtime_error(message); }
++}
++
++int main() {
++    llama_moe_stream_l2 cache;
++    cache.n_entries = 4;
++    cache.slot_stride = 16384;
++#ifdef _WIN32
++    cache.base = (uint8_t *) _aligned_malloc(cache.n_entries * cache.slot_stride, 4096);
++#else
++    check(posix_memalign((void **) &cache.base, 4096, cache.n_entries * cache.slot_stride) == 0, "allocation");
++#endif
++    check(cache.base != nullptr, "allocation");
++    cache.entries.resize(cache.n_entries);
++    size_t slot;
++    uint8_t * dst = cache.reserve(0, 4096, 256, &slot);
++    check(dst != nullptr, "initial reservation");
++    check(!cache.discard(0, 4096, 256), "must not discard LOADING bytes");
++    std::memset(dst + 31, 0x5a, 256);
++    cache.commit(slot, 31);
++    size_t pin;
++    auto data = cache.find(0, 4096, 256, &pin);
++    check(data == dst + 31 && data[255] == 0x5a, "unaligned file payload");
++    check(!cache.discard(0, 4096, 256), "must not discard leased bytes");
++    cache.release(pin);
++    check(cache.discard(0, 4096, 256), "discard released bytes");
++    check(cache.find(0, 4096, 256, &pin) == nullptr, "discarded key must miss");
++    check(cache.discard(0, 4096, 256), "already absent key is safe");
++    check(cache.recycled.size() == 1, "discard must not duplicate a free slot");
++    size_t replacement;
++    auto next = cache.reserve(1, 8192, 256, &replacement);
++    check(next == dst && replacement == slot, "reuse explicit hole before evicting");
++    std::memset(next, 0x6b, 256);
++    cache.commit(replacement, 0);
++    data = cache.find(1, 8192, 256, &pin);
++    check(data == next && data[255] == 0x6b, "GPU writeback with zero head offset");
++    std::thread writer([&] {
++        for (size_t i = 0; i < 1000; ++i) {
++            check(!cache.discard(1, 8192, 256), "concurrent discard must respect a lease");
++            size_t s;
++            auto p = cache.reserve(2, (i + 1) * 4096, 256, &s);
++            check(p != nullptr && s != pin, "CLOCK must preserve leased slot");
++            std::memset(p, (int) (i & 0xff), 256);
++            cache.commit(s, 0);
++        }
++    });
++    writer.join();
++    for (int i = 0; i < 256; ++i) { check(data[i] == 0x6b, "leased payload changed during eviction"); }
++    cache.release(pin);
++    check(cache.discard(1, 8192, 256), "discard after concurrent work");
++    auto p = cache.reserve(3, 4096, 256, &slot);
++    check(p != nullptr, "reserve after recycling");
++    cache.abandon(slot);
++    check(cache.find(3, 4096, 256, &pin) == nullptr, "failed read must not become resident");
++    std::puts("PASS: host-cache leases, recycling, aligned writeback and 1000 concurrent evictions");
 +}
 diff --git a/tools/imatrix/CMakeLists.txt b/tools/imatrix/CMakeLists.txt
 index 361c457..d084012 100644

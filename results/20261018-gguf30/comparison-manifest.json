@@ -1,0 +1,52 @@
+{
+  "workloads": {
+    "original": {
+      "GGUF": [
+        "results/20261018T072751Z-gguf30-c18-graphopt/probe.json",
+        "results/20261018T074053Z-gguf30-final-confirm/probe.json"
+      ],
+      "EXL3": [
+        "results/20261018-gguf30/exl3-evidence/original-1.json",
+        "results/20261018-gguf30/exl3-evidence/original-2.json"
+      ]
+    },
+    "matched-cache": {
+      "GGUF": [
+        "results/20261018T072751Z-gguf30-c18-graphopt/probe.json",
+        "results/20261018T074053Z-gguf30-final-confirm/probe.json"
+      ],
+      "EXL3": [
+        "results/20261018-gguf30/exl3-evidence/equal-cache-18.json"
+      ]
+    },
+    "additional": {
+      "GGUF": [
+        "results/20261018T074756Z-gguf30-additional/probe.json"
+      ],
+      "EXL3": [
+        "results/20261018-gguf30/exl3-evidence/additional-23.json"
+      ]
+    },
+    "long": {
+      "GGUF": [
+        "results/20261018T075923Z-gguf30-long-page-reserve/probe.json"
+      ],
+      "EXL3": [
+        "results/20261018-gguf30/exl3-evidence/long-page-reserve-23.json"
+      ]
+    },
+    "512-output": {
+      "GGUF": [
+        "results/20261018T080810Z-gguf30-output512-1/probe.json",
+        "results/20261018T081054Z-gguf30-output512-2/probe.json"
+      ],
+      "EXL3": [
+        "results/20261018-gguf30/exl3-evidence/output512-23.json"
+      ]
+    }
+  },
+  "quality": {
+    "GGUF": "results/20261018T074208Z-gguf30-final-quality/quality.json",
+    "EXL3": "results/20261018-gguf30/exl3-evidence/quality.json"
+  }
+}

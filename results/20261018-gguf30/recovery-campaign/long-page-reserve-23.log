@@ -1,0 +1,14 @@
+{
+  "ready_for_gpu_validation": true,
+  "gpu_used": false,
+  "download_status": "complete",
+  "verified_bytes": 413905629467,
+  "total_bytes": 413905629467,
+  "pending": []
+}
+ninja: no work to do.
+{"id": "context-2048", "phase": "fresh", "decode_tok_s": 11.972609631953706, "ttft_seconds": 53.65705748999608, "text": "# Review of the System-Design Notes: Failure Cases and Improvements\n\n## 1. What the notes actually say\n\nAll 61 notes are identical, and each describes a single worker performing a four-step job lifecycle:\n\n1. **Accept** a job.\n2. **Write a durable record** of it.\n3. **Retry after a timeout** (i.e., if the job does not complete within some deadline, try again).\n4. **Record completion**.\n5. The **database assigns an increasing sequence number** to each record.\n\nThe trailing `x x x x` is not a note; it is noise ("}
+{"id": "context-8063", "phase": "fresh", "decode_tok_s": 11.288858843474005, "ttft_seconds": 69.33654502101126, "text": "# Review of the System-Design Notes: Failure Cases and Improvements\n\n## 1. What the notes actually say\n\nAll 243 notes are identical, and the trailing `x x x x x x x x x x x x x` is noise. Stripped to its essentials, the design is:\n\n1. A worker **accepts** a job.\n2. The worker **writes a durable record** (presumably to a database).\n3. If the job does not finish in time, the worker **retries after a timeout**.\n4. On success, the worker **records completion**.\n5. The database"}
+{"id": "context-2048", "phase": "repeat", "decode_tok_s": 13.330432580832477, "ttft_seconds": 22.55625182800577, "text": "# Review of the System-Design Notes: Failure Cases and Improvements\n\n## 1. What the notes actually say\n\nAll 61 notes are identical, and each describes a single worker performing a four-step job lifecycle:\n\n1. **Accept** a job.\n2. **Write a durable record** of it.\n3. **Retry after a timeout** (i.e., if the job does not complete within some deadline, try again).\n4. **Record completion**.\n5. The **database assigns an increasing sequence number** to each record.\n\nThe trailing `x x x x` is not a note; it is noise ("}
+{"id": "context-8063", "phase": "repeat", "decode_tok_s": 11.432451224441046, "ttft_seconds": 68.24585351000133, "text": "# Review of the System-Design Notes: Failure Cases and Improvements\n\n## 1. What the notes actually say\n\nAll 243 notes are identical, and the trailing `x x x x x x x x x x x x x` is noise. Stripped to its essentials, the design is:\n\n1. A worker **accepts** a job.\n2. The worker **writes a durable record** (presumably to a database).\n3. If the job does not finish in time, the worker **retries after a timeout**.\n4. On success, the worker **records completion**.\n5. The database"}
+Saved /recipe/results/20261018-gguf-comparison/long-page-reserve-23.json

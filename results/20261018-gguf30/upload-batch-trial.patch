@@ -1,0 +1,175 @@
+diff --git a/src/llama-moe-stream.cpp b/src/llama-moe-stream.cpp
+index 888b107..d353a8e 100644
+--- a/src/llama-moe-stream.cpp
++++ b/src/llama-moe-stream.cpp
+@@ -358,6 +358,13 @@ llama_moe_stream::llama_moe_stream(uint32_t n_layer, uint32_t n_slots, int32_t n
+ 
+     debug         = std::getenv("LLAMA_MOE_STREAM_DEBUG") != nullptr;
+     use_direct_io = direct;
++    if (const char * s = std::getenv("LLAMA_MOE_STREAM_UPLOAD_BATCH")) {
++        const long n = std::strtol(s, nullptr, 10);
++        if (n < 1 || n > 6) {
++            throw std::runtime_error("LLAMA_MOE_STREAM_UPLOAD_BATCH must be between 1 and 6");
++        }
++        upload_batch = (int32_t) n;
++    }
+ 
+     // Router bias toward resident experts. Read once here rather than per call so a run cannot
+     // change policy halfway through and leave counters that describe two different experiments.
+@@ -556,7 +563,13 @@ void llama_moe_stream::start_workers_locked() {
+     workers_started = true;
+     workers.reserve(n_io_threads);
+     for (int32_t i = 0; i < n_io_threads; i++) {
+-        workers.emplace_back([this, i]() { worker_loop((int) i); });
++        workers.emplace_back([this, i]() {
++            if (upload_batch > 1) {
++                worker_loop_batched((int) i);
++            } else {
++                worker_loop((int) i);
++            }
++        });
+     }
+ }
+ 
+@@ -681,6 +694,121 @@ void llama_moe_stream::worker_loop(int worker_id) {
+     moe_aligned_free(staging);
+ }
+ 
++// Keep uploads serialized, but issue several copies on one worker-owned backend
++// stream before synchronizing. Every RAM lease and LOADING slot survives until
++// that synchronization; no other worker can recycle bytes in flight. Arithmetic,
++// routing, graph shapes and slot selection are untouched.
++void llama_moe_stream::worker_loop_batched(int worker_id) {
++    struct pending {
++        llama_moe_stream_work work;
++        const uint8_t * data = nullptr;
++        size_t pinned = SIZE_MAX;
++        size_t filled = SIZE_MAX;
++        size_t head = 0;
++    };
++    std::vector<uint8_t *> staging(upload_batch);
++    for (auto & ptr : staging) {
++        ptr = (uint8_t *) moe_aligned_alloc(max_nb_expert + 2*MOE_STREAM_DIRECT_ALIGN);
++        GGML_ASSERT(ptr != nullptr);
++    }
++    std::vector<pending> batch;
++    batch.reserve(upload_batch);
++    ggml_backend_ptr uploader;
++    ggml_backend_dev_t device = nullptr;
++    std::unique_lock<std::mutex> lk(mtx);
++    while (true) {
++        cv_work.wait(lk, [&]{ return shutting_down || !q_demand.empty(); });
++        if (shutting_down) {
++            break;
++        }
++        batch.clear();
++        while (!q_demand.empty() && batch.size() < (size_t) upload_batch) {
++            const auto w = q_demand.front();
++            q_demand.pop_front();
++            auto & sl = *w.sl;
++            const uint8_t bit = (uint8_t) (1u << w.weight);
++            if (w.gen != sl.slot_gen[w.slot] ||
++                sl.slot_state[w.slot] != LLAMA_MOE_STREAM_SLOT_LOADING ||
++                sl.slot_expert[w.slot] != w.expert || (sl.slot_claimed[w.slot] & bit)) {
++                continue;
++            }
++            sl.slot_claimed[w.slot] |= bit;
++            batch.push_back({ w });
++        }
++        lk.unlock();
++        for (size_t i = 0; i < batch.size(); ++i) {
++            auto & p = batch[i];
++            const auto & wt = p.work.sl->weights[p.work.weight];
++            const size_t offs = wt.offs + (size_t) p.work.expert * wt.nb_expert;
++            p.data = l2 ? l2->find(wt.file_idx, offs, wt.nb_expert, &p.pinned) : nullptr;
++            if (p.data == nullptr) {
++                size_t slot = SIZE_MAX;
++                uint8_t * dst = l2 ? l2->reserve(wt.file_idx, offs, wt.nb_expert, &slot) : nullptr;
++                p.data = llama_moe_stream_pread(*files[wt.file_idx], dst ? dst : staging[i],
++                                               wt.nb_expert, offs, use_direct_io, worker_id);
++                if (dst) {
++                    if (p.data) {
++                        p.filled = slot;
++                        p.head = (size_t) (p.data - dst);
++                    } else {
++                        l2->abandon(slot);
++                    }
++                }
++            }
++        }
++        {
++            std::lock_guard<std::mutex> up(upload_mtx);
++            for (const auto & p : batch) {
++                if (!p.data) {
++                    continue;
++                }
++                const auto & wt = p.work.sl->weights[p.work.weight];
++                auto dev = ggml_backend_buft_get_device(ggml_backend_buffer_get_type(wt.cache->buffer));
++                if (!uploader) {
++                    // This experimental path has only been validated on CUDA.
++                    GGML_ASSERT(dev && std::strncmp(ggml_backend_dev_name(dev), "CUDA", 4) == 0);
++                    device = dev;
++                    uploader.reset(ggml_backend_dev_init(dev, nullptr));
++                    GGML_ASSERT(uploader);
++                }
++                GGML_ASSERT(dev == device);
++                ggml_backend_tensor_set_async(uploader.get(), wt.cache, p.data,
++                                             (size_t) p.work.slot * wt.nb_expert, wt.nb_expert);
++            }
++            if (uploader) {
++                ggml_backend_synchronize(uploader.get());
++            }
++        }
++        for (const auto & p : batch) {
++            if (p.filled != SIZE_MAX) {
++                l2->commit(p.filled, p.head);
++            }
++            if (p.pinned != SIZE_MAX) {
++                l2->release(p.pinned);
++            }
++        }
++        lk.lock();
++        for (const auto & p : batch) {
++            const auto & w = p.work;
++            auto & sl = *w.sl;
++            if (w.gen != sl.slot_gen[w.slot]) {
++                continue;
++            }
++            sl.slot_claimed[w.slot] &= (uint8_t) ~(1u << w.weight);
++            if (!p.data) {
++                load_failed = true;
++            } else if (sl.slot_parts_left[w.slot] > 0 && --sl.slot_parts_left[w.slot] == 0) {
++                sl.slot_state[w.slot] = LLAMA_MOE_STREAM_SLOT_RESIDENT;
++            }
++        }
++        cv_done.notify_all();
++    }
++    lk.unlock();
++    for (auto ptr : staging) {
++        moe_aligned_free(ptr);
++    }
++}
++
+ // least valuable evictable slot: empty first, then coldest resident (min route hotness, oldest use
+ // as tiebreak); LOADING and keep slots are never candidates. returns -1 when no candidate exists
+ int32_t llama_moe_stream::pick_victim_locked(llama_moe_stream_layer & sl, const uint8_t * keep) const {
+diff --git a/src/llama-moe-stream.h b/src/llama-moe-stream.h
+index b05e57c..f511ab6 100644
+--- a/src/llama-moe-stream.h
++++ b/src/llama-moe-stream.h
+@@ -304,6 +304,7 @@ struct llama_moe_stream_l2 {
+ struct llama_moe_stream {
+     uint32_t n_slots      = 0; // expert cache slots per streamed layer
+     int32_t  n_io_threads = 0;
++    int32_t upload_batch = 1; // opt-in: preserve the original single-slab path by default
+ 
+     std::vector<std::unique_ptr<llama_moe_stream_layer>> layers; // [n_layer], null = not streamed
+ 
+@@ -418,6 +419,7 @@ struct llama_moe_stream {
+     // llama_file::read_raw_at - on Windows it selects that worker's private handle, which is what
+     // makes the pool parallel rather than merely correct
+     void worker_loop(int worker_id);
++    void worker_loop_batched(int worker_id);
+     int32_t pick_victim_locked(llama_moe_stream_layer & sl, const uint8_t * keep) const;
+     void reserve_slot_locked(llama_moe_stream_layer & sl, int32_t expert, int32_t slot);
+     // queues one read per weight tensor and wakes the pool; see the .cpp for why

@@ -1,0 +1,181 @@
+{
+  "status": "complete",
+  "purpose": "Real OpenAI chat completion with system and user roles; not a capability benchmark",
+  "started_at": "2026-10-18T08:28:17.969641+00:00",
+  "variant": "iq2",
+  "model": "deepseek-v41-flash-1017-iq2xxs-q8",
+  "url": "http://127.0.0.1:5017",
+  "pins": {
+    "native": {
+      "repo": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "revision": "1bae0e1088993b9b82de08f59de5be5a34e42170"
+    },
+    "baseline": {
+      "repo": "mrfakename/DeepSeek-V4.1-Flash-1017-GGUF",
+      "revision": "2c97dba3934f27a99767a90830e7519cc7b8b2d9",
+      "include": "Q2_K/*.gguf",
+      "bytes": 264515416800
+    },
+    "reference": {
+      "repo": "mrfakename/DeepSeek-V4.1-Flash-1017-GGUF",
+      "revision": "2c97dba3934f27a99767a90830e7519cc7b8b2d9",
+      "include": "Q8_0/*.gguf",
+      "bytes": 507954227008,
+      "description": "MXFP4 routed experts retained from the native checkpoint; Q8 dense and Engram conversion. This is a converted reference, not an exact native forward pass."
+    },
+    "llama_cpp": {
+      "repo": "https://github.com/vcruz305/llama.cpp",
+      "revision": "2076412598e99127ea2554467b2b7530856895d3"
+    },
+    "streaming_patch": {
+      "upstream_repo": "https://github.com/JigSawPT/llama.cpp",
+      "upstream_commit": "4aa9d62c871a55021bc2c2d35ee84bdd5dd28c6e",
+      "local_patch": "patches/moe-stream.patch",
+      "sha256": "19d21611dac18d49a02b44a56bd48e97f0ffe762d19bd9e89519a570f895f802"
+    },
+    "runtime_fixes": {
+      "local_patch": "patches/runtime-fixes.patch",
+      "sha256": "e449f85290ceacf28e14028fe17691f278fe42ad975977d84aef990ef8c2163f",
+      "description": "Index-source top-k reuse, CUDA MMQ tail padding, and imatrix source-free operation guard; applied to both runtimes"
+    }
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "For this connection test, reply with exactly DEEPSEEK_READY and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Run the connection test."
+    }
+  ],
+  "health": {
+    "status": "ok"
+  },
+  "models": {
+    "models": [
+      {
+        "name": "deepseek-v41-flash-1017-iq2xxs-q8",
+        "model": "deepseek-v41-flash-1017-iq2xxs-q8",
+        "modified_at": "",
+        "size": "",
+        "digest": "",
+        "type": "model",
+        "description": "",
+        "tags": [
+          ""
+        ],
+        "capabilities": [
+          "completion"
+        ],
+        "parameters": "",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "",
+          "families": [
+            ""
+          ],
+          "parameter_size": "",
+          "quantization_level": ""
+        }
+      }
+    ],
+    "object": "list",
+    "data": [
+      {
+        "id": "deepseek-v41-flash-1017-iq2xxs-q8",
+        "aliases": [
+          "deepseek-v41-flash-1017-iq2xxs-q8"
+        ],
+        "tags": [],
+        "object": "model",
+        "created": 1792312097,
+        "owned_by": "llamacpp",
+        "meta": {
+          "vocab_type": 2,
+          "n_vocab": 129280,
+          "n_ctx": 8192,
+          "n_ctx_train": 1048576,
+          "n_embd": 5120,
+          "n_params": 748494684784,
+          "size": 359312742368,
+          "ftype": "IQ2_XXS - 2.0625 bpw"
+        }
+      }
+    ]
+  },
+  "configured_context": 8192,
+  "template_matches_official": true,
+  "expected_input_ids": [
+    0,
+    128799,
+    3870,
+    566,
+    7530,
+    1950,
+    14,
+    20430,
+    418,
+    9045,
+    420,
+    67845,
+    58348,
+    45,
+    65,
+    35092,
+    59,
+    305,
+    5760,
+    3006,
+    16,
+    128803,
+    29382,
+    270,
+    7530,
+    1950,
+    16,
+    128804,
+    128822
+  ],
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "DEEPSEEK_READY"
+        }
+      }
+    ],
+    "created": 1792312102,
+    "model": "deepseek-v41-flash-1017-iq2xxs-q8",
+    "system_fingerprint": "b1-2076412",
+    "object": "chat.completion",
+    "usage": {
+      "completion_tokens": 8,
+      "prompt_tokens": 29,
+      "total_tokens": 37,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "id": "chatcmpl-gAw0cdFuzcLNPCg7oOzFqnfpHWm3wC4z",
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 29,
+      "prompt_ms": 3840.416,
+      "prompt_per_token_ms": 132.42813793103448,
+      "prompt_per_second": 7.551265279594709,
+      "predicted_n": 8,
+      "predicted_ms": 692.908,
+      "predicted_per_token_ms": 98.98685714285715,
+      "predicted_per_second": 10.102351250093808
+    }
+  },
+  "seconds": 4.535123417997966,
+  "prompt_token_count_matches": true,
+  "answer": "DEEPSEEK_READY",
+  "exact_answer": true
+}

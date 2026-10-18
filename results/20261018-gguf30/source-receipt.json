@@ -1,0 +1,15 @@
+{
+  "gguf_parent_commit": "b952c1e6f29a1f4dca2f89bd84132f7f3f7dafef",
+  "exl3_recipe_commit": "4935e146f2eda380dc9c1af9637db2c573d8fd7a",
+  "source_sha256": {
+    "patches/moe-stream.patch": "19d21611dac18d49a02b44a56bd48e97f0ffe762d19bd9e89519a570f895f802",
+    "scripts/serve.sh": "14e3f1a00b9c7cf9cc7bbd30a362e384bbda9493c8b7fe1ad758d36780ee73b4",
+    "scripts/start.sh": "13f827fd99bd6d810aabfef4868f952e3cb2126933259eaaf0345a02857c607f",
+    "scripts/probe.py": "8f6f878bbc452c342461f2eb5eba97e7b061120e65f38ec24e376b2415c95b67",
+    "scripts/run_probe.py": "5c48db62152e422ed39c2aec3f050c641df255303b01af408f938cd72e972700",
+    "scripts/run_quality.py": "1d8f3d9a16c2bce50277a25c5c2156884256b9c9caeb68f8d20005fdb800d06a",
+    "scripts/compare_exl3.py": "3e239cffe590b91922eea4be086a0d7eceaaeb63b750c3d7ec3403a5ea367d8e",
+    "scripts/prepare_comparison.py": "749689e390cafa9c10237f7a0db3ba545cb108c10c7c90fea948909a7dd5e7de"
+  },
+  "note": "Each raw measurement retains its own source/binary hashes; trial code differs from the final selected patch. Harness-only metadata handling was subsequently scoped to streaming profiles."
+}

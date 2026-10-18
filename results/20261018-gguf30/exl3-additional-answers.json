@@ -1,0 +1,178 @@
+[
+  {
+    "id": "multiply2",
+    "expected": "12922",
+    "text": "12922",
+    "passed": true
+  },
+  {
+    "id": "modulo",
+    "expected": "7",
+    "text": "1",
+    "passed": false
+  },
+  {
+    "id": "hex",
+    "expected": "687",
+    "text": "687",
+    "passed": true
+  },
+  {
+    "id": "fraction",
+    "expected": "38",
+    "text": "38",
+    "passed": true
+  },
+  {
+    "id": "percentage2",
+    "expected": "160",
+    "text": "160",
+    "passed": true
+  },
+  {
+    "id": "gcd",
+    "expected": "18",
+    "text": "18",
+    "passed": true
+  },
+  {
+    "id": "median",
+    "expected": "7",
+    "text": "7",
+    "passed": true
+  },
+  {
+    "id": "combinations",
+    "expected": "36",
+    "text": "36",
+    "passed": true
+  },
+  {
+    "id": "filter",
+    "expected": [
+      9,
+      -6,
+      12,
+      0
+    ],
+    "text": "[9, -6, 12, 0]",
+    "passed": true
+  },
+  {
+    "id": "unique",
+    "expected": [
+      "oak",
+      "elm",
+      "pine"
+    ],
+    "text": "[\"oak\",\"elm\",\"pine\"]",
+    "passed": true
+  },
+  {
+    "id": "json2",
+    "expected": {
+      "id": "B"
+    },
+    "text": "{\"id\":\"B\"}",
+    "passed": true
+  },
+  {
+    "id": "json3",
+    "expected": {
+      "b": 1,
+      "a": 3,
+      "n": 2
+    },
+    "text": "{\"b\":1,\"a\":3,\"n\":2}",
+    "passed": true
+  },
+  {
+    "id": "python2",
+    "expected": [
+      1,
+      4,
+      7
+    ],
+    "text": "[1, 4, 7]",
+    "passed": true
+  },
+  {
+    "id": "python3",
+    "expected": "40",
+    "text": "48",
+    "passed": false
+  },
+  {
+    "id": "python4",
+    "expected": "5",
+    "text": "5",
+    "passed": true
+  },
+  {
+    "id": "python5",
+    "expected": "bd",
+    "text": "bd",
+    "passed": true
+  },
+  {
+    "id": "python6",
+    "expected": [
+      "a",
+      "cc",
+      "bbb"
+    ],
+    "text": "[\"a\", \"cc\", \"bbb\"]",
+    "passed": true
+  },
+  {
+    "id": "python7",
+    "expected": [
+      1,
+      2,
+      3
+    ],
+    "text": "[1,2,3]",
+    "passed": true
+  },
+  {
+    "id": "extract2",
+    "expected": "K3P7",
+    "text": "K3P7",
+    "passed": true
+  },
+  {
+    "id": "extract3",
+    "expected": "app-926",
+    "text": "app-926",
+    "passed": true
+  },
+  {
+    "id": "order2",
+    "expected": [
+      "D",
+      "A",
+      "C",
+      "B"
+    ],
+    "text": "Let's go through the conditions step by step:\n\n1. **A finishes before C** \u2192 A < C  \n2. **B finishes after C** \u2192 C < B  \n3. **D finishes before A** \u2192 D < A  \n\nFrom these:\n\n- D < A < C < B  \n\nSo the finishing order is: **D, A, C, B**\n\nFinal answer as JSON array:\n\n```json\n[\"D\", \"A\", \"C\", \"B\"]\n```",
+    "passed": false
+  },
+  {
+    "id": "logic",
+    "expected": "no",
+    "text": "No",
+    "passed": false
+  },
+  {
+    "id": "stack",
+    "expected": "C",
+    "text": "C",
+    "passed": true
+  },
+  {
+    "id": "queue",
+    "expected": "B",
+    "text": "B",
+    "passed": true
+  }
+]

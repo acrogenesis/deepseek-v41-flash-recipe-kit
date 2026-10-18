@@ -1,0 +1,15 @@
+multiply: PASS '3973'
+remaining: FAIL '84 - 6*9 = 84 - 54 = 30\n\n30'
+percentage: FAIL "Let's go step by step.\n\n1. Start with the price: 240  \n2. Apply a 15% discount:  \n   Discount = 240 × 0.15 = 36  \n   Price after discount = 240 − 36 = 204  \n\n3. Add 10% tax:  \n"
+extract: PASS 'K7N4'
+ordering: PASS 'Pia'
+json: PASS '{"count": 3}'
+sort: PASS '[-3,0,8,14,14]'
+python: FAIL 'TC: The expression sums the squares of odd numbers from 1 to 5.\n\nOdd numbers: 1, 3, 5\nSquares: 1, 9, 25\nSum: 1 + 9 + 25 = 35\n\n35'
+fresh fresh-0: 22.80293193048149 tok/s, TTFT 1.2935808800102677s
+fresh fresh-1: 27.61940311172843 tok/s, TTFT 0.9184902639972279s
+fresh fresh-2: 27.359382678094857 tok/s, TTFT 0.8635239379946142s
+repeat fresh-0: 29.6344598081624 tok/s, TTFT 0.8285423929919489s
+repeat fresh-1: 30.115733407984205 tok/s, TTFT 0.8324347030138597s
+repeat fresh-2: 29.8762864489233 tok/s, TTFT 0.8057471119973343s
+Probe saved to /home/archogenesis/Work/deepseek-v41-flash-recipe-kit/results/20261018T081054Z-gguf30-output512-2

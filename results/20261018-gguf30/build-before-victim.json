@@ -1,0 +1,7 @@
+{
+  "files": {
+    "work/upstream/llama-streaming/src/llama-moe-stream.cpp": "64cf347035b93c40942a047717d92ccd4fed12c8427c14769387d6bef2d54503",
+    "work/upstream/llama-streaming/src/llama-moe-stream.h": "3a495ca9f3a36650774b229619f08cc080e854fba771c8681ccf5b3cb471d292",
+    "work/build-streaming/bin/libllama.so.0.4.1": "d8e802976b115c69571609c82f18bec17f7689343ef5ab1da429ffe8829fbde5"
+  }
+}

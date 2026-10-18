@@ -1,0 +1,269 @@
+{
+  "note": "Two small shape tests share the terminal cgroup with unrelated processes; use model VmSwap for their swap measurement. Full-model campaign jobs have dedicated cgroups.",
+  "runs": {
+    "20261018T070028Z-gguf30-batch3": {
+      "cgroup_peak_bytes": 98787041280,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 18007805952,
+      "peak_sampled_device_used_mib_including_desktop": 27917.0,
+      "resource_guard_events": []
+    },
+    "20261018T070233Z-gguf30-batch3-shape": {
+      "cgroup_peak_bytes": 69980160,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 112188751872,
+      "peak_sampled_device_used_mib_including_desktop": 1438.0,
+      "resource_guard_events": []
+    },
+    "20261018T070306Z-gguf30-batch3-shape-decode": {
+      "cgroup_peak_bytes": 36654837760,
+      "max_cgroup_swap_bytes": 9102123008,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 111975387136,
+      "peak_sampled_device_used_mib_including_desktop": 1438.0,
+      "resource_guard_events": []
+    },
+    "20261018T070342Z-gguf30-c20-ub64-b3": {
+      "cgroup_peak_bytes": 98786381824,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 18851250176,
+      "peak_sampled_device_used_mib_including_desktop": 31265.0,
+      "resource_guard_events": []
+    },
+    "20261018T071131Z-gguf30-keep-profile": {
+      "cgroup_peak_bytes": 98786332672,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 19926511616,
+      "peak_sampled_device_used_mib_including_desktop": 27917.0,
+      "resource_guard_events": []
+    },
+    "20261018T071515Z-gguf30-heldout-decode": {
+      "cgroup_peak_bytes": 98786820096,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 19522191360,
+      "peak_sampled_device_used_mib_including_desktop": 27107.0,
+      "resource_guard_events": []
+    },
+    "20261018T072012Z-gguf30-victim-shape-decode": {
+      "cgroup_peak_bytes": 36654837760,
+      "max_cgroup_swap_bytes": 10491805696,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 113228304384,
+      "peak_sampled_device_used_mib_including_desktop": 1437.0,
+      "resource_guard_events": []
+    },
+    "20261018T072055Z-gguf30-victim12": {
+      "cgroup_peak_bytes": 98786738176,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 19737014272,
+      "peak_sampled_device_used_mib_including_desktop": 27917.0,
+      "resource_guard_events": []
+    },
+    "20261018T072317Z-gguf30-graphopt": {
+      "cgroup_peak_bytes": 98787053568,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 18345082880,
+      "peak_sampled_device_used_mib_including_desktop": 27917.0,
+      "resource_guard_events": []
+    },
+    "20261018T072751Z-gguf30-c18-graphopt": {
+      "cgroup_peak_bytes": 96439136256,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 18661085184,
+      "peak_sampled_device_used_mib_including_desktop": 29711.0,
+      "resource_guard_events": []
+    },
+    "20261018T072916Z-gguf30-c20-graphopt": {
+      "cgroup_peak_bytes": 98786816000,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 18239930368,
+      "peak_sampled_device_used_mib_including_desktop": 31725.0,
+      "resource_guard_events": []
+    },
+    "20261018T073044Z-gguf30-c18-t4": {
+      "cgroup_peak_bytes": 98786861056,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 18139238400,
+      "peak_sampled_device_used_mib_including_desktop": 29645.0,
+      "resource_guard_events": []
+    },
+    "20261018T073217Z-gguf30-c18-io8": {
+      "cgroup_peak_bytes": 98787717120,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 18239221760,
+      "peak_sampled_device_used_mib_including_desktop": 29649.0,
+      "resource_guard_events": []
+    },
+    "20261018T073352Z-gguf30-c18-ram86": {
+      "cgroup_peak_bytes": 101188001792,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 16610971648,
+      "peak_sampled_device_used_mib_including_desktop": 29715.0,
+      "resource_guard_events": []
+    },
+    "20261018T073544Z-gguf30-c18-decay256": {
+      "cgroup_peak_bytes": 98787082240,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 18235834368,
+      "peak_sampled_device_used_mib_including_desktop": 29645.0,
+      "resource_guard_events": []
+    },
+    "20261018T073658Z-gguf30-c18-decay16": {
+      "cgroup_peak_bytes": 98786918400,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 18517233664,
+      "peak_sampled_device_used_mib_including_desktop": 29645.0,
+      "resource_guard_events": []
+    },
+    "20261018T073922Z-gguf30-c18-only12": {
+      "cgroup_peak_bytes": 98787311616,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 18180034560,
+      "peak_sampled_device_used_mib_including_desktop": 29645.0,
+      "resource_guard_events": []
+    },
+    "20261018T074053Z-gguf30-final-confirm": {
+      "cgroup_peak_bytes": 97780297728,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 18750275584,
+      "peak_sampled_device_used_mib_including_desktop": 29709.0,
+      "resource_guard_events": []
+    },
+    "20261018T074208Z-gguf30-final-quality": {
+      "cgroup_peak_bytes": 98786979840,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 18367856640,
+      "peak_sampled_device_used_mib_including_desktop": 28847.0,
+      "resource_guard_events": []
+    },
+    "20261018T074514Z-gguf30-final-runtime-gate": {
+      "cgroup_peak_bytes": 98786979840,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 18357764096,
+      "peak_sampled_device_used_mib_including_desktop": 29211.0,
+      "resource_guard_events": []
+    },
+    "20261018T074756Z-gguf30-additional": {
+      "cgroup_peak_bytes": 98787516416,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 18178125824,
+      "peak_sampled_device_used_mib_including_desktop": 29659.0,
+      "resource_guard_events": []
+    },
+    "20261018T075335Z-gguf30-long": {
+      "cgroup_peak_bytes": 98787516416,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 18373312512,
+      "peak_sampled_device_used_mib_including_desktop": 29851.0,
+      "resource_guard_events": []
+    },
+    "20261018T075923Z-gguf30-long-page-reserve": {
+      "cgroup_peak_bytes": 98786918400,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 18399531008,
+      "peak_sampled_device_used_mib_including_desktop": 29851.0,
+      "resource_guard_events": []
+    },
+    "20261018T064836Z-iq2-streaming": {
+      "cgroup_peak_bytes": 0,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 39011913728,
+      "peak_sampled_device_used_mib_including_desktop": 27537.0,
+      "resource_guard_events": []
+    },
+    "20261018T065005Z-iq2-streaming": {
+      "cgroup_peak_bytes": 0,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 17343762432,
+      "peak_sampled_device_used_mib_including_desktop": 31385.0,
+      "resource_guard_events": []
+    },
+    "20261018T065142Z-iq2-streaming": {
+      "cgroup_peak_bytes": 0,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 15964446720,
+      "peak_sampled_device_used_mib_including_desktop": 27617.0,
+      "resource_guard_events": []
+    },
+    "20261018T065328Z-iq2-streaming": {
+      "cgroup_peak_bytes": 0,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 19892539392,
+      "peak_sampled_device_used_mib_including_desktop": 31408.0,
+      "resource_guard_events": []
+    },
+    "20261018T080650Z-gguf30-default-control": {
+      "cgroup_peak_bytes": 98786918400,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 40096886784,
+      "peak_sampled_device_used_mib_including_desktop": 27877.0,
+      "resource_guard_events": []
+    },
+    "20261018T080810Z-gguf30-output512-1": {
+      "cgroup_peak_bytes": 98787037184,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 19880542208,
+      "peak_sampled_device_used_mib_including_desktop": 29633.0,
+      "resource_guard_events": []
+    },
+    "20261018T081054Z-gguf30-output512-2": {
+      "cgroup_peak_bytes": 98787037184,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 19284406272,
+      "peak_sampled_device_used_mib_including_desktop": 29633.0,
+      "resource_guard_events": []
+    },
+    "20261018T081817Z-gguf30-output512-default": {
+      "cgroup_peak_bytes": 98787131392,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 39886848000,
+      "peak_sampled_device_used_mib_including_desktop": 27861.0,
+      "resource_guard_events": []
+    },
+    "20261018T082120Z-gguf30-c18-t1-bt16": {
+      "cgroup_peak_bytes": 98786312192,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 19461058560,
+      "peak_sampled_device_used_mib_including_desktop": 29645.0,
+      "resource_guard_events": []
+    },
+    "20261018T082402Z-gguf30-c18-ram88": {
+      "cgroup_peak_bytes": 103204786176,
+      "max_cgroup_swap_bytes": 0,
+      "max_model_vm_swap_bytes": 0,
+      "minimum_available_host_bytes": 14911623168,
+      "peak_sampled_device_used_mib_including_desktop": 29675.0,
+      "resource_guard_events": []
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "additional-23.json": {
+    "source": "../deepseek-v41-exl3-recipe-kit/results/20261018-gguf-comparison/additional-23.json",
+    "sha256": "eb5df7779626adaef46df4ecc50878ec0b223c9325625c4b93dc6dd82c7ef38b"
+  },
+  "equal-cache-18.json": {
+    "source": "../deepseek-v41-exl3-recipe-kit/results/20261018-gguf-comparison/equal-cache-18.json",
+    "sha256": "35e70cf8f95b1e121212776e6c2477550586c413da40380b5720eb2a4fa5edd8"
+  },
+  "long-page-reserve-23.json": {
+    "source": "../deepseek-v41-exl3-recipe-kit/results/20261018-gguf-comparison/long-page-reserve-23.json",
+    "sha256": "fdd4b3620536f1aa6cee07fcef97b481fadb42b071999c46113b8903724b545a"
+  },
+  "original-1.json": {
+    "source": "../deepseek-v41-exl3-recipe-kit/results/20261018-overlap/engram-full.json",
+    "sha256": "56665a9a04d33475143e5aec088bf98794658ea3fd06af9021dbae6d2df668d6"
+  },
+  "original-2.json": {
+    "source": "../deepseek-v41-exl3-recipe-kit/results/20261018-overlap/engram-replica.json",
+    "sha256": "9694894b9be76cb6efd46c13391afa83d841a3aa9805af629e7fdf464342a0cd"
+  },
+  "output512-23.json": {
+    "source": "../deepseek-v41-exl3-recipe-kit/results/20261018-gguf-comparison/output512-23.json",
+    "sha256": "125b880a85a09a12383f14929e188d98adefc53f28954c8c9ed0585943617064"
+  },
+  "quality.json": {
+    "source": "../deepseek-v41-exl3-recipe-kit/results/20261018-gguf-comparison-quality/quality.json",
+    "sha256": "6fa057b6ed12994883783a7eb0ed51fb7de5b1685894a91693e7db976397e6cb"
+  },
+  "rejected-8064-input.json": {
+    "source": "../deepseek-v41-exl3-recipe-kit/results/20261018-gguf-comparison/long-23.json",
+    "sha256": "db78b4e2b3d0bfeef9573539885fe3f974736cce5cf1c76f2ffa30a9342ab370"
+  }
+}

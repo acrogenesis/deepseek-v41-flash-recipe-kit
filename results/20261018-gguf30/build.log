@@ -1,0 +1,90 @@
+-- llama.cpp version: 0.4.1-dev
+CMAKE_BUILD_TYPE=Release
+-- Warning: ccache not found - consider installing it for faster compilation or disable this warning with GGML_CCACHE=OFF
+-- CMAKE_SYSTEM_PROCESSOR: x86_64
+-- GGML_SYSTEM_ARCH: x86
+-- Including CPU backend
+-- x86 detected
+-- Adding CPU backend variant ggml-cpu: -march=native 
+-- CUDA Toolkit found
+-- Replacing 120-real in CMAKE_CUDA_ARCHITECTURES_NATIVE with 120a-real
+-- Using CMAKE_CUDA_ARCHITECTURES=120a-real CMAKE_CUDA_ARCHITECTURES_NATIVE=120a-real
+-- FlashAttention K-V type combinations: f16-f16;q4_0-q4_0;q8_0-q8_0;bf16-bf16
+-- CUDA host compiler is GNU 14.3.1
+-- Including CUDA backend
+-- ggml version: 0.24.0
+-- ggml commit:  2076412-dirty
+-- OpenSSL found: 3.6.4
+-- Configuring done (0.1s)
+-- Generating done (0.1s)
+-- Build files have been written to: /home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/build-streaming
+[1/29] Provisioning UI assets
+-- UI: HF stamp matches 'ggml-org/llama-ui|b1', skipping HF fetch
+-- UI: assets unchanged, skipping embedding
+[2/26] Building CXX object tools/tokenize/CMakeFiles/llama-tokenize.dir/tokenize.cpp.o
+[3/26] Building CXX object src/CMakeFiles/llama.dir/llama-moe-stream.cpp.o
+/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/upstream/llama-streaming/src/llama-moe-stream.cpp: In function ‘const uint8_t* llama_moe_stream_pread(llama_file&, uint8_t*, size_t, size_t, bool, int)’:
+/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/upstream/llama-streaming/src/llama-moe-stream.cpp:62:127: warning: unused parameter ‘worker_id’ [-Wunused-parameter]
+   62 | static const uint8_t * llama_moe_stream_pread(llama_file & file, uint8_t * staging, size_t len, size_t offs, bool direct, int worker_id) {
+      |                                                                                                                           ~~~~^~~~~~~~~
+[4/26] Building CXX object tests/CMakeFiles/test-moe-host-cache.dir/__/src/llama-moe-stream.cpp.o
+/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/upstream/llama-streaming/src/llama-moe-stream.cpp: In function ‘const uint8_t* llama_moe_stream_pread(llama_file&, uint8_t*, size_t, size_t, bool, int)’:
+/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/upstream/llama-streaming/src/llama-moe-stream.cpp:62:127: warning: unused parameter ‘worker_id’ [-Wunused-parameter]
+   62 | static const uint8_t * llama_moe_stream_pread(llama_file & file, uint8_t * staging, size_t len, size_t offs, bool direct, int worker_id) {
+      |                                                                                                                           ~~~~^~~~~~~~~
+[5/26] Linking CXX shared library bin/libllama.so.0.4.1
+[6/26] Creating library symlink bin/libllama.so.0 bin/libllama.so
+[7/26] Linking CXX shared library bin/libmtmd.so.0.4.1
+[8/26] Creating library symlink bin/libmtmd.so.0 bin/libmtmd.so
+[9/26] Linking CXX shared library bin/libllama-common.so.0.4.1
+[10/26] Creating library symlink bin/libllama-common.so.0 bin/libllama-common.so
+[11/26] Linking CXX shared library bin/libllama-perplexity-impl.so
+[12/26] Linking CXX shared library bin/libllama-quantize-impl.so
+[13/26] Linking CXX shared library bin/libllama-bench-impl.so
+[14/26] Linking CXX executable bin/test-llama-file
+[15/26] Linking CXX shared library bin/libllama-server-impl.so
+[16/26] Linking CXX executable bin/test-moe-host-cache
+[17/26] Linking CXX executable bin/llama-bench
+[18/26] Linking CXX executable bin/llama-perplexity
+[19/26] Linking CXX executable bin/test-backend-ops
+[20/26] Linking CXX shared library bin/libllama-cli-impl.so
+[21/26] Linking CXX executable bin/llama-quantize
+[22/26] Linking CXX executable bin/llama-tokenize
+[23/26] Linking CXX executable bin/llama-server
+[24/26] Linking CXX executable bin/llama-cli
+[25/26] Building CXX object tools/imatrix/CMakeFiles/llama-imatrix.dir/imatrix.cpp.o
+[26/26] Linking CXX executable bin/llama-imatrix
+0.00.000.227 I srv  llama_server: initializing ...
+version: 0.4.1-dev (build 1, commit 2076412)
+built with GNU 14.3.1 for Linux x86_64
+test file  test-llama-file.tmp, 1049810 bytes (1234 past the last 4096 boundary)
+
+buffered open, use_direct_io = false:
+  ok    has_direct_io() is false when direct I/O was never requested
+  ok    read_alignment() is 1 on a buffered file
+  ok    size() matches the file on disk
+  ok    read_raw_at returns the bytes at the requested offset
+  ok    the same read does NOT match the bytes of a different offset
+
+unbuffered open, use_direct_io = true:
+  ok    read_alignment() reports the device's sector size, not 1
+        alignment = 4096
+  ok    size() matches the file on disk
+  ok    read_raw handles an unaligned offset and length
+  ok    a read past EOF reports exactly the bytes up to the end of file
+        offset 1048576, asked 4096, got 1234 (file ends 1234 in)
+  ok    it does NOT report the full request when the file ends first
+  ok    the bytes it did return are the right ones
+  ok    a read starting entirely past EOF returns 0 bytes
+
+per-worker handle pool:
+  ok    a buffered file holds no private handles
+        private handles = 0
+  ok    POSIX pread uses a shared descriptor
+  ok    every worker slot returns the bytes at the requested offset
+  ok    a worker-slot read does NOT match the bytes of a different offset
+  ok    an out-of-range worker id falls back to the shared handle and still reads
+  ok    all slots read their own offsets correctly at the same time
+
+RESULT: PASS - all checks behaved as required
+PASS: host-cache leases, recycling, aligned writeback and 1000 concurrent evictions

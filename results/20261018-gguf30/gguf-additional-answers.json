@@ -1,0 +1,178 @@
+[
+  {
+    "id": "multiply2",
+    "expected": "12922",
+    "text": "13022",
+    "passed": false
+  },
+  {
+    "id": "modulo",
+    "expected": "7",
+    "text": "First, compute \\( 7^{13} \\mod 19 \\).\n\nWe can use modular exponentiation:\n\n- \\( 7^2 = 49 \\equiv 49 - 38 = 11 \\mod 19 \\)\n- \\( 7^4 = (7^2)^2 = 11^2 = 121 \\equiv 121 - 114 = 7 \\mod 19 \\)\n- \\( 7^8 = (7^4)^2 = 7^2 = 49 \\equiv 11 \\mod 19 \\)\n\nNow \\( 13 = 8 + 4 + 1",
+    "passed": false
+  },
+  {
+    "id": "hex",
+    "expected": "687",
+    "text": "687",
+    "passed": true
+  },
+  {
+    "id": "fraction",
+    "expected": "38",
+    "text": "38",
+    "passed": true
+  },
+  {
+    "id": "percentage2",
+    "expected": "160",
+    "text": "160",
+    "passed": true
+  },
+  {
+    "id": "gcd",
+    "expected": "18",
+    "text": "18",
+    "passed": true
+  },
+  {
+    "id": "median",
+    "expected": "7",
+    "text": "First, sort the list: [2, 3, 5, 7, 11, 13, 19].  \nThere are 7 numbers, so the median is the middle one (4th value), which is 7.\n\n7",
+    "passed": false
+  },
+  {
+    "id": "combinations",
+    "expected": "36",
+    "text": "36",
+    "passed": true
+  },
+  {
+    "id": "filter",
+    "expected": [
+      9,
+      -6,
+      12,
+      0
+    ],
+    "text": "```json\n[9, -6, 12, 0]\n```",
+    "passed": false
+  },
+  {
+    "id": "unique",
+    "expected": [
+      "oak",
+      "elm",
+      "pine"
+    ],
+    "text": "[\"oak\",\"elm\",\"pine\"]",
+    "passed": true
+  },
+  {
+    "id": "json2",
+    "expected": {
+      "id": "B"
+    },
+    "text": "```json\n{\"id\":\"B\"}\n```",
+    "passed": false
+  },
+  {
+    "id": "json3",
+    "expected": {
+      "b": 1,
+      "a": 3,
+      "n": 2
+    },
+    "text": "```json\n{\"b\":1,\"a\":3,\"n\":2}\n```",
+    "passed": false
+  },
+  {
+    "id": "python2",
+    "expected": [
+      1,
+      4,
+      7
+    ],
+    "text": "Especially [1, 4, 7]",
+    "passed": false
+  },
+  {
+    "id": "python3",
+    "expected": "40",
+    "text": "48",
+    "passed": false
+  },
+  {
+    "id": "python4",
+    "expected": "5",
+    "text": "6",
+    "passed": false
+  },
+  {
+    "id": "python5",
+    "expected": "bd",
+    "text": "bd",
+    "passed": true
+  },
+  {
+    "id": "python6",
+    "expected": [
+      "a",
+      "cc",
+      "bbb"
+    ],
+    "text": " potentially:\n\n[\"a\",\"cc\",\"bbb\"]",
+    "passed": false
+  },
+  {
+    "id": "python7",
+    "expected": [
+      1,
+      2,
+      3
+    ],
+    "text": "```json\n[1, 2, 3]\n```",
+    "passed": false
+  },
+  {
+    "id": "extract2",
+    "expected": "K3P7",
+    "text": "K3P7",
+    "passed": true
+  },
+  {
+    "id": "extract3",
+    "expected": "app-926",
+    "text": "app-926",
+    "passed": true
+  },
+  {
+    "id": "order2",
+    "expected": [
+      "D",
+      "A",
+      "C",
+      "B"
+    ],
+    "text": "Let's go through the clues step by step.\n\n1. **A finishes before C** \u2192 A < C  \n2. **B finishes after C** \u2192 C < B  \n3. **D finishes before A** \u2192 D < A  \n\nFrom 1 and 3: D < A < C  \nFrom 2: C < B  \n\nPutting it together: D < A < C < B  \n\nSo the finishing order is: **D, A, C, B**\n\nAs a JSON array:\n\n```json\n[\"D\", \"A\", \"C\", \"B\"]\n```",
+    "passed": false
+  },
+  {
+    "id": "logic",
+    "expected": "no",
+    "text": "No",
+    "passed": false
+  },
+  {
+    "id": "stack",
+    "expected": "C",
+    "text": "C",
+    "passed": true
+  },
+  {
+    "id": "queue",
+    "expected": "B",
+    "text": "B",
+    "passed": true
+  }
+]

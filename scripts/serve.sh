@@ -28,10 +28,14 @@ elif [[ "$profile" == gpu-offload ]]; then
 elif [[ "$profile" != baseline ]]; then
     echo 'PROFILE must be baseline, gpu-offload or streaming'; exit 1
 fi
+thread_args=(-t "${THREADS:-16}")
+if [[ -n "${BATCH_THREADS:-}" ]]; then
+    thread_args+=(-tb "$BATCH_THREADS")
+fi
 exec "$binary" -m "$model" \
     --host 127.0.0.1 --port "${PORT:-5017}" \
     --alias "$alias" \
-    -c "$context" -np 1 -b 512 -ub 256 -t "${THREADS:-16}" \
+    -c "$context" -np 1 -b "${BATCH:-512}" -ub "${UBATCH:-256}" "${thread_args[@]}" \
     -ngl 99 "${placement[@]}" -ot 'engram_embd.weight=CPU' \
     -lm mmap -lzm on --no-repack --fit off -fa on \
     --jinja "${template_args[@]}" --reasoning off \

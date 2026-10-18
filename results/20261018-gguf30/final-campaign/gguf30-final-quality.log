@@ -1,0 +1,119 @@
+{
+  "label": "gguf30-final-quality",
+  "profile": "streaming",
+  "command": [
+    "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/build-streaming/bin/llama-perplexity",
+    "-m",
+    "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/models/DeepSeek-V4.1-Flash-1017-IQ2_XXS/DeepSeek-V4.1-Flash-1017-IQ2_XXS-Experts-Q8-Dense-Engram-00001-of-00010.gguf",
+    "-c",
+    "512",
+    "-b",
+    "512",
+    "-ub",
+    "1",
+    "--chunks",
+    "8",
+    "-f",
+    "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/data/heldout.txt",
+    "-t",
+    "16",
+    "-ngl",
+    "99",
+    "-ot",
+    "engram_embd.weight=CPU",
+    "-lm",
+    "mmap",
+    "-lzm",
+    "on",
+    "--no-repack",
+    "--fit",
+    "off",
+    "-fa",
+    "on",
+    "--no-warmup",
+    "--moe-stream",
+    "--moe-stream-cache",
+    "18",
+    "--moe-stream-l2",
+    "84",
+    "--moe-stream-io-threads",
+    "4",
+    "--moe-stream-direct",
+    "--kl-divergence",
+    "--kl-divergence-base",
+    "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/quality/mxfp4-q8-reference-416f4d6022cd.logits"
+  ],
+  "status": "complete",
+  "context": 512,
+  "chunks": 8,
+  "ubatch": 1,
+  "wave_preloading": false,
+  "op_offload_min_batch": "32",
+  "scored_positions": 2040,
+  "corpus_sha256": "3dc6d7e7174c78dbe9844befc30b86cd3141b1a3c42f23d66477b7f6ace1fc70",
+  "pins": {
+    "native": {
+      "repo": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "revision": "1bae0e1088993b9b82de08f59de5be5a34e42170"
+    },
+    "baseline": {
+      "repo": "mrfakename/DeepSeek-V4.1-Flash-1017-GGUF",
+      "revision": "2c97dba3934f27a99767a90830e7519cc7b8b2d9",
+      "include": "Q2_K/*.gguf",
+      "bytes": 264515416800
+    },
+    "reference": {
+      "repo": "mrfakename/DeepSeek-V4.1-Flash-1017-GGUF",
+      "revision": "2c97dba3934f27a99767a90830e7519cc7b8b2d9",
+      "include": "Q8_0/*.gguf",
+      "bytes": 507954227008,
+      "description": "MXFP4 routed experts retained from the native checkpoint; Q8 dense and Engram conversion. This is a converted reference, not an exact native forward pass."
+    },
+    "llama_cpp": {
+      "repo": "https://github.com/vcruz305/llama.cpp",
+      "revision": "2076412598e99127ea2554467b2b7530856895d3"
+    },
+    "streaming_patch": {
+      "upstream_repo": "https://github.com/JigSawPT/llama.cpp",
+      "upstream_commit": "4aa9d62c871a55021bc2c2d35ee84bdd5dd28c6e",
+      "local_patch": "patches/moe-stream.patch",
+      "sha256": "19d21611dac18d49a02b44a56bd48e97f0ffe762d19bd9e89519a570f895f802"
+    },
+    "runtime_fixes": {
+      "local_patch": "patches/runtime-fixes.patch",
+      "sha256": "e449f85290ceacf28e14028fe17691f278fe42ad975977d84aef990ef8c2163f",
+      "description": "Index-source top-k reuse, CUDA MMQ tail padding, and imatrix source-free operation guard; applied to both runtimes"
+    }
+  },
+  "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/deepseek41-final-comparison.service\n",
+  "environment": {
+    "GPU_CACHE_GIB": "18",
+    "RAM_CACHE_GIB": "84",
+    "THREADS": "16",
+    "IO_THREADS": "4",
+    "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3",
+    "LLAMA_MOE_STREAM_KEEP_SELECTED": "1",
+    "LLAMA_MOE_STREAM_GPU_ONLY_GIB": "14",
+    "GGML_CUDA_GRAPH_OPT": "1",
+    "LLAMA_MOE_STREAM_NO_PRELOAD": "1"
+  },
+  "binary_sha256": {
+    "llama-perplexity": "e389a47bb4544edfb353ea8cc585a57a07d5d005fd3b6607fac93d3d91a3a704",
+    "libllama.so.0.4.1": "cca59bfd9902daa90e13ac5d6a7294d5758c4143ef5835b0a2ad8cec6fd718d0"
+  },
+  "source_sha256": {
+    "src/llama-moe-stream.cpp": "8f2796f5111de4cd67ff2c3e49cb27dee2c25fee7d582c9628ff5bcd34477b36",
+    "src/llama-moe-stream.h": "374a922b6a3bd88205b4ca00ba51a06ecaf961867c2c657c965c2acfcb2197be"
+  },
+  "returncode": 0,
+  "seconds": 186.40977017699333,
+  "ppl": 7.520919,
+  "reference_ppl": 6.335829,
+  "ppl_ratio": 1.187046,
+  "mean_kl": 0.362934,
+  "top1_agreement_percent": 77.549,
+  "ppl_ratio_se": 0.029186,
+  "mean_kl_se": 0.01462,
+  "top1_agreement_se": 0.924,
+  "ppl_se": 0.452157
+}

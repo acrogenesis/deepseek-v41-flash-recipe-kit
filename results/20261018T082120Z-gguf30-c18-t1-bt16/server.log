@@ -1,0 +1,158 @@
+0.00.000.229 I srv  llama_server: initializing ...
+0.00.019.965 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.020.172 W srv  llama_server: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)
+0.00.022.551 I srv    load_model: loading model '/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/models/DeepSeek-V4.1-Flash-1017-IQ2_XXS/DeepSeek-V4.1-Flash-1017-IQ2_XXS-Experts-Q8-Dense-Engram-00001-of-00010.gguf'
+0.00.022.575 W llama_model_load: disabling mmap because MoE expert streaming is enabled (mmap -> none)
+0.00.200.647 W load_tensors: tensor buffer overrides (-ot/--cpu-moe) do not apply to SSD-streamed expert tensors
+0.12.769.595 W alloc_l2: MoE L2 host tier = 84.00 GiB PINNED (page-locked, unavailable to the rest of the system), 29577 slots of 3049472 bytes, eviction CLOCK
+0.16.079.649 I cmn          init: llama threadpool init, n_threads = 1
+0.16.613.793 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 8192, kv_unified = 'false'
+0.16.618.116 I srv  llama_server: model loaded
+0.16.618.122 I srv  llama_server: listening on http://127.0.0.1:5017
+0.17.373.811 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+0.17.373.848 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+0.20.108.961 I slot print_timing: id  0 | task 0 | prompt eval time =    2423.73 ms /    16 tokens (  151.48 ms per token,     6.60 tokens per second)
+0.20.108.964 I slot print_timing: id  0 | task 0 |        eval time =     311.35 ms /     3 tokens (  155.67 ms per token,     6.42 tokens per second)
+0.20.108.964 I slot print_timing: id  0 | task 0 |       total time =    2735.08 ms /    19 tokens
+0.20.108.968 I slot print_timing: id  0 | task 0 |    graphs reused =          1
+0.20.108.976 W print_stats: target: moe stream: remap calls = 200, expert hits = 1018, misses = 1871 (1870 cold), hit rate = 35.24%
+0.20.108.976 W print_stats: target: moe stream: load stall = 1093.49 ms total (5.467 ms per remap call)
+0.20.108.978 W print_stats: moe stream: L2 slab hits = 3, fills = 5610, evictions = 0, hit rate = 0.05%
+0.20.109.101 I slot      release: id  0 | task 0 | stop processing: n_tokens = 18, truncated = 0
+0.20.110.500 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 68382462788
+0.20.111.387 I slot launch_slot_: id  0 | task 5 | processing task, is_child = 0
+0.23.985.622 I slot print_timing: id  0 | task 5 | prompt eval time =    2193.08 ms /    28 tokens (   78.32 ms per token,    12.77 tokens per second)
+0.23.985.624 I slot print_timing: id  0 | task 5 |        eval time =    1681.13 ms /    18 tokens (   98.89 ms per token,    10.11 tokens per second)
+0.23.985.625 I slot print_timing: id  0 | task 5 |       total time =    3874.21 ms /    46 tokens
+0.23.985.625 I slot print_timing: id  0 | task 5 |    graphs reused =         17
+0.23.985.629 W print_stats: target: moe stream: remap calls = 960, expert hits = 5795, misses = 4166 (3663 cold), hit rate = 58.18%
+0.23.985.630 W print_stats: target: moe stream: load stall = 2554.46 ms total (2.661 ms per remap call)
+0.23.985.631 W print_stats: moe stream: L2 slab hits = 1509, fills = 10989, evictions = 0, hit rate = 12.07%
+0.23.985.768 I slot      release: id  0 | task 5 | stop processing: n_tokens = 45, truncated = 0
+0.23.987.031 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 68386339455
+0.23.988.164 I slot launch_slot_: id  0 | task 25 | processing task, is_child = 0
+0.30.365.192 I slot print_timing: id  0 | task 25 | prompt eval time =    1684.70 ms /    31 tokens (   54.35 ms per token,    18.40 tokens per second)
+0.30.365.195 I slot print_timing: id  0 | task 25 |        eval time =    4692.31 ms /    64 tokens (   74.48 ms per token,    13.43 tokens per second)
+0.30.365.195 I slot print_timing: id  0 | task 25 |       total time =    6377.01 ms /    95 tokens
+0.30.365.196 I slot print_timing: id  0 | task 25 |    graphs reused =         79
+0.30.365.199 W print_stats: target: moe stream: remap calls = 3560, expert hits = 19345, misses = 8825 (5698 cold), hit rate = 68.67%
+0.30.365.200 W print_stats: target: moe stream: load stall = 6051.04 ms total (1.700 ms per remap call)
+0.30.365.201 W print_stats: moe stream: L2 slab hits = 9381, fills = 17166, evictions = 0, hit rate = 35.34%
+0.30.365.380 I slot      release: id  0 | task 25 | stop processing: n_tokens = 94, truncated = 0
+0.30.366.806 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 68392719067
+0.30.368.534 I slot launch_slot_: id  0 | task 91 | processing task, is_child = 0
+0.32.471.289 I slot print_timing: id  0 | task 91 | prompt eval time =    1829.48 ms /    28 tokens (   65.34 ms per token,    15.30 tokens per second)
+0.32.471.291 I slot print_timing: id  0 | task 91 |        eval time =     273.25 ms /     5 tokens (   68.31 ms per token,    14.64 tokens per second)
+0.32.471.292 I slot print_timing: id  0 | task 91 |       total time =    2102.73 ms /    33 tokens
+0.32.471.292 I slot print_timing: id  0 | task 91 |    graphs reused =         82
+0.32.471.296 W print_stats: target: moe stream: remap calls = 3800, expert hits = 20956, misses = 11335 (6635 cold), hit rate = 64.90%
+0.32.471.297 W print_stats: target: moe stream: load stall = 6380.36 ms total (1.679 ms per remap call)
+0.32.471.298 W print_stats: moe stream: L2 slab hits = 14100, fills = 20376, evictions = 0, hit rate = 40.90%
+0.32.471.480 I slot      release: id  0 | task 91 | stop processing: n_tokens = 32, truncated = 0
+0.32.472.936 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 68394825167
+0.32.473.962 I slot launch_slot_: id  0 | task 98 | processing task, is_child = 0
+0.33.781.901 I slot print_timing: id  0 | task 98 | prompt eval time =    1173.29 ms /    25 tokens (   46.93 ms per token,    21.31 tokens per second)
+0.33.781.904 I slot print_timing: id  0 | task 98 |        eval time =     134.62 ms /     3 tokens (   67.31 ms per token,    14.86 tokens per second)
+0.33.781.905 I slot print_timing: id  0 | task 98 |       total time =    1307.92 ms /    28 tokens
+0.33.781.905 I slot print_timing: id  0 | task 98 |    graphs reused =         83
+0.33.781.910 W print_stats: target: moe stream: remap calls = 3960, expert hits = 22327, misses = 13261 (7127 cold), hit rate = 62.74%
+0.33.781.910 W print_stats: target: moe stream: load stall = 6583.70 ms total (1.663 ms per remap call)
+0.33.781.911 W print_stats: moe stream: L2 slab hits = 18402, fills = 22020, evictions = 0, hit rate = 45.52%
+0.33.782.086 I slot      release: id  0 | task 98 | stop processing: n_tokens = 27, truncated = 0
+0.33.783.672 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 68396135773
+0.33.784.601 I slot launch_slot_: id  0 | task 103 | processing task, is_child = 0
+0.36.030.874 I slot print_timing: id  0 | task 103 | prompt eval time =    1833.63 ms /    43 tokens (   42.64 ms per token,    23.45 tokens per second)
+0.36.030.877 I slot print_timing: id  0 | task 103 |        eval time =     412.61 ms /     7 tokens (   68.77 ms per token,    14.54 tokens per second)
+0.36.030.877 I slot print_timing: id  0 | task 103 |       total time =    2246.25 ms /    50 tokens
+0.36.030.878 I slot print_timing: id  0 | task 103 |    graphs reused =         88
+0.36.030.885 W print_stats: target: moe stream: remap calls = 4280, expert hits = 24645, misses = 16346 (7968 cold), hit rate = 60.12%
+0.36.030.886 W print_stats: target: moe stream: load stall = 6970.04 ms total (1.629 ms per remap call)
+0.36.030.887 W print_stats: moe stream: L2 slab hits = 25134, fills = 24684, evictions = 0, hit rate = 50.45%
+0.36.031.073 I slot      release: id  0 | task 103 | stop processing: n_tokens = 49, truncated = 0
+0.36.032.495 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 68398384760
+0.36.033.792 I slot launch_slot_: id  0 | task 112 | processing task, is_child = 0
+0.37.480.139 I slot print_timing: id  0 | task 112 | prompt eval time =     836.68 ms /    30 tokens (   27.89 ms per token,    35.86 tokens per second)
+0.37.480.142 I slot print_timing: id  0 | task 112 |        eval time =     609.64 ms /    12 tokens (   55.42 ms per token,    18.04 tokens per second)
+0.37.480.143 I slot print_timing: id  0 | task 112 |       total time =    1446.32 ms /    42 tokens
+0.37.480.144 I slot print_timing: id  0 | task 112 |    graphs reused =         98
+0.37.480.148 W print_stats: target: moe stream: remap calls = 4800, expert hits = 28075, misses = 18453 (8227 cold), hit rate = 60.34%
+0.37.480.148 W print_stats: target: moe stream: load stall = 7451.77 ms total (1.552 ms per remap call)
+0.37.480.149 W print_stats: moe stream: L2 slab hits = 30678, fills = 25617, evictions = 0, hit rate = 54.50%
+0.37.480.363 I slot      release: id  0 | task 112 | stop processing: n_tokens = 41, truncated = 0
+0.37.481.941 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 68399834050
+0.37.483.159 I slot launch_slot_: id  0 | task 126 | processing task, is_child = 0
+0.41.437.572 I slot print_timing: id  0 | task 126 | prompt eval time =    1292.53 ms /    36 tokens (   35.90 ms per token,    27.85 tokens per second)
+0.41.437.574 I slot print_timing: id  0 | task 126 |        eval time =    2661.86 ms /    57 tokens (   47.53 ms per token,    21.04 tokens per second)
+0.41.437.575 I slot print_timing: id  0 | task 126 |       total time =    3954.39 ms /    93 tokens
+0.41.437.575 I slot print_timing: id  0 | task 126 |    graphs reused =        153
+0.41.437.578 W print_stats: target: moe stream: remap calls = 7120, expert hits = 40160, misses = 23376 (8994 cold), hit rate = 63.21%
+0.41.437.579 W print_stats: target: moe stream: load stall = 9036.94 ms total (1.269 ms per remap call)
+0.41.437.580 W print_stats: moe stream: L2 slab hits = 43146, fills = 29442, evictions = 0, hit rate = 59.44%
+0.41.437.786 I slot      release: id  0 | task 126 | stop processing: n_tokens = 92, truncated = 0
+0.41.439.504 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 68403791473
+0.41.441.194 I slot launch_slot_: id  0 | task 185 | processing task, is_child = 0
+0.49.209.629 I slot print_timing: id  0 | task 185 | n_gen =    100, tg =  15.65 t/s, tg_3s =  15.81 t/s
+0.50.670.122 I slot print_timing: id  0 | task 185 | prompt eval time =    1442.78 ms /    30 tokens (   48.09 ms per token,    20.79 tokens per second)
+0.50.670.125 I slot print_timing: id  0 | task 185 |        eval time =    7786.12 ms /   128 tokens (   61.31 ms per token,    16.31 tokens per second)
+0.50.670.126 I slot print_timing: id  0 | task 185 |       total time =    9228.90 ms /   158 tokens
+0.50.670.127 I slot print_timing: id  0 | task 185 |    graphs reused =        279
+0.50.670.132 W print_stats: target: moe stream: remap calls = 12280, expert hits = 61921, misses = 35465 (10663 cold), hit rate = 63.58%
+0.50.670.133 W print_stats: target: moe stream: load stall = 14135.00 ms total (1.151 ms per remap call)
+0.50.670.135 W print_stats: moe stream: L2 slab hits = 74406, fills = 39474, evictions = 0, hit rate = 65.34%
+0.50.670.480 I slot      release: id  0 | task 185 | stop processing: n_tokens = 157, truncated = 0
+0.50.672.525 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.129 (> 0.100 thold), f_keep = 0.025
+0.50.675.026 I slot launch_slot_: id  0 | task 315 | processing task, is_child = 0
+0.56.112.678 I slot print_timing: id  0 | task 315 | n_gen =    100, tg =  21.92 t/s, tg_3s =  22.14 t/s
+0.57.135.422 I slot print_timing: id  0 | task 315 | prompt eval time =     920.26 ms /    31 tokens (   29.69 ms per token,    33.69 tokens per second)
+0.57.135.424 I slot print_timing: id  0 | task 315 |        eval time =    5540.12 ms /   128 tokens (   43.62 ms per token,    22.92 tokens per second)
+0.57.135.425 I slot print_timing: id  0 | task 315 |       total time =    6460.37 ms /   159 tokens
+0.57.135.425 I slot print_timing: id  0 | task 315 |    graphs reused =        405
+0.57.135.429 W print_stats: target: moe stream: remap calls = 17440, expert hits = 86038, misses = 45126 (11179 cold), hit rate = 65.60%
+0.57.135.430 W print_stats: target: moe stream: load stall = 17016.36 ms total (0.976 ms per remap call)
+0.57.135.431 W print_stats: moe stream: L2 slab hits = 101841, fills = 45264, evictions = 0, hit rate = 69.23%
+0.57.135.833 I slot      release: id  0 | task 315 | stop processing: n_tokens = 158, truncated = 0
+0.57.138.586 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.129 (> 0.100 thold), f_keep = 0.025
+0.57.141.105 I slot launch_slot_: id  0 | task 445 | processing task, is_child = 0
+1.01.962.114 I slot print_timing: id  0 | task 445 | n_gen =    100, tg =  24.91 t/s, tg_3s =  25.17 t/s
+1.03.031.175 I slot print_timing: id  0 | task 445 | prompt eval time =     847.46 ms /    31 tokens (   27.34 ms per token,    36.58 tokens per second)
+1.03.031.179 I slot print_timing: id  0 | task 445 |        eval time =    5042.57 ms /   128 tokens (   39.71 ms per token,    25.19 tokens per second)
+1.03.031.180 I slot print_timing: id  0 | task 445 |       total time =    5890.04 ms /   159 tokens
+1.03.031.180 I slot print_timing: id  0 | task 445 |    graphs reused =        531
+1.03.031.186 W print_stats: target: moe stream: remap calls = 22600, expert hits = 110641, misses = 54332 (11557 cold), hit rate = 67.07%
+1.03.031.188 W print_stats: target: moe stream: load stall = 19499.94 ms total (0.863 ms per remap call)
+1.03.031.189 W print_stats: moe stream: L2 slab hits = 128265, fills = 50214, evictions = 372, hit rate = 71.87%
+1.03.031.551 I slot      release: id  0 | task 445 | stop processing: n_tokens = 158, truncated = 0
+1.03.034.250 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.133 (> 0.100 thold), f_keep = 0.025
+1.03.036.393 I slot launch_slot_: id  0 | task 575 | processing task, is_child = 0
+1.07.026.220 I slot print_timing: id  0 | task 575 | n_gen =    100, tg =  30.89 t/s, tg_3s =  31.20 t/s
+1.07.945.286 I slot print_timing: id  0 | task 575 | prompt eval time =     784.84 ms /    30 tokens (   26.16 ms per token,    38.22 tokens per second)
+1.07.945.290 I slot print_timing: id  0 | task 575 |        eval time =    4124.02 ms /   128 tokens (   32.47 ms per token,    30.80 tokens per second)
+1.07.945.290 I slot print_timing: id  0 | task 575 |       total time =    4908.86 ms /   158 tokens
+1.07.945.291 I slot print_timing: id  0 | task 575 |    graphs reused =        657
+1.07.945.297 W print_stats: target: moe stream: remap calls = 27760, expert hits = 135130, misses = 63693 (11557 cold), hit rate = 67.96%
+1.07.945.298 W print_stats: target: moe stream: load stall = 21150.58 ms total (0.762 ms per remap call)
+1.07.945.300 W print_stats: moe stream: L2 slab hits = 156160, fills = 54314, evictions = 1454, hit rate = 74.19%
+1.07.945.675 I slot      release: id  0 | task 575 | stop processing: n_tokens = 157, truncated = 0
+1.07.948.590 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.129 (> 0.100 thold), f_keep = 0.025
+1.07.948.635 I slot launch_slot_: id  0 | task 705 | processing task, is_child = 0
+1.11.747.909 I slot print_timing: id  0 | task 705 | n_gen =    101, tg =  33.06 t/s, tg_3s =  33.39 t/s
+1.12.432.599 I slot print_timing: id  0 | task 705 | prompt eval time =     774.05 ms /    31 tokens (   24.97 ms per token,    40.05 tokens per second)
+1.12.432.602 I slot print_timing: id  0 | task 705 |        eval time =    3709.90 ms /   128 tokens (   29.21 ms per token,    34.23 tokens per second)
+1.12.432.603 I slot print_timing: id  0 | task 705 |       total time =    4483.95 ms /   159 tokens
+1.12.432.604 I slot print_timing: id  0 | task 705 |    graphs reused =        783
+1.12.432.607 W print_stats: target: moe stream: remap calls = 32920, expert hits = 159435, misses = 73166 (11557 cold), hit rate = 68.54%
+1.12.432.608 W print_stats: target: moe stream: load stall = 22894.35 ms total (0.695 ms per remap call)
+1.12.432.610 W print_stats: moe stream: L2 slab hits = 184388, fills = 58453, evictions = 1657, hit rate = 75.93%
+1.12.432.906 I slot      release: id  0 | task 705 | stop processing: n_tokens = 158, truncated = 0
+1.12.436.041 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.129 (> 0.100 thold), f_keep = 0.025
+1.12.436.083 I slot launch_slot_: id  0 | task 835 | processing task, is_child = 0
+1.16.107.996 I slot print_timing: id  0 | task 835 | n_gen =    114, tg =  37.52 t/s, tg_3s =  37.85 t/s
+1.16.444.511 I slot print_timing: id  0 | task 835 | prompt eval time =     659.83 ms /    31 tokens (   21.28 ms per token,    46.98 tokens per second)
+1.16.444.514 I slot print_timing: id  0 | task 835 |        eval time =    3348.59 ms /   128 tokens (   26.37 ms per token,    37.93 tokens per second)
+1.16.444.514 I slot print_timing: id  0 | task 835 |       total time =    4008.42 ms /   159 tokens
+1.16.444.515 I slot print_timing: id  0 | task 835 |    graphs reused =        909
+1.16.444.517 W print_stats: target: moe stream: remap calls = 38080, expert hits = 184143, misses = 82267 (11557 cold), hit rate = 69.12%
+1.16.444.518 W print_stats: target: moe stream: load stall = 24401.37 ms total (0.641 ms per remap call)
+1.16.444.519 W print_stats: moe stream: L2 slab hits = 211598, fills = 62068, evictions = 1740, hit rate = 77.32%
+1.16.444.798 I slot      release: id  0 | task 835 | stop processing: n_tokens = 158, truncated = 0
+1.16.478.291 I srv    operator(): operator(): cleaning up before exit...

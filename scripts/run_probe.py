@@ -2,6 +2,7 @@
 """Run one bounded-memory baseline campaign after download verification."""
 import argparse
 import datetime
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -31,11 +32,33 @@ def monitor(pid, output, stop):
                     row[name] = Path(f"/proc/{pid}/{name}").read_text()
                 except FileNotFoundError:
                     return
+            try:
+                cgroup = Path('/sys/fs/cgroup') / Path(f'/proc/{pid}/cgroup').read_text().strip().split('::', 1)[1].lstrip('/')
+            except FileNotFoundError:
+                return
+            try:
+                row['cgroup'] = {name: (cgroup / name).read_text().strip()
+                                 for name in ('memory.current', 'memory.peak', 'memory.events',
+                                              'memory.pressure', 'memory.swap.current')
+                                 if (cgroup / name).exists()}
+            except FileNotFoundError:
+                return
             row["gpu"] = subprocess.check_output([
                 "nvidia-smi", "--query-gpu=memory.used,power.draw,utilization.gpu,temperature.gpu", "--format=csv,noheader,nounits"
             ], text=True).strip()
             log.write(json.dumps(row) + "\n")
             log.flush()
+            reserve = int(os.environ.get('HOST_RESERVE_GIB', '12')) * 2**30
+            available = int(row['system_memory']['MemAvailable'].split()[0]) * 1024
+            if available < reserve:
+                log.write(json.dumps({'resource_guard': 'host memory reserve',
+                                      'available_bytes': available, 'reserve_bytes': reserve}) + '\n')
+                log.flush()
+                try:
+                    os.killpg(pid, signal.SIGTERM)
+                except ProcessLookupError:
+                    pass
+                return
             stop.wait(3)
 
 
@@ -45,6 +68,7 @@ def main():
     ap.add_argument("--fixture", type=Path)
     ap.add_argument("--variant", choices=("baseline", "reference", "iq2"), default="baseline")
     ap.add_argument("--wait-download", action="store_true")
+    ap.add_argument("--label", help="Optional explicit result-directory label for tuning runs")
     args = ap.parse_args()
     receipt = ROOT / "work/feasibility" / ("download-reference-verified.json" if args.variant == "reference" else "download-verified.json")
     while not receipt.exists():
@@ -67,6 +91,10 @@ def main():
         check.bind(("127.0.0.1", 5017))
     stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     label = args.profile if args.variant == "baseline" else f"{args.variant}-{args.profile}"
+    if args.label:
+        if not all(c.isalnum() or c in '-_' for c in args.label):
+            ap.error('--label must contain letters, digits, hyphens or underscores')
+        label = args.label
     out = ROOT / "results" / f"{stamp}-{label}"
     out.mkdir(parents=True)
     env = os.environ.copy()
@@ -77,6 +105,17 @@ def main():
               "gpu_cache": env.get("GPU_CACHE_GIB", "18"), "ram_cache": env.get("RAM_CACHE_GIB", "64"),
               "command": ["bash", str(ROOT / "scripts/serve.sh")],
               "systemd_cgroup": Path('/proc/self/cgroup').read_text()}
+    launch['environment'] = {k: v for k, v in env.items()
+                             if k.startswith(('LLAMA_MOE_STREAM_', 'GGML_CUDA_'))
+                             or k in ('GPU_CACHE_GIB', 'RAM_CACHE_GIB', 'THREADS', 'BATCH_THREADS', 'IO_THREADS', 'BATCH', 'UBATCH')}
+    if args.profile == 'streaming':
+        for name in ('src/llama-moe-stream.cpp', 'src/llama-moe-stream.h'):
+            source = ROOT / 'work/upstream/llama-streaming' / name
+            launch.setdefault('streaming_source_sha256', {})[name] = hashlib.sha256(source.read_bytes()).hexdigest()
+    build = ROOT / ('work/build-streaming/bin' if args.profile == 'streaming' else 'work/build/bin')
+    launch['binary_sha256'] = {name: hashlib.sha256((build / name).read_bytes()).hexdigest()
+                              for name in ('llama-server', 'libllama.so.0.4.1')}
+    launch['host_reserve_gib'] = int(env.get('HOST_RESERVE_GIB', '12'))
     (out / "launch.json").write_text(json.dumps(launch, indent=2) + "\n")
     stop = threading.Event()
     with (out / "server.log").open("w") as log:

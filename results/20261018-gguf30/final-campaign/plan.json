@@ -1,0 +1,278 @@
+{
+  "configuration": {
+    "environment": {
+      "GPU_CACHE_GIB": "18",
+      "RAM_CACHE_GIB": "84",
+      "THREADS": "16",
+      "IO_THREADS": "4",
+      "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3",
+      "LLAMA_MOE_STREAM_KEEP_SELECTED": "1",
+      "LLAMA_MOE_STREAM_GPU_ONLY_GIB": "14",
+      "GGML_CUDA_GRAPH_OPT": "1"
+    },
+    "selection": "Best fixed-workload fresh median among the completed trials; confirm independently. Repeat speed exceeds 30, fresh remains below 30 in the selection run.",
+    "selection_artifact": "results/20261018T072751Z-gguf30-c18-graphopt/probe.json",
+    "binary_sha256": {
+      "llama-server": "4ba10a43c792bc5465c814edc19721dd69bc44a997f841673f0e7a97fc115aa7",
+      "libllama.so.0.4.1": "cca59bfd9902daa90e13ac5d6a7294d5758c4143ef5835b0a2ad8cec6fd718d0"
+    }
+  },
+  "jobs": [
+    {
+      "name": "gguf30-final-confirm",
+      "cwd": "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit",
+      "environment": {
+        "GPU_CACHE_GIB": "18",
+        "RAM_CACHE_GIB": "84",
+        "THREADS": "16",
+        "IO_THREADS": "4",
+        "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3",
+        "LLAMA_MOE_STREAM_KEEP_SELECTED": "1",
+        "LLAMA_MOE_STREAM_GPU_ONLY_GIB": "14",
+        "GGML_CUDA_GRAPH_OPT": "1"
+      },
+      "command": [
+        "/home/archogenesis/.local/share/mise/installs/python/3.13/bin/python",
+        "scripts/run_probe.py",
+        "--profile",
+        "streaming",
+        "--variant",
+        "iq2",
+        "--label",
+        "gguf30-final-confirm",
+        "--fixture",
+        "results/20261017T210718Z-iq2-streaming/fixture.json"
+      ]
+    },
+    {
+      "name": "gguf30-final-quality",
+      "cwd": "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit",
+      "environment": {
+        "GPU_CACHE_GIB": "18",
+        "RAM_CACHE_GIB": "84",
+        "THREADS": "16",
+        "IO_THREADS": "4",
+        "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3",
+        "LLAMA_MOE_STREAM_KEEP_SELECTED": "1",
+        "LLAMA_MOE_STREAM_GPU_ONLY_GIB": "14",
+        "GGML_CUDA_GRAPH_OPT": "1"
+      },
+      "command": [
+        "/home/archogenesis/.local/share/mise/installs/python/3.13/bin/python",
+        "scripts/run_quality.py",
+        "--profile",
+        "streaming",
+        "--model",
+        "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/models/DeepSeek-V4.1-Flash-1017-IQ2_XXS/DeepSeek-V4.1-Flash-1017-IQ2_XXS-Experts-Q8-Dense-Engram-00001-of-00010.gguf",
+        "--label",
+        "gguf30-final-quality",
+        "--context",
+        "512",
+        "--chunks",
+        "8",
+        "--ubatch",
+        "1",
+        "--compare-logits",
+        "work/quality/mxfp4-q8-reference-416f4d6022cd.logits"
+      ]
+    },
+    {
+      "name": "gguf30-final-runtime-gate",
+      "cwd": "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit",
+      "environment": {
+        "GPU_CACHE_GIB": "18",
+        "RAM_CACHE_GIB": "84",
+        "THREADS": "16",
+        "IO_THREADS": "4",
+        "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3",
+        "LLAMA_MOE_STREAM_KEEP_SELECTED": "1",
+        "LLAMA_MOE_STREAM_GPU_ONLY_GIB": "14",
+        "GGML_CUDA_GRAPH_OPT": "1"
+      },
+      "command": [
+        "/home/archogenesis/.local/share/mise/installs/python/3.13/bin/python",
+        "scripts/run_quality.py",
+        "--profile",
+        "streaming",
+        "--model",
+        "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit/work/models/DeepSeek-V4.1-Flash-1017-IQ2_XXS/DeepSeek-V4.1-Flash-1017-IQ2_XXS-Experts-Q8-Dense-Engram-00001-of-00010.gguf",
+        "--label",
+        "gguf30-final-runtime-gate",
+        "--context",
+        "512",
+        "--chunks",
+        "2",
+        "--ubatch",
+        "256",
+        "--compare-logits",
+        "work/quality/iq2-runtime-gpu-20261017T213741Z.logits",
+        "--runtime-gate"
+      ]
+    },
+    {
+      "name": "equal-cache-18",
+      "cwd": "/home/archogenesis/Work/deepseek-v41-exl3-recipe-kit",
+      "environment": {},
+      "command": [
+        "bash",
+        "scripts/run.sh",
+        "--gpu-is-free",
+        "bench",
+        "--gpu-cache-gib",
+        "18",
+        "--grouped-dispatch",
+        "--hc-graphs",
+        "--gpu-policy",
+        "lfu",
+        "--victim-cache",
+        "--gpu-only-gib",
+        "14",
+        "--fast-guard",
+        "--fused-reduce",
+        "--overlap-loads",
+        "--overlap-shared",
+        "--engram-cache-rows",
+        "65536",
+        "--fixture",
+        "/recipe/fixtures/paired-gguf.json",
+        "--output",
+        "/recipe/results/20261018-gguf-comparison/equal-cache-18.json"
+      ]
+    },
+    {
+      "name": "gguf30-additional",
+      "cwd": "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit",
+      "environment": {
+        "GPU_CACHE_GIB": "18",
+        "RAM_CACHE_GIB": "84",
+        "THREADS": "16",
+        "IO_THREADS": "4",
+        "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3",
+        "LLAMA_MOE_STREAM_KEEP_SELECTED": "1",
+        "LLAMA_MOE_STREAM_GPU_ONLY_GIB": "14",
+        "GGML_CUDA_GRAPH_OPT": "1"
+      },
+      "command": [
+        "/home/archogenesis/.local/share/mise/installs/python/3.13/bin/python",
+        "scripts/run_probe.py",
+        "--profile",
+        "streaming",
+        "--variant",
+        "iq2",
+        "--label",
+        "gguf30-additional",
+        "--fixture",
+        "results/20261018-gguf30/fixtures/additional-short.json"
+      ]
+    },
+    {
+      "name": "additional-23",
+      "cwd": "/home/archogenesis/Work/deepseek-v41-exl3-recipe-kit",
+      "environment": {},
+      "command": [
+        "bash",
+        "scripts/run.sh",
+        "--gpu-is-free",
+        "bench",
+        "--gpu-cache-gib",
+        "23",
+        "--grouped-dispatch",
+        "--hc-graphs",
+        "--gpu-policy",
+        "lfu",
+        "--victim-cache",
+        "--gpu-only-gib",
+        "19",
+        "--fast-guard",
+        "--fused-reduce",
+        "--overlap-loads",
+        "--overlap-shared",
+        "--engram-cache-rows",
+        "65536",
+        "--fixture",
+        "/recipe/fixtures/comparison/additional-short.json",
+        "--output",
+        "/recipe/results/20261018-gguf-comparison/additional-23.json"
+      ]
+    },
+    {
+      "name": "gguf30-long",
+      "cwd": "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit",
+      "environment": {
+        "GPU_CACHE_GIB": "18",
+        "RAM_CACHE_GIB": "84",
+        "THREADS": "16",
+        "IO_THREADS": "4",
+        "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3",
+        "LLAMA_MOE_STREAM_KEEP_SELECTED": "1",
+        "LLAMA_MOE_STREAM_GPU_ONLY_GIB": "14",
+        "GGML_CUDA_GRAPH_OPT": "1"
+      },
+      "command": [
+        "/home/archogenesis/.local/share/mise/installs/python/3.13/bin/python",
+        "scripts/run_probe.py",
+        "--profile",
+        "streaming",
+        "--variant",
+        "iq2",
+        "--label",
+        "gguf30-long",
+        "--fixture",
+        "results/20261018-gguf30/fixtures/long-inputs.json"
+      ]
+    },
+    {
+      "name": "long-23",
+      "cwd": "/home/archogenesis/Work/deepseek-v41-exl3-recipe-kit",
+      "environment": {},
+      "command": [
+        "bash",
+        "scripts/run.sh",
+        "--gpu-is-free",
+        "bench",
+        "--gpu-cache-gib",
+        "23",
+        "--grouped-dispatch",
+        "--hc-graphs",
+        "--gpu-policy",
+        "lfu",
+        "--victim-cache",
+        "--gpu-only-gib",
+        "19",
+        "--fast-guard",
+        "--fused-reduce",
+        "--overlap-loads",
+        "--overlap-shared",
+        "--engram-cache-rows",
+        "65536",
+        "--fixture",
+        "/recipe/fixtures/comparison/long-inputs.json",
+        "--output",
+        "/recipe/results/20261018-gguf-comparison/long-23.json"
+      ]
+    },
+    {
+      "name": "gguf30-default-control",
+      "cwd": "/home/archogenesis/Work/deepseek-v41-flash-recipe-kit",
+      "environment": {
+        "GPU_CACHE_GIB": "16",
+        "RAM_CACHE_GIB": "64",
+        "THREADS": "16",
+        "IO_THREADS": "4"
+      },
+      "command": [
+        "/home/archogenesis/.local/share/mise/installs/python/3.13/bin/python",
+        "scripts/run_probe.py",
+        "--profile",
+        "streaming",
+        "--variant",
+        "iq2",
+        "--label",
+        "gguf30-default-control",
+        "--fixture",
+        "results/20261017T210718Z-iq2-streaming/fixture.json"
+      ]
+    }
+  ],
+  "patch_sha256": "19d21611dac18d49a02b44a56bd48e97f0ffe762d19bd9e89519a570f895f802"
+}

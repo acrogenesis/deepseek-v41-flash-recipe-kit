@@ -1,0 +1,56 @@
+0.00.014.112 W llama_model_load: disabling mmap because MoE expert streaming is enabled (mmap -> none)
+0.00.187.280 W load_tensors: tensor buffer overrides (-ot/--cpu-moe) do not apply to SSD-streamed expert tensors
+0.11.434.601 W alloc_l2: MoE L2 host tier = 84.00 GiB PINNED (page-locked, unavailable to the rest of the system), 29577 slots of 3049472 bytes, eviction CLOCK
+0.13.569.140 I cmn          init: llama threadpool init, n_threads = 16
+0.13.570.039 I 
+0.13.570.096 I system_info: n_threads = 16 (n_threads_batch = 16) / 32 | CUDA : ARCHS = 1200 | USE_GRAPHS = 1 | FA_QUANTS = q4_0-q4_0,q8_0-q8_0,f16-f16,bf16-bf16 | BLACKWELL_NATIVE_FP4 = 1 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | AVX512 = 1 | AVX512_VBMI = 1 | AVX512_VNNI = 1 | AVX512_BF16 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+0.13.574.388 I kl_divergence: computing over 2 chunks, n_ctx=512, batch_size=512, n_seq=1
+0.29.496.413 I kl_divergence: 15.92 seconds per pass - ETA 0.52 minutes
+
+chunk             PPL               ln(PPL(Q)/PPL(base))          KL Divergence              Δp RMS            Same top p
+   1       3.8010 ±    0.5552       0.00001 ±       -nan      -0.00000 ±    0.00000     0.001 ±  0.000 %    100.000 ±  0.000 %
+   2       6.3382 ±    0.7521       0.00000 ±       -nan      -0.00000 ±    0.00000     0.001 ±  0.000 %    100.000 ±  0.000 %
+
+====== Perplexity statistics ======
+Mean PPL(Q)                   :   6.338198 ±   0.752079
+Mean PPL(base)                :   6.338186 ±   0.752078
+Cor(ln(PPL(Q)), ln(PPL(base))): 100.00%
+Mean ln(PPL(Q)/PPL(base))     :   0.000002 ±       -nan
+Mean PPL(Q)/PPL(base)         :   1.000002 ±       -nan
+Mean PPL(Q)-PPL(base)         :   0.000012 ±       -nan
+
+====== KL divergence statistics ======
+Mean    KLD:  -0.000001 ±   0.000001
+Maximum KLD:   0.000048
+99.9%   KLD:   0.000047
+99.0%   KLD:   0.000039
+95.0%   KLD:   0.000023
+90.0%   KLD:   0.000015
+Median  KLD:   0.000000
+10.0%   KLD:  -0.000016
+ 5.0%   KLD:  -0.000023
+ 1.0%   KLD:  -0.000035
+ 0.1%   KLD:  -0.000054
+Minimum KLD:  -0.000056
+
+====== Token probability statistics ======
+Mean    Δp: -0.000 ± 0.000 %
+Maximum Δp:  0.003%
+99.9%   Δp:  0.003%
+99.0%   Δp:  0.002%
+95.0%   Δp:  0.001%
+90.0%   Δp:  0.000%
+75.0%   Δp:  0.000%
+Median  Δp:  0.000%
+25.0%   Δp:  0.000%
+10.0%   Δp: -0.000%
+ 5.0%   Δp: -0.001%
+ 1.0%   Δp: -0.002%
+ 0.1%   Δp: -0.004%
+Minimum Δp: -0.005%
+RMS Δp    :  0.001 ± 0.000 %
+Same top p: 100.000 ± 0.000 %
+
+0.38.295.442 W print_stats: moe stream: remap calls = 160, expert hits = 1034, misses = 27120 (11070 cold), hit rate = 3.67%
+0.38.295.443 W print_stats: moe stream: load stall = 0.00 ms total (0.000 ms per remap call)
+0.38.295.445 W print_stats: moe stream: L2 slab hits = 46773, fills = 34587, evictions = 5010, hit rate = 57.49%

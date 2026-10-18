@@ -1,0 +1,5 @@
+fresh context-2048: 16.55432752280782 tok/s, TTFT 23.29518966100295s
+fresh context-8063: 25.705858587821336 tok/s, TTFT 52.47370652000245s
+repeat context-2048: 31.72269469054511 tok/s, TTFT 12.657219315005932s
+repeat context-8063: 32.64454206390619 tok/s, TTFT 48.38980371100479s
+Probe saved to /home/archogenesis/Work/deepseek-v41-flash-recipe-kit/results/20261018T075923Z-gguf30-long-page-reserve

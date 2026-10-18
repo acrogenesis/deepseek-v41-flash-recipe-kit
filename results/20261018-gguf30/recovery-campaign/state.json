@@ -1,0 +1,26 @@
+{
+  "status": "complete",
+  "jobs": {
+    "gguf30-long-page-reserve": {
+      "status": "complete",
+      "started_at": "2026-10-18T07:59:23.453032+00:00",
+      "returncode": 0,
+      "seconds": 178.73645695600135,
+      "finished_at": "2026-10-18T08:02:22.189813+00:00"
+    },
+    "long-page-reserve-23": {
+      "status": "complete",
+      "started_at": "2026-10-18T08:02:22.199847+00:00",
+      "returncode": 0,
+      "seconds": 268.7306382920069,
+      "finished_at": "2026-10-18T08:06:50.930757+00:00"
+    },
+    "gguf30-default-control": {
+      "status": "complete",
+      "started_at": "2026-10-18T08:06:50.941536+00:00",
+      "returncode": 0,
+      "seconds": 73.82294266798999,
+      "finished_at": "2026-10-18T08:08:04.764739+00:00"
+    }
+  }
+}

@@ -1,0 +1,251 @@
+{
+  "status": "complete",
+  "target": "at least 30 tok/s; fresh and repeats separate",
+  "baseline_date": "2026-10-18",
+  "runs": [
+    {
+      "artifact": "results/20261018T064836Z-iq2-streaming/probe.json",
+      "config": {
+        "gpu_gib": 16,
+        "ram_gib": 64,
+        "threads": 16,
+        "io_threads": 4,
+        "memory_high_gib": 88
+      },
+      "status": "complete_smoke",
+      "client_tok_s": {
+        "fresh": 20.72457901752467,
+        "repeat": 28.315716205499417
+      },
+      "changed_cases": []
+    },
+    {
+      "artifact": "results/20261018T065005Z-iq2-streaming/probe.json",
+      "config": {
+        "gpu_gib": 20,
+        "ram_gib": 84,
+        "threads": 16,
+        "io_threads": 4,
+        "memory_high_gib": 88
+      },
+      "status": "complete_smoke",
+      "client_tok_s": {
+        "fresh": 23.75630438774267,
+        "repeat": 26.866915124364482
+      },
+      "changed_cases": [
+        "checks/percentage",
+        "checks/python",
+        "fresh/fresh-0",
+        "fresh/fresh-1",
+        "fresh/fresh-2",
+        "repeat/fresh-0",
+        "repeat/fresh-1",
+        "repeat/fresh-2"
+      ]
+    },
+    {
+      "artifact": "results/20261018T065142Z-iq2-streaming/probe.json",
+      "config": {
+        "gpu_gib": 16,
+        "ram_gib": 84,
+        "threads": 4,
+        "io_threads": 4,
+        "memory_high_gib": 92
+      },
+      "status": "complete_smoke",
+      "client_tok_s": {
+        "fresh": 23.954316248929754,
+        "repeat": 24.332201074652982
+      },
+      "changed_cases": []
+    },
+    {
+      "artifact": "results/20261018T065328Z-iq2-streaming/probe.json",
+      "config": {
+        "gpu_gib": 20,
+        "ram_gib": 80,
+        "threads": 16,
+        "io_threads": 8,
+        "memory_high_gib": 92
+      },
+      "status": "complete_smoke",
+      "client_tok_s": {
+        "fresh": 18.434910741489254,
+        "repeat": 21.51853767274995
+      },
+      "changed_cases": [
+        "checks/percentage",
+        "checks/python",
+        "fresh/fresh-0",
+        "fresh/fresh-1",
+        "fresh/fresh-2",
+        "repeat/fresh-0",
+        "repeat/fresh-1",
+        "repeat/fresh-2"
+      ]
+    },
+    {
+      "artifact": "results/20261018T070028Z-gguf30-batch3/probe.json",
+      "status": "complete_smoke",
+      "environment": {
+        "GPU_CACHE_GIB": "16",
+        "RAM_CACHE_GIB": "84",
+        "THREADS": "16",
+        "IO_THREADS": "4",
+        "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3"
+      },
+      "client_tok_s": {
+        "fresh": 22.84049115762304,
+        "repeat": 33.7096800753227
+      }
+    },
+    {
+      "artifact": "results/20261018T070342Z-gguf30-c20-ub64-b3/probe.json",
+      "status": "complete_smoke",
+      "environment": {
+        "GPU_CACHE_GIB": "20",
+        "RAM_CACHE_GIB": "84",
+        "THREADS": "16",
+        "IO_THREADS": "4",
+        "UBATCH": "64",
+        "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3"
+      },
+      "client_tok_s": {
+        "fresh": 23.64167023348297,
+        "repeat": 27.19170341439526
+      }
+    },
+    {
+      "artifact": "results/20261018T071131Z-gguf30-keep-profile/probe.json",
+      "status": "complete_smoke",
+      "environment": {
+        "GPU_CACHE_GIB": "16",
+        "RAM_CACHE_GIB": "84",
+        "THREADS": "16",
+        "IO_THREADS": "4",
+        "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3",
+        "LLAMA_MOE_STREAM_KEEP_SELECTED": "1",
+        "LLAMA_MOE_STREAM_TRANSFER_PROFILE": "1"
+      },
+      "client_tok_s": {
+        "fresh": 21.78094525634023,
+        "repeat": 31.256958895808957
+      }
+    }
+  ],
+  "profiler": "Nsight CUDA launcher failed: package is absent; no trace collected",
+  "batch_upload_test": {
+    "model": "synthetic two-layer 16-expert Q2_K",
+    "purpose": "cache plumbing only",
+    "preloading": false,
+    "comparisons": [
+      {
+        "profile": "stream-buffered",
+        "prompt_tokens": 32,
+        "same_tokens": true,
+        "max_abs_logprob_difference": 0.0,
+        "positions": 16,
+        "passed": true
+      },
+      {
+        "profile": "stream-buffered",
+        "prompt_tokens": 128,
+        "same_tokens": true,
+        "max_abs_logprob_difference": 0.0,
+        "positions": 16,
+        "passed": true
+      },
+      {
+        "profile": "stream-buffered",
+        "prompt_tokens": 311,
+        "same_tokens": true,
+        "max_abs_logprob_difference": 0.0,
+        "positions": 16,
+        "passed": true
+      },
+      {
+        "profile": "stream-direct",
+        "prompt_tokens": 32,
+        "same_tokens": true,
+        "max_abs_logprob_difference": 0.0,
+        "positions": 16,
+        "passed": true
+      },
+      {
+        "profile": "stream-direct",
+        "prompt_tokens": 128,
+        "same_tokens": true,
+        "max_abs_logprob_difference": 0.0,
+        "positions": 16,
+        "passed": true
+      },
+      {
+        "profile": "stream-direct",
+        "prompt_tokens": 311,
+        "same_tokens": true,
+        "max_abs_logprob_difference": 0.0,
+        "positions": 16,
+        "passed": true
+      },
+      {
+        "profile": "stream-buffered-l2",
+        "prompt_tokens": 32,
+        "same_tokens": true,
+        "max_abs_logprob_difference": 0.0,
+        "positions": 16,
+        "passed": true
+      },
+      {
+        "profile": "stream-buffered-l2",
+        "prompt_tokens": 128,
+        "same_tokens": true,
+        "max_abs_logprob_difference": 0.0,
+        "positions": 16,
+        "passed": true
+      },
+      {
+        "profile": "stream-buffered-l2",
+        "prompt_tokens": 311,
+        "same_tokens": true,
+        "max_abs_logprob_difference": 0.0,
+        "positions": 16,
+        "passed": true
+      },
+      {
+        "profile": "stream-direct-l2",
+        "prompt_tokens": 32,
+        "same_tokens": true,
+        "max_abs_logprob_difference": 0.0,
+        "positions": 16,
+        "passed": true
+      },
+      {
+        "profile": "stream-direct-l2",
+        "prompt_tokens": 128,
+        "same_tokens": true,
+        "max_abs_logprob_difference": 0.0,
+        "positions": 16,
+        "passed": true
+      },
+      {
+        "profile": "stream-direct-l2",
+        "prompt_tokens": 311,
+        "same_tokens": true,
+        "max_abs_logprob_difference": 0.0,
+        "positions": 16,
+        "passed": true
+      }
+    ],
+    "passed": true
+  },
+  "quality": {
+    "exl3": "../deepseek-v41-exl3-recipe-kit/results/20261018-gguf-comparison-quality/quality.json",
+    "gguf": "results/20261018T071515Z-gguf30-heldout-decode/quality.json"
+  },
+  "completed_at": "2026-10-18T08:31:44.883464+00:00",
+  "comparison_manifest": "results/20261018-gguf30/comparison-manifest.json",
+  "final_validation": "results/20261018-gguf30/validation.json",
+  "all_tuning_trials": "results/20261018-gguf30/tuning.json",
+  "outcome": "Original repeated prompts exceed 30 tok/s in two independent sweeps; fresh median remains below 30. Full paired comparison completed. GPU server stopped."
+}

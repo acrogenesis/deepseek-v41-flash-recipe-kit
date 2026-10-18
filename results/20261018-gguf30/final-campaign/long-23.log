@@ -1,0 +1,26 @@
+{
+  "ready_for_gpu_validation": true,
+  "gpu_used": false,
+  "download_status": "complete",
+  "verified_bytes": 413905629467,
+  "total_bytes": 413905629467,
+  "pending": []
+}
+ninja: no work to do.
+{"id": "context-2048", "phase": "fresh", "decode_tok_s": 11.867581929756211, "ttft_seconds": 58.56568244499795, "text": "# Review of the System-Design Notes: Failure Cases and Improvements\n\n## 1. What the notes actually say\n\nAll 61 notes are identical, and each describes a single worker performing a four-step job lifecycle:\n\n1. **Accept** a job.\n2. **Write a durable record** of it.\n3. **Retry after a timeout** (i.e., if the job does not complete within some deadline, try again).\n4. **Record completion**.\n5. The **database assigns an increasing sequence number** to each record.\n\nThe trailing `x x x x` is not a note; it is noise ("}
+Saved /recipe/results/20261018-gguf-comparison/long-23.json
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/recipe/runtime/runner.py", line 264, in <module>
+    main()
+  File "/recipe/runtime/runner.py", line 243, in main
+    run(case, phase, fixture["output_cap"])
+  File "/recipe/runtime/runner.py", line 161, in run
+    generator.enqueue(job)
+  File "/opt/sglang/lib/python3.12/site-packages/exllamav3/generator/generator.py", line 410, in enqueue
+    job.prepare_for_queue(self, self.job_serial)
+  File "/opt/sglang/lib/python3.12/site-packages/exllamav3/generator/job.py", line 1156, in prepare_for_queue
+    assert total_pages <= max_pages, \
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Job requires 33 pages (only 32 available) and cannot be enqueued. Total cache allocated is 32 * 256 = 8192 tokens

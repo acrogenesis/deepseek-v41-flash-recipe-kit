@@ -59,3 +59,33 @@ that original source state.
 
 The two-level candidate mask is still absent, so these fixes do not enable the
 model's advertised 1M context. The recipe remains capped at 16K.
+
+## Optional transfer and cache settings
+
+The following additions preserve the stored weight bytes and selected expert IDs.
+They are disabled by default and have been exercised on CUDA/RTX 5090 only.
+
+- `LLAMA_MOE_STREAM_UPLOAD_BATCH=3` groups up to three weight transfers on one
+  worker-owned CUDA backend before synchronizing. Disk reads remain parallel;
+  uploads remain serialized. A host-cache lease stays live until its transfer
+  finishes, and a GPU slot becomes resident only after every tensor arrives.
+  Accepted values are 1–6; 1 uses the original worker path.
+- `LLAMA_MOE_STREAM_KEEP_SELECTED=1` protects every already-resident expert needed
+  by the current token before reserving slots for missing experts.
+- `LLAMA_MOE_STREAM_GPU_ONLY_GIB=N` removes redundant host copies of frequently
+  used GPU experts, up to the per-layer share of N GiB. Before evicting such an
+  expert, its original bytes are copied back to a reserved host-cache slot.
+  At least six GPU slots per layer keep the ordinary policy. This requires an
+  allocated host tier; 0 disables it. It never writes to model files.
+- `LLAMA_MOE_STREAM_TRANSFER_PROFILE=1` records aggregate read, transfer and wait
+  counters. Worker times overlap and must not be read as elapsed request time.
+
+`KEEP_SELECTED` and `TRANSFER_PROFILE` enable when present: unset them to disable
+them. CUDA's existing `GGML_CUDA_GRAPH_OPT=1` can be tested independently.
+Neither cache setting changes routing scores, activation precision or sampling.
+Changing the GPU cache capacity can change prefill wave grouping and floating
+point rounding; compare outputs and distributions for the chosen capacity.
+
+`test-moe-host-cache`, included in `scripts/build.sh streaming`, checks host-slot
+leases, failed reads, explicit recycling and concurrent eviction. Real-expert
+and full-model measurements are saved with the comparison results.

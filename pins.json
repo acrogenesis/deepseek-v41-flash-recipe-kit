@@ -24,7 +24,7 @@
     "upstream_repo": "https://github.com/JigSawPT/llama.cpp",
     "upstream_commit": "4aa9d62c871a55021bc2c2d35ee84bdd5dd28c6e",
     "local_patch": "patches/moe-stream.patch",
-    "sha256": "416f4d6022cd012b271ad6d08614d3d64e77b3dcfb0212df0f9de522039ac3d8"
+    "sha256": "19d21611dac18d49a02b44a56bd48e97f0ffe762d19bd9e89519a570f895f802"
   },
   "runtime_fixes": {
     "local_patch": "patches/runtime-fixes.patch",

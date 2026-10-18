@@ -1,0 +1,502 @@
+[
+  {
+    "artifact": "results/20261018T070028Z-gguf30-batch3/probe.json",
+    "environment": {
+      "GPU_CACHE_GIB": "16",
+      "RAM_CACHE_GIB": "84",
+      "THREADS": "16",
+      "IO_THREADS": "4",
+      "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3"
+    },
+    "source_sha256": {
+      "src/llama-moe-stream.cpp": "2849290f362152df00897a22379a8eb095d056446314ca26832872b6d0cc6f19",
+      "src/llama-moe-stream.h": "93f8b1ad826aa249072adbb5891013eb8222377761ab9599f8bcdb557780a400"
+    },
+    "binary_sha256": null,
+    "client_tok_s": {
+      "fresh": 22.84049115762304,
+      "repeat": 33.7096800753227
+    },
+    "identical_to_control": 14,
+    "functional_score": {
+      "correct": 5,
+      "total": 8
+    }
+  },
+  {
+    "artifact": "results/20261018T070342Z-gguf30-c20-ub64-b3/probe.json",
+    "environment": {
+      "GPU_CACHE_GIB": "20",
+      "RAM_CACHE_GIB": "84",
+      "THREADS": "16",
+      "IO_THREADS": "4",
+      "UBATCH": "64",
+      "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3"
+    },
+    "source_sha256": {
+      "src/llama-moe-stream.cpp": "2849290f362152df00897a22379a8eb095d056446314ca26832872b6d0cc6f19",
+      "src/llama-moe-stream.h": "93f8b1ad826aa249072adbb5891013eb8222377761ab9599f8bcdb557780a400"
+    },
+    "binary_sha256": {
+      "llama-server": "4ba10a43c792bc5465c814edc19721dd69bc44a997f841673f0e7a97fc115aa7",
+      "libllama.so.0.4.1": "be02bb091f907f13558380b41aa67d57d94cab539068ebb2a90aeae254e9dd36"
+    },
+    "client_tok_s": {
+      "fresh": 23.64167023348297,
+      "repeat": 27.19170341439526
+    },
+    "identical_to_control": 6,
+    "functional_score": {
+      "correct": 5,
+      "total": 8
+    }
+  },
+  {
+    "artifact": "results/20261018T071131Z-gguf30-keep-profile/probe.json",
+    "environment": {
+      "GPU_CACHE_GIB": "16",
+      "RAM_CACHE_GIB": "84",
+      "THREADS": "16",
+      "IO_THREADS": "4",
+      "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3",
+      "LLAMA_MOE_STREAM_KEEP_SELECTED": "1",
+      "LLAMA_MOE_STREAM_TRANSFER_PROFILE": "1"
+    },
+    "source_sha256": {
+      "src/llama-moe-stream.cpp": "64cf347035b93c40942a047717d92ccd4fed12c8427c14769387d6bef2d54503",
+      "src/llama-moe-stream.h": "3a495ca9f3a36650774b229619f08cc080e854fba771c8681ccf5b3cb471d292"
+    },
+    "binary_sha256": {
+      "llama-server": "4ba10a43c792bc5465c814edc19721dd69bc44a997f841673f0e7a97fc115aa7",
+      "libllama.so.0.4.1": "d8e802976b115c69571609c82f18bec17f7689343ef5ab1da429ffe8829fbde5"
+    },
+    "client_tok_s": {
+      "fresh": 21.78094525634023,
+      "repeat": 31.256958895808957
+    },
+    "identical_to_control": 14,
+    "functional_score": {
+      "correct": 5,
+      "total": 8
+    }
+  },
+  {
+    "artifact": "results/20261018T072055Z-gguf30-victim12/probe.json",
+    "environment": {
+      "GPU_CACHE_GIB": "16",
+      "RAM_CACHE_GIB": "84",
+      "THREADS": "16",
+      "IO_THREADS": "4",
+      "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3",
+      "LLAMA_MOE_STREAM_KEEP_SELECTED": "1",
+      "LLAMA_MOE_STREAM_GPU_ONLY_GIB": "12",
+      "LLAMA_MOE_STREAM_TRANSFER_PROFILE": "1"
+    },
+    "source_sha256": {
+      "src/llama-moe-stream.cpp": "8f2796f5111de4cd67ff2c3e49cb27dee2c25fee7d582c9628ff5bcd34477b36",
+      "src/llama-moe-stream.h": "374a922b6a3bd88205b4ca00ba51a06ecaf961867c2c657c965c2acfcb2197be"
+    },
+    "binary_sha256": {
+      "llama-server": "4ba10a43c792bc5465c814edc19721dd69bc44a997f841673f0e7a97fc115aa7",
+      "libllama.so.0.4.1": "cca59bfd9902daa90e13ac5d6a7294d5758c4143ef5835b0a2ad8cec6fd718d0"
+    },
+    "client_tok_s": {
+      "fresh": 24.566484446904372,
+      "repeat": 34.29438007512973
+    },
+    "identical_to_control": 14,
+    "functional_score": {
+      "correct": 5,
+      "total": 8
+    }
+  },
+  {
+    "artifact": "results/20261018T072317Z-gguf30-graphopt/probe.json",
+    "environment": {
+      "GPU_CACHE_GIB": "16",
+      "RAM_CACHE_GIB": "84",
+      "THREADS": "16",
+      "IO_THREADS": "4",
+      "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3",
+      "LLAMA_MOE_STREAM_KEEP_SELECTED": "1",
+      "LLAMA_MOE_STREAM_GPU_ONLY_GIB": "12",
+      "GGML_CUDA_GRAPH_OPT": "1"
+    },
+    "source_sha256": {
+      "src/llama-moe-stream.cpp": "8f2796f5111de4cd67ff2c3e49cb27dee2c25fee7d582c9628ff5bcd34477b36",
+      "src/llama-moe-stream.h": "374a922b6a3bd88205b4ca00ba51a06ecaf961867c2c657c965c2acfcb2197be"
+    },
+    "binary_sha256": {
+      "llama-server": "4ba10a43c792bc5465c814edc19721dd69bc44a997f841673f0e7a97fc115aa7",
+      "libllama.so.0.4.1": "cca59bfd9902daa90e13ac5d6a7294d5758c4143ef5835b0a2ad8cec6fd718d0"
+    },
+    "client_tok_s": {
+      "fresh": 26.295239531466848,
+      "repeat": 34.837434368591694
+    },
+    "identical_to_control": 14,
+    "functional_score": {
+      "correct": 5,
+      "total": 8
+    }
+  },
+  {
+    "artifact": "results/20261018T072751Z-gguf30-c18-graphopt/probe.json",
+    "environment": {
+      "GPU_CACHE_GIB": "18",
+      "RAM_CACHE_GIB": "84",
+      "THREADS": "16",
+      "IO_THREADS": "4",
+      "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3",
+      "LLAMA_MOE_STREAM_KEEP_SELECTED": "1",
+      "LLAMA_MOE_STREAM_GPU_ONLY_GIB": "14",
+      "GGML_CUDA_GRAPH_OPT": "1"
+    },
+    "source_sha256": {
+      "src/llama-moe-stream.cpp": "8f2796f5111de4cd67ff2c3e49cb27dee2c25fee7d582c9628ff5bcd34477b36",
+      "src/llama-moe-stream.h": "374a922b6a3bd88205b4ca00ba51a06ecaf961867c2c657c965c2acfcb2197be"
+    },
+    "binary_sha256": {
+      "llama-server": "4ba10a43c792bc5465c814edc19721dd69bc44a997f841673f0e7a97fc115aa7",
+      "libllama.so.0.4.1": "cca59bfd9902daa90e13ac5d6a7294d5758c4143ef5835b0a2ad8cec6fd718d0"
+    },
+    "client_tok_s": {
+      "fresh": 29.087995537332528,
+      "repeat": 36.06617606116553
+    },
+    "identical_to_control": 14,
+    "functional_score": {
+      "correct": 5,
+      "total": 8
+    }
+  },
+  {
+    "artifact": "results/20261018T072916Z-gguf30-c20-graphopt/probe.json",
+    "environment": {
+      "GPU_CACHE_GIB": "20",
+      "RAM_CACHE_GIB": "84",
+      "THREADS": "16",
+      "IO_THREADS": "4",
+      "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3",
+      "LLAMA_MOE_STREAM_KEEP_SELECTED": "1",
+      "LLAMA_MOE_STREAM_GPU_ONLY_GIB": "16",
+      "GGML_CUDA_GRAPH_OPT": "1"
+    },
+    "source_sha256": {
+      "src/llama-moe-stream.cpp": "8f2796f5111de4cd67ff2c3e49cb27dee2c25fee7d582c9628ff5bcd34477b36",
+      "src/llama-moe-stream.h": "374a922b6a3bd88205b4ca00ba51a06ecaf961867c2c657c965c2acfcb2197be"
+    },
+    "binary_sha256": {
+      "llama-server": "4ba10a43c792bc5465c814edc19721dd69bc44a997f841673f0e7a97fc115aa7",
+      "libllama.so.0.4.1": "cca59bfd9902daa90e13ac5d6a7294d5758c4143ef5835b0a2ad8cec6fd718d0"
+    },
+    "client_tok_s": {
+      "fresh": 23.943365160373098,
+      "repeat": 28.762298634039137
+    },
+    "identical_to_control": 6,
+    "functional_score": {
+      "correct": 5,
+      "total": 8
+    }
+  },
+  {
+    "artifact": "results/20261018T073044Z-gguf30-c18-t4/probe.json",
+    "environment": {
+      "GPU_CACHE_GIB": "18",
+      "RAM_CACHE_GIB": "84",
+      "THREADS": "4",
+      "IO_THREADS": "4",
+      "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3",
+      "LLAMA_MOE_STREAM_KEEP_SELECTED": "1",
+      "LLAMA_MOE_STREAM_GPU_ONLY_GIB": "14",
+      "GGML_CUDA_GRAPH_OPT": "1"
+    },
+    "source_sha256": {
+      "src/llama-moe-stream.cpp": "8f2796f5111de4cd67ff2c3e49cb27dee2c25fee7d582c9628ff5bcd34477b36",
+      "src/llama-moe-stream.h": "374a922b6a3bd88205b4ca00ba51a06ecaf961867c2c657c965c2acfcb2197be"
+    },
+    "binary_sha256": {
+      "llama-server": "4ba10a43c792bc5465c814edc19721dd69bc44a997f841673f0e7a97fc115aa7",
+      "libllama.so.0.4.1": "cca59bfd9902daa90e13ac5d6a7294d5758c4143ef5835b0a2ad8cec6fd718d0"
+    },
+    "client_tok_s": {
+      "fresh": 28.016901313528738,
+      "repeat": 36.32418864837847
+    },
+    "identical_to_control": 14,
+    "functional_score": {
+      "correct": 5,
+      "total": 8
+    }
+  },
+  {
+    "artifact": "results/20261018T073217Z-gguf30-c18-io8/probe.json",
+    "environment": {
+      "GPU_CACHE_GIB": "18",
+      "RAM_CACHE_GIB": "84",
+      "THREADS": "16",
+      "IO_THREADS": "8",
+      "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3",
+      "LLAMA_MOE_STREAM_KEEP_SELECTED": "1",
+      "LLAMA_MOE_STREAM_GPU_ONLY_GIB": "14",
+      "GGML_CUDA_GRAPH_OPT": "1"
+    },
+    "source_sha256": {
+      "src/llama-moe-stream.cpp": "8f2796f5111de4cd67ff2c3e49cb27dee2c25fee7d582c9628ff5bcd34477b36",
+      "src/llama-moe-stream.h": "374a922b6a3bd88205b4ca00ba51a06ecaf961867c2c657c965c2acfcb2197be"
+    },
+    "binary_sha256": {
+      "llama-server": "4ba10a43c792bc5465c814edc19721dd69bc44a997f841673f0e7a97fc115aa7",
+      "libllama.so.0.4.1": "cca59bfd9902daa90e13ac5d6a7294d5758c4143ef5835b0a2ad8cec6fd718d0"
+    },
+    "client_tok_s": {
+      "fresh": 27.065192311890073,
+      "repeat": 36.08705493487013
+    },
+    "identical_to_control": 14,
+    "functional_score": {
+      "correct": 5,
+      "total": 8
+    }
+  },
+  {
+    "artifact": "results/20261018T073352Z-gguf30-c18-ram86/probe.json",
+    "environment": {
+      "GPU_CACHE_GIB": "18",
+      "RAM_CACHE_GIB": "86",
+      "THREADS": "16",
+      "IO_THREADS": "4",
+      "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3",
+      "LLAMA_MOE_STREAM_KEEP_SELECTED": "1",
+      "LLAMA_MOE_STREAM_GPU_ONLY_GIB": "16",
+      "GGML_CUDA_GRAPH_OPT": "1"
+    },
+    "source_sha256": {
+      "src/llama-moe-stream.cpp": "8f2796f5111de4cd67ff2c3e49cb27dee2c25fee7d582c9628ff5bcd34477b36",
+      "src/llama-moe-stream.h": "374a922b6a3bd88205b4ca00ba51a06ecaf961867c2c657c965c2acfcb2197be"
+    },
+    "binary_sha256": {
+      "llama-server": "4ba10a43c792bc5465c814edc19721dd69bc44a997f841673f0e7a97fc115aa7",
+      "libllama.so.0.4.1": "cca59bfd9902daa90e13ac5d6a7294d5758c4143ef5835b0a2ad8cec6fd718d0"
+    },
+    "client_tok_s": {
+      "fresh": 26.78257379546849,
+      "repeat": 36.08407615878495
+    },
+    "identical_to_control": 14,
+    "functional_score": {
+      "correct": 5,
+      "total": 8
+    }
+  },
+  {
+    "artifact": "results/20261018T073544Z-gguf30-c18-decay256/probe.json",
+    "environment": {
+      "GPU_CACHE_GIB": "18",
+      "RAM_CACHE_GIB": "84",
+      "THREADS": "16",
+      "IO_THREADS": "4",
+      "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3",
+      "LLAMA_MOE_STREAM_KEEP_SELECTED": "1",
+      "LLAMA_MOE_STREAM_GPU_ONLY_GIB": "14",
+      "LLAMA_MOE_STREAM_HOT_DECAY_TOKENS": "256",
+      "GGML_CUDA_GRAPH_OPT": "1"
+    },
+    "source_sha256": {
+      "src/llama-moe-stream.cpp": "646642ee0eb7f819aeec8b42ca577bb4954f62cea97495eb26114cb991efcb2d",
+      "src/llama-moe-stream.h": "374a922b6a3bd88205b4ca00ba51a06ecaf961867c2c657c965c2acfcb2197be"
+    },
+    "binary_sha256": {
+      "llama-server": "4ba10a43c792bc5465c814edc19721dd69bc44a997f841673f0e7a97fc115aa7",
+      "libllama.so.0.4.1": "66e0c417d0255add0b74c754fe4da7d671d43b972aae245b74048d60d41a7056"
+    },
+    "client_tok_s": {
+      "fresh": 25.27892418602847,
+      "repeat": 37.36854464305254
+    },
+    "identical_to_control": 14,
+    "functional_score": {
+      "correct": 5,
+      "total": 8
+    }
+  },
+  {
+    "artifact": "results/20261018T073658Z-gguf30-c18-decay16/probe.json",
+    "environment": {
+      "GPU_CACHE_GIB": "18",
+      "RAM_CACHE_GIB": "84",
+      "THREADS": "16",
+      "IO_THREADS": "4",
+      "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3",
+      "LLAMA_MOE_STREAM_KEEP_SELECTED": "1",
+      "LLAMA_MOE_STREAM_GPU_ONLY_GIB": "14",
+      "LLAMA_MOE_STREAM_HOT_DECAY_TOKENS": "16",
+      "GGML_CUDA_GRAPH_OPT": "1"
+    },
+    "source_sha256": {
+      "src/llama-moe-stream.cpp": "646642ee0eb7f819aeec8b42ca577bb4954f62cea97495eb26114cb991efcb2d",
+      "src/llama-moe-stream.h": "374a922b6a3bd88205b4ca00ba51a06ecaf961867c2c657c965c2acfcb2197be"
+    },
+    "binary_sha256": {
+      "llama-server": "4ba10a43c792bc5465c814edc19721dd69bc44a997f841673f0e7a97fc115aa7",
+      "libllama.so.0.4.1": "66e0c417d0255add0b74c754fe4da7d671d43b972aae245b74048d60d41a7056"
+    },
+    "client_tok_s": {
+      "fresh": 24.852809222698916,
+      "repeat": 34.81515125307955
+    },
+    "identical_to_control": 14,
+    "functional_score": {
+      "correct": 5,
+      "total": 8
+    }
+  },
+  {
+    "artifact": "results/20261018T073922Z-gguf30-c18-only12/probe.json",
+    "environment": {
+      "GPU_CACHE_GIB": "18",
+      "RAM_CACHE_GIB": "84",
+      "THREADS": "16",
+      "IO_THREADS": "4",
+      "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3",
+      "LLAMA_MOE_STREAM_KEEP_SELECTED": "1",
+      "LLAMA_MOE_STREAM_GPU_ONLY_GIB": "12",
+      "GGML_CUDA_GRAPH_OPT": "1"
+    },
+    "source_sha256": {
+      "src/llama-moe-stream.cpp": "8f2796f5111de4cd67ff2c3e49cb27dee2c25fee7d582c9628ff5bcd34477b36",
+      "src/llama-moe-stream.h": "374a922b6a3bd88205b4ca00ba51a06ecaf961867c2c657c965c2acfcb2197be"
+    },
+    "binary_sha256": {
+      "llama-server": "4ba10a43c792bc5465c814edc19721dd69bc44a997f841673f0e7a97fc115aa7",
+      "libllama.so.0.4.1": "cca59bfd9902daa90e13ac5d6a7294d5758c4143ef5835b0a2ad8cec6fd718d0"
+    },
+    "client_tok_s": {
+      "fresh": 25.928362450209985,
+      "repeat": 35.82046760315002
+    },
+    "identical_to_control": 14,
+    "functional_score": {
+      "correct": 5,
+      "total": 8
+    }
+  },
+  {
+    "artifact": "results/20261018T074053Z-gguf30-final-confirm/probe.json",
+    "environment": {
+      "GPU_CACHE_GIB": "18",
+      "RAM_CACHE_GIB": "84",
+      "THREADS": "16",
+      "IO_THREADS": "4",
+      "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3",
+      "LLAMA_MOE_STREAM_KEEP_SELECTED": "1",
+      "LLAMA_MOE_STREAM_GPU_ONLY_GIB": "14",
+      "GGML_CUDA_GRAPH_OPT": "1"
+    },
+    "source_sha256": {
+      "src/llama-moe-stream.cpp": "8f2796f5111de4cd67ff2c3e49cb27dee2c25fee7d582c9628ff5bcd34477b36",
+      "src/llama-moe-stream.h": "374a922b6a3bd88205b4ca00ba51a06ecaf961867c2c657c965c2acfcb2197be"
+    },
+    "binary_sha256": {
+      "llama-server": "4ba10a43c792bc5465c814edc19721dd69bc44a997f841673f0e7a97fc115aa7",
+      "libllama.so.0.4.1": "cca59bfd9902daa90e13ac5d6a7294d5758c4143ef5835b0a2ad8cec6fd718d0"
+    },
+    "client_tok_s": {
+      "fresh": 26.815897431535294,
+      "repeat": 35.801448256513844
+    },
+    "identical_to_control": 14,
+    "functional_score": {
+      "correct": 5,
+      "total": 8
+    }
+  },
+  {
+    "artifact": "results/20261018T080650Z-gguf30-default-control/probe.json",
+    "environment": {
+      "GPU_CACHE_GIB": "16",
+      "RAM_CACHE_GIB": "64",
+      "THREADS": "16",
+      "IO_THREADS": "4"
+    },
+    "source_sha256": {
+      "src/llama-moe-stream.cpp": "8f2796f5111de4cd67ff2c3e49cb27dee2c25fee7d582c9628ff5bcd34477b36",
+      "src/llama-moe-stream.h": "374a922b6a3bd88205b4ca00ba51a06ecaf961867c2c657c965c2acfcb2197be"
+    },
+    "binary_sha256": {
+      "llama-server": "4ba10a43c792bc5465c814edc19721dd69bc44a997f841673f0e7a97fc115aa7",
+      "libllama.so.0.4.1": "cca59bfd9902daa90e13ac5d6a7294d5758c4143ef5835b0a2ad8cec6fd718d0"
+    },
+    "client_tok_s": {
+      "fresh": 21.655160802865137,
+      "repeat": 28.8022983213917
+    },
+    "identical_to_control": 14,
+    "functional_score": {
+      "correct": 5,
+      "total": 8
+    }
+  },
+  {
+    "artifact": "results/20261018T082120Z-gguf30-c18-t1-bt16/probe.json",
+    "environment": {
+      "GPU_CACHE_GIB": "18",
+      "RAM_CACHE_GIB": "84",
+      "THREADS": "1",
+      "BATCH_THREADS": "16",
+      "IO_THREADS": "4",
+      "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3",
+      "LLAMA_MOE_STREAM_KEEP_SELECTED": "1",
+      "LLAMA_MOE_STREAM_GPU_ONLY_GIB": "14",
+      "GGML_CUDA_GRAPH_OPT": "1"
+    },
+    "source_sha256": {
+      "src/llama-moe-stream.cpp": "8f2796f5111de4cd67ff2c3e49cb27dee2c25fee7d582c9628ff5bcd34477b36",
+      "src/llama-moe-stream.h": "374a922b6a3bd88205b4ca00ba51a06ecaf961867c2c657c965c2acfcb2197be"
+    },
+    "binary_sha256": {
+      "llama-server": "4ba10a43c792bc5465c814edc19721dd69bc44a997f841673f0e7a97fc115aa7",
+      "libllama.so.0.4.1": "cca59bfd9902daa90e13ac5d6a7294d5758c4143ef5835b0a2ad8cec6fd718d0"
+    },
+    "client_tok_s": {
+      "fresh": 22.924152950431903,
+      "repeat": 34.23269908969226
+    },
+    "identical_to_control": 14,
+    "functional_score": {
+      "correct": 5,
+      "total": 8
+    }
+  },
+  {
+    "artifact": "results/20261018T082402Z-gguf30-c18-ram88/probe.json",
+    "environment": {
+      "GPU_CACHE_GIB": "18",
+      "RAM_CACHE_GIB": "88",
+      "THREADS": "16",
+      "IO_THREADS": "4",
+      "LLAMA_MOE_STREAM_UPLOAD_BATCH": "3",
+      "LLAMA_MOE_STREAM_KEEP_SELECTED": "1",
+      "LLAMA_MOE_STREAM_GPU_ONLY_GIB": "14",
+      "GGML_CUDA_GRAPH_OPT": "1"
+    },
+    "source_sha256": {
+      "src/llama-moe-stream.cpp": "8f2796f5111de4cd67ff2c3e49cb27dee2c25fee7d582c9628ff5bcd34477b36",
+      "src/llama-moe-stream.h": "374a922b6a3bd88205b4ca00ba51a06ecaf961867c2c657c965c2acfcb2197be"
+    },
+    "binary_sha256": {
+      "llama-server": "4ba10a43c792bc5465c814edc19721dd69bc44a997f841673f0e7a97fc115aa7",
+      "libllama.so.0.4.1": "cca59bfd9902daa90e13ac5d6a7294d5758c4143ef5835b0a2ad8cec6fd718d0"
+    },
+    "client_tok_s": {
+      "fresh": 28.9298898945556,
+      "repeat": 37.85855896716687
+    },
+    "identical_to_control": 14,
+    "functional_score": {
+      "correct": 5,
+      "total": 8
+    }
+  }
+]

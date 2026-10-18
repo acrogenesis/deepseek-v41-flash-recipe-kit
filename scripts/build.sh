@@ -12,7 +12,7 @@ if [[ "$profile" == streaming ]]; then
     source_dir="$PWD/work/upstream/llama-streaming"
     build_dir=work/build-streaming
     tests=ON
-    targets+=(test-llama-file)
+    targets+=(test-llama-file test-moe-host-cache)
 fi
 revision=2076412598e99127ea2554467b2b7530856895d3
 if [[ ! -e "$source_dir/.git" ]]; then
@@ -46,4 +46,5 @@ cmake --build "$build_dir" --target "${targets[@]}" -j "${BUILD_JOBS:-8}"
 "$build_dir/bin/llama-server" --version
 if [[ "$profile" == streaming ]]; then
     "$build_dir/bin/test-llama-file"
+    "$build_dir/bin/test-moe-host-cache"
 fi

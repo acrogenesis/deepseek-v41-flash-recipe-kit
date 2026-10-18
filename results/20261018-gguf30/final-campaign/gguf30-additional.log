@@ -1,0 +1,37 @@
+multiply2: FAIL '13022'
+modulo: FAIL 'First, compute \\( 7^{13} \\mod 19 \\).\n\nWe can use modular exponentiation:\n\n- \\( 7^2 = 49 \\equiv 49 - 38 = 11 \\mod 19 \\)\n- \\( 7^4 = (7^2)^2 = 11^2 = 121 \\equiv 121 - 114 = 7 \\mod 19 \\)\n- \\( 7^8 = (7^4)^2 = 7^2 = 49 \\equiv 11 \\mod 19 \\)\n\nNow \\( 13 = 8 + 4 + 1'
+hex: PASS '687'
+fraction: PASS '38'
+percentage2: PASS '160'
+gcd: PASS '18'
+median: FAIL 'First, sort the list: [2, 3, 5, 7, 11, 13, 19].  \nThere are 7 numbers, so the median is the middle one (4th value), which is 7.\n\n7'
+combinations: PASS '36'
+filter: FAIL '```json\n[9, -6, 12, 0]\n```'
+unique: PASS '["oak","elm","pine"]'
+json2: FAIL '```json\n{"id":"B"}\n```'
+json3: FAIL '```json\n{"b":1,"a":3,"n":2}\n```'
+python2: FAIL 'Especially [1, 4, 7]'
+python3: FAIL '48'
+python4: FAIL '6'
+python5: PASS 'bd'
+python6: FAIL ' potentially:\n\n["a","cc","bbb"]'
+python7: FAIL '```json\n[1, 2, 3]\n```'
+extract2: PASS 'K3P7'
+extract3: PASS 'app-926'
+order2: FAIL 'Let\'s go through the clues step by step.\n\n1. **A finishes before C** → A < C  \n2. **B finishes after C** → C < B  \n3. **D finishes before A** → D < A  \n\nFrom 1 and 3: D < A < C  \nFrom 2: C < B  \n\nPutting it together: D < A < C < B  \n\nSo the finishing order is: **D, A, C, B**\n\nAs a JSON array:\n\n```json\n["D", "A", "C", "B"]\n```'
+logic: FAIL 'No'
+stack: PASS 'C'
+queue: PASS 'B'
+fresh new-0: 18.548645868522815 tok/s, TTFT 1.085297042998718s
+fresh new-1: 24.29984865212375 tok/s, TTFT 0.981337737001013s
+fresh new-2: 24.95556141563664 tok/s, TTFT 0.8636788320000051s
+fresh new-3: 22.99861772874706 tok/s, TTFT 0.9489901909983018s
+fresh new-4: 25.821610085148286 tok/s, TTFT 0.946084855007939s
+fresh new-5: 24.243622829551487 tok/s, TTFT 0.7810293630027445s
+repeat new-0: 26.603912157652687 tok/s, TTFT 0.7647600560012506s
+repeat new-1: 30.04564572351098 tok/s, TTFT 0.7468223169998964s
+repeat new-2: 29.724108779940018 tok/s, TTFT 0.7077100769965909s
+repeat new-3: 28.147874303561746 tok/s, TTFT 0.7635296289954567s
+repeat new-4: 31.369728310982197 tok/s, TTFT 0.7523433680034941s
+repeat new-5: 35.267275966712134 tok/s, TTFT 0.5975108339916915s
+Probe saved to /home/archogenesis/Work/deepseek-v41-flash-recipe-kit/results/20261018T074756Z-gguf30-additional

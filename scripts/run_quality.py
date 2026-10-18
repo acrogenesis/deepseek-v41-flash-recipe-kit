@@ -51,14 +51,16 @@ def main():
     build = "build-streaming" if args.profile == "streaming" else "build"
     command = [str(ROOT / f"work/{build}/bin/llama-perplexity"), "-m", str(args.model.resolve()),
                "-c", str(args.context), "-b", str(args.context), "-ub", str(args.ubatch), "--chunks", str(args.chunks),
-               "-f", str(data), "-t", "16", "-ngl", "99", "-ot", "engram_embd.weight=CPU",
+               "-f", str(data), "-t", os.environ.get("THREADS", "16"), "-ngl", "99", "-ot", "engram_embd.weight=CPU",
                "-lm", "mmap", "-lzm", "on", "--no-repack", "--fit", "off", "-fa", "on", "--no-warmup"]
+    if os.environ.get('BATCH_THREADS'):
+        command += ['-tb', os.environ['BATCH_THREADS']]
     if args.profile == "baseline":
         command += ["-cmoe"]
     elif args.profile == "streaming":
         command += ["--moe-stream", "--moe-stream-cache", os.environ.get("GPU_CACHE_GIB", "16"),
                     "--moe-stream-l2", os.environ.get("RAM_CACHE_GIB", "64"),
-                    "--moe-stream-io-threads", "4", "--moe-stream-direct"]
+                    "--moe-stream-io-threads", os.environ.get("IO_THREADS", "4"), "--moe-stream-direct"]
     logits = (args.save_logits or args.compare_logits).resolve()
     if args.save_logits:
         if logits.exists():
@@ -82,6 +84,14 @@ def main():
               "corpus_sha256": hashlib.sha256(data.read_bytes()).hexdigest(),
               "pins": json.loads((ROOT / "pins.json").read_text()),
               "cgroup": Path("/proc/self/cgroup").read_text()}
+    result['environment'] = {k: v for k, v in env.items()
+                             if k.startswith(('LLAMA_MOE_STREAM_', 'GGML_CUDA_'))
+                             or k in ('GPU_CACHE_GIB', 'RAM_CACHE_GIB', 'IO_THREADS', 'THREADS', 'BATCH_THREADS')}
+    result['binary_sha256'] = {name: hashlib.sha256((ROOT / f'work/{build}/bin' / name).read_bytes()).hexdigest()
+                              for name in ('llama-perplexity', 'libllama.so.0.4.1')}
+    if args.profile == 'streaming':
+        result['source_sha256'] = {name: hashlib.sha256((ROOT / 'work/upstream/llama-streaming' / name).read_bytes()).hexdigest()
+                                   for name in ('src/llama-moe-stream.cpp', 'src/llama-moe-stream.h')}
     result_file = out / "quality.json"
     result_file.write_text(json.dumps(result, indent=2) + "\n")
     log_file = out / "quality.log"

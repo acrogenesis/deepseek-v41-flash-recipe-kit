@@ -1,0 +1,61 @@
+{
+  "status": "failed",
+  "jobs": {
+    "gguf30-final-confirm": {
+      "status": "complete",
+      "started_at": "2026-10-18T07:40:53.388301+00:00",
+      "returncode": 0,
+      "seconds": 74.57812796201324,
+      "finished_at": "2026-10-18T07:42:07.966694+00:00"
+    },
+    "gguf30-final-quality": {
+      "status": "complete",
+      "started_at": "2026-10-18T07:42:07.976738+00:00",
+      "returncode": 0,
+      "seconds": 186.45154277299298,
+      "finished_at": "2026-10-18T07:45:14.428585+00:00"
+    },
+    "gguf30-final-runtime-gate": {
+      "status": "complete",
+      "started_at": "2026-10-18T07:45:14.438828+00:00",
+      "returncode": 0,
+      "seconds": 42.42777009900601,
+      "finished_at": "2026-10-18T07:45:56.866931+00:00"
+    },
+    "equal-cache-18": {
+      "status": "complete",
+      "started_at": "2026-10-18T07:45:56.877165+00:00",
+      "returncode": 0,
+      "seconds": 119.43930698999611,
+      "finished_at": "2026-10-18T07:47:56.316734+00:00"
+    },
+    "gguf30-additional": {
+      "status": "complete",
+      "started_at": "2026-10-18T07:47:56.327004+00:00",
+      "returncode": 0,
+      "seconds": 136.02641461200255,
+      "finished_at": "2026-10-18T07:50:12.353743+00:00"
+    },
+    "additional-23": {
+      "status": "complete",
+      "started_at": "2026-10-18T07:50:12.363790+00:00",
+      "returncode": 0,
+      "seconds": 202.6246229350072,
+      "finished_at": "2026-10-18T07:53:34.988760+00:00"
+    },
+    "gguf30-long": {
+      "status": "complete",
+      "started_at": "2026-10-18T07:53:34.999180+00:00",
+      "returncode": 0,
+      "seconds": 179.8727165809978,
+      "finished_at": "2026-10-18T07:56:34.872158+00:00"
+    },
+    "long-23": {
+      "status": "failed",
+      "started_at": "2026-10-18T07:56:34.882429+00:00",
+      "returncode": 1,
+      "seconds": 82.28108212401276,
+      "finished_at": "2026-10-18T07:57:57.163813+00:00"
+    }
+  }
+}

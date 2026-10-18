@@ -1,0 +1,33 @@
+{
+  "status": "complete",
+  "jobs": {
+    "gguf30-output512-1": {
+      "status": "complete",
+      "started_at": "2026-10-18T08:08:10.283162+00:00",
+      "returncode": 0,
+      "seconds": 164.01782942199497,
+      "finished_at": "2026-10-18T08:10:54.301225+00:00"
+    },
+    "gguf30-output512-2": {
+      "status": "complete",
+      "started_at": "2026-10-18T08:10:54.311528+00:00",
+      "returncode": 0,
+      "seconds": 164.60616112299613,
+      "finished_at": "2026-10-18T08:13:38.917972+00:00"
+    },
+    "output512-23": {
+      "status": "complete",
+      "started_at": "2026-10-18T08:13:38.928646+00:00",
+      "returncode": 0,
+      "seconds": 278.47840145099326,
+      "finished_at": "2026-10-18T08:18:17.407329+00:00"
+    },
+    "gguf30-output512-default": {
+      "status": "complete",
+      "started_at": "2026-10-18T08:18:17.417510+00:00",
+      "returncode": 0,
+      "seconds": 179.88033034000546,
+      "finished_at": "2026-10-18T08:21:17.298058+00:00"
+    }
+  }
+}

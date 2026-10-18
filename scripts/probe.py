@@ -128,7 +128,7 @@ def main():
     save()
     try:
         for case in fixture["checks"]:
-            answer = generate(args.url, case["input_ids"], 64)
+            answer = generate(args.url, case["input_ids"], fixture.get("check_output_cap", 64))
             actual = answer["text"].strip()
             if not isinstance(case["expected"], str):
                 try:
